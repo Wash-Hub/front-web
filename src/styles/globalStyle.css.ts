@@ -7,6 +7,8 @@ export const globalStyleExample = style({
 globalStyle('body', {
   fontFamily: 'Pretendard-Regular',
   background: '#fff',
+  margin: 0,
+  padding: 0,
 });
 
 globalStyle('*::-webkit-scrollbar', {
@@ -16,4 +18,9 @@ globalStyle('*::-webkit-scrollbar', {
 globalStyle('*::-webkit-scrollbar-thumb', {
   backgroundColor: '#cdcccc',
   borderRadius: '10px',
+});
+
+export const map = style({
+  width: '100%',
+  height: '100vh',
 });

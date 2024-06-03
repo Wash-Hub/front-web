@@ -14,7 +14,9 @@
     "@vanilla-extract/vite-plugin": "^4.0.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-kakao-maps-sdk": "^1.1.27",
     "react-query": "^3.39.3",
+    "react-router-dom": "^6.23.1",
     "recoil": "^0.7.7",
     "vite-plugin-node-polyfills": "^0.22.0"
   },
