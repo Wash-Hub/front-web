@@ -8,6 +8,9 @@ dependencies:
   '@vanilla-extract/css':
     specifier: ^1.15.2
     version: 1.15.2
+  '@vanilla-extract/recipes':
+    specifier: ^0.5.3
+    version: 0.5.3(@vanilla-extract/css@1.15.2)
   '@vanilla-extract/vite-plugin':
     specifier: ^4.0.10
     version: 4.0.10(vite@5.2.12)
@@ -17,9 +20,21 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.3.1(react@18.3.1)
+  react-hook-form:
+    specifier: ^7.52.0
+    version: 7.52.0(react@18.3.1)
+  react-icons:
+    specifier: ^5.2.1
+    version: 5.2.1(react@18.3.1)
+  react-kakao-maps-sdk:
+    specifier: ^1.1.27
+    version: 1.1.27(react-dom@18.3.1)(react@18.3.1)
   react-query:
     specifier: ^3.39.3
     version: 3.39.3(react-dom@18.3.1)(react@18.3.1)
+  react-router-dom:
+    specifier: ^6.23.1
+    version: 6.23.1(react-dom@18.3.1)(react@18.3.1)
   recoil:
     specifier: ^0.7.7
     version: 0.7.7(react-dom@18.3.1)(react@18.3.1)
@@ -783,6 +798,11 @@ packages:
       fastq: 1.17.1
     dev: true
 
+  /@remix-run/router@1.16.1:
+    resolution: {integrity: sha512-es2g3dq6Nb07iFxGk5GuHN20RwBZOsuDQN7izWIisUcv9r+d2C5jQxqmgkdebXgReWfiyUabcki6Fg77mSNrig==}
+    engines: {node: '>=14.0.0'}
+    dev: false
+
   /@rollup/plugin-inject@5.0.5:
     resolution: {integrity: sha512-2+DEJbNBoPROPkgTDNe8/1YXWcqxbN5DTjASVIOx8HS+pITXushyNiBV56RB08zuptzz8gT3YfkqriTBVycepg==}
     engines: {node: '>=14.0.0'}
@@ -1260,6 +1280,14 @@ packages:
 
   /@vanilla-extract/private@1.0.5:
     resolution: {integrity: sha512-6YXeOEKYTA3UV+RC8DeAjFk+/okoNz/h88R+McnzA2zpaVqTR/Ep+vszkWYlGBcMNO7vEkqbq5nT/JMMvhi+tw==}
+    dev: false
+
+  /@vanilla-extract/recipes@0.5.3(@vanilla-extract/css@1.15.2):
+    resolution: {integrity: sha512-SPREq1NmaoKuvJeOV0pppOkwy3pWZUoDufsyQ6iHrbkHhAU7XQqG9o0iZSmg5JoVgDLIiOr9djQb0x9wuxig7A==}
+    peerDependencies:
+      '@vanilla-extract/css': ^1.0.0
+    dependencies:
+      '@vanilla-extract/css': 1.15.2
     dev: false
 
   /@vanilla-extract/vite-plugin@4.0.10(vite@5.2.12):
@@ -2392,6 +2420,10 @@ packages:
     hasBin: true
     dev: false
 
+  /kakao.maps.d.ts@0.1.39:
+    resolution: {integrity: sha512-KXENJ8hHYtjb5G+0vf8TXx/PwWW4j5ndDiQTSMvGtF7EFWu2P3N/+Zivcj9/UKn3j29Iz/sIUaA7WL8Ug3IDGQ==}
+    dev: false
+
   /keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
     dependencies:
@@ -2805,6 +2837,35 @@ packages:
       scheduler: 0.23.2
     dev: false
 
+  /react-hook-form@7.52.0(react@18.3.1):
+    resolution: {integrity: sha512-mJX506Xc6mirzLsmXUJyqlAI3Kj9Ph2RhplYhUVffeOQSnubK2uVqBFOBJmvKikvbFV91pxVXmDiR+QMF19x6A==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
+    dependencies:
+      react: 18.3.1
+    dev: false
+
+  /react-icons@5.2.1(react@18.3.1):
+    resolution: {integrity: sha512-zdbW5GstTzXaVKvGSyTaBalt7HSfuK5ovrzlpyiWHAFXndXTdd/1hdDHI4xBM1Mn7YriT6aqESucFl9kEXzrdw==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.3.1
+    dev: false
+
+  /react-kakao-maps-sdk@1.1.27(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-1EwYkYsjTDRFqysKStDasFMrFTXcLx2AyRlqMoWD7ONWhRqpjx9M874hkhEEHrnypP2eSIhhDLe0EiSKp3bd2Q==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18
+      react-dom: ^16.8 || ^17 || ^18
+    dependencies:
+      '@babel/runtime': 7.24.6
+      kakao.maps.d.ts: 0.1.39
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
   /react-query@3.39.3(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-nLfLz7GiohKTJDuT4us4X3h/8unOh+00MLb2yJoGTPjxKs2bc1iDhkNx2bd5MKklXnOD3NrVZ+J2UXujA5In4g==}
     peerDependencies:
@@ -2822,6 +2883,29 @@ packages:
       match-sorter: 6.3.4
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
+  /react-router-dom@6.23.1(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-utP+K+aSTtEdbWpC+4gxhdlPFwuEfDKq8ZrPFU65bbRJY+l706qjR7yaidBpo3MSeA/fzwbXWbKBI6ftOnP3OQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.16.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-router: 6.23.1(react@18.3.1)
+    dev: false
+
+  /react-router@6.23.1(react@18.3.1):
+    resolution: {integrity: sha512-fzcOaRF69uvqbbM7OhvQyBTFDVrrGlsFdS3AL+1KfIBtGETibHzi3FkoTRyiDJnWNc2VxrfvR+657ROHjaNjqQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.16.1
+      react: 18.3.1
     dev: false
 
   /react@18.3.1:
