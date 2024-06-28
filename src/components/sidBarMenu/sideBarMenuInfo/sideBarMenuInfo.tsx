@@ -22,7 +22,7 @@ export const SideBarMenuInfo = () => {
   };
   return (
     <div>
-      <img src="public\test.png" alt="" className={sidebarMenuImg} />
+      <img src="public\test.jpg" alt="" className={sidebarMenuImg} />
       <div className={sidebarMenuInfo}>
         <div>
           <div className={sidebarMenuInfoTitle}>코인세탁소</div>

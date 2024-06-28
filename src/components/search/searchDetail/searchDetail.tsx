@@ -18,17 +18,17 @@ import { menuState } from '../../../recoil/atoms/menuState';
 export const SearchDetail = () => {
   const dummy = [
     {
-      img: 'public/test.png',
+      img: 'public/test.jpg',
       name: '코인세탁소',
       address: '서울특별시 양천구 신정로 11길',
     },
     {
-      img: 'public/test.png',
+      img: 'public/test.jpg',
       name: '코인세탁소',
       address: '서울특별시 양천구 신정로 11길',
     },
     {
-      img: 'public/test.png',
+      img: 'public/test.jpg',
       name: '코인세탁소',
       address: '서울특별시 양천구 신정로 11길',
     },
