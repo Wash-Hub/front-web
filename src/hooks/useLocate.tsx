@@ -2,15 +2,15 @@ import { useMemo } from 'react';
 import { useRecoilState } from 'recoil';
 import { mapState } from '../recoil/atoms/mapState';
 
-export const useLocation = () => {
-  const [location, setLocation] = useRecoilState<{ latitude: number; longitude: number }>(mapState);
+export const useLocate = () => {
+  const [locate, setLocate] = useRecoilState<{ latitude: number; longitude: number }>(mapState);
   useMemo(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(success, error);
     }
 
     function success(position: any) {
-      setLocation({
+      setLocate({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
@@ -21,5 +21,5 @@ export const useLocation = () => {
     }
   }, [navigator.geolocation.getCurrentPosition]);
 
-  return location;
+  return locate;
 };

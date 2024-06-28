@@ -1,10 +1,10 @@
 import { Map } from 'react-kakao-maps-sdk';
 import { map } from '../styles/globalStyle.css';
-import { useLocation } from '../hooks/useLocation';
+import { useLocate } from '../hooks/useLocate';
 
 export const KakaoMap = () => {
   // 현재 위치 정보 받아오기
-  const location = useLocation() as { latitude: number; longitude: number };
+  const location = useLocate() as { latitude: number; longitude: number };
 
   return (
     <div>

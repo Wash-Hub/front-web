@@ -11,9 +11,12 @@
   },
   "dependencies": {
     "@vanilla-extract/css": "^1.15.2",
+    "@vanilla-extract/recipes": "^0.5.3",
     "@vanilla-extract/vite-plugin": "^4.0.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.52.0",
+    "react-icons": "^5.2.1",
     "react-kakao-maps-sdk": "^1.1.27",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.23.1",
