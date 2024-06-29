@@ -1,6 +1,12 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+export const scrollbar = style({
+  overflowY: 'scroll',
+  overflowX: 'hidden',
+  height: '100vh',
+});
+
 export const sidebarMenuImg = style({
   width: '100%',
   height: '250px',

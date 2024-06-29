@@ -1,5 +1,6 @@
 import { GoBookmark } from 'react-icons/go';
 import {
+  scrollbar,
   sidebarMenuBookmark,
   sidebarMenuImg,
   sidebarMenuInfo,
@@ -12,16 +13,19 @@ import { useRecoilState } from 'recoil';
 import { sidebarState } from '../../../recoil/atoms/sidebarState';
 import { SideBarMenuInfoDetail } from './sideBarMenuInfoDetail/sideBarMenuInfoDetail';
 import { SideBarMenuInfoReview } from './sideBarMenuInfoReview/sideBarMenuInfoReview';
+import { reviewState } from '../../../recoil/atoms/menuState';
+import { CreateReview } from './sideBarMenuInfoReview/createReview/createReview';
 
 export const SideBarMenuInfo = () => {
   const [isActiveDetail, setIsActiveDetail] = useRecoilState(sidebarState);
   const [isActiveReview, setIsActiveReview] = useRecoilState(sidebarState);
+  const [review, setReview] = useRecoilState(reviewState);
   const onClick = () => {
     setIsActiveDetail((prevState) => ({ ...prevState, isActiveDetail: !prevState.isActiveDetail }));
     setIsActiveReview((prevState) => ({ ...prevState, isActiveReview: !prevState.isActiveReview }));
   };
   return (
-    <div>
+    <div className={review.isOpened ? scrollbar : ''}>
       <img src="public\test.jpg" alt="" className={sidebarMenuImg} />
       <div className={sidebarMenuInfo}>
         <div>
@@ -48,7 +52,7 @@ export const SideBarMenuInfo = () => {
               active: isActiveReview.isActiveReview ? 'borderBottom' : undefined,
             })}
           >
-            리뷰보기
+            {review.isOpened ? '리뷰작성하기' : '리뷰보기'}
           </div>
         </div>
         {isActiveDetail.isActiveDetail ? (
@@ -57,9 +61,7 @@ export const SideBarMenuInfo = () => {
           </div>
         ) : null}
         {isActiveReview.isActiveReview ? (
-          <div>
-            <SideBarMenuInfoReview />
-          </div>
+          <div>{review.isOpened ? <CreateReview /> : <SideBarMenuInfoReview />}</div>
         ) : null}
       </div>
     </div>

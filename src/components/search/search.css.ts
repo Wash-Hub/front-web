@@ -14,6 +14,11 @@ export const searchWrapper = style({
   borderRadius: '20px',
   backgroundColor: 'white',
   border: '1px solid #e0e0e0',
+  '@media': {
+    '(max-width: 1600px)': {
+      width: '80%',
+    },
+  },
 });
 
 export const searchInput = style({

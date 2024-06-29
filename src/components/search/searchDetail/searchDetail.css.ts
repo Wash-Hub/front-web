@@ -9,11 +9,22 @@ export const searchDetailContainer = style({
   backgroundColor: 'white',
   borderLeft: '1px solid #e0e0e0',
   borderRight: '1px solid #e0e0e0',
+  '@media': {
+    '(max-width: 1600px)': {
+      width: '43vh',
+    },
+  },
 });
 
 export const searchDetailSearch = style({
   width: '37vh',
   marginLeft: '30%',
+  '@media': {
+    '(max-width: 1600px)': {
+      marginLeft: '17%',
+      width: '43vh',
+    },
+  },
 });
 
 export const searchDetailItem = style({
