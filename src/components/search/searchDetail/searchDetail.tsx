@@ -13,7 +13,8 @@ import {
   searchDetailSearch,
 } from './searchDetail.css';
 import { sidebarState } from '../../../recoil/atoms/sidebarState';
-import { menuState } from '../../../recoil/atoms/menuState';
+import { menuState, reviewState } from '../../../recoil/atoms/menuState';
+import { set } from 'react-hook-form';
 
 export const SearchDetail = () => {
   const dummy = [
@@ -36,10 +37,11 @@ export const SearchDetail = () => {
 
   const [, setIsActiveSearch] = useRecoilState(sidebarState);
   const [, setIsOpened] = useRecoilState(menuState);
-
+  const [, setReview] = useRecoilState(reviewState);
   const onClick = (title: string) => {
     setIsOpened((prevState) => ({ ...prevState, isOpened: !prevState.isOpened }));
     setIsActiveSearch((prevState) => ({ ...prevState, isActiveSearch: !prevState.isActiveSearch }));
+    setReview({ isOpened: false });
   };
   return (
     <div className={searchDetailContainer}>

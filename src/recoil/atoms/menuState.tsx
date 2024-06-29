@@ -10,3 +10,10 @@ export const menuState: RecoilState<MenuState> = atom({
     isOpened: false,
   } as MenuState,
 });
+
+export const reviewState: RecoilState<MenuState> = atom({
+  key: 'reviewState',
+  default: {
+    isOpened: false,
+  } as MenuState,
+});
