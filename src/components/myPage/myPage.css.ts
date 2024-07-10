@@ -1,6 +1,5 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-import { BiBorderBottom } from 'react-icons/bi';
 
 export const myPageContainer = style({
   display: 'flex',
@@ -60,14 +59,37 @@ export const myPageProfileIcon = style({
 export const myPageProfileDropdown = style({
   display: 'block',
   position: 'absolute',
-  top: '100%',
-  left: '0',
+  top: '110%',
+  left: '-10px',
   backgroundColor: 'white',
   boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+  border: '1px solid #e0e0e0',
   borderRadius: '10px',
   zIndex: '1',
   minWidth: '160px',
   padding: '6px 6px',
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: '-10px',
+    left: '11px',
+    width: '0',
+    height: '0',
+    borderLeft: '10px solid transparent',
+    borderRight: '10px solid transparent',
+    borderBottom: '10px solid #e0e0e0',
+  },
+  '::after': {
+    content: '""',
+    position: 'absolute',
+    top: '-8px', // 삼각형 높이만큼 위로 이동
+    left: '12px', // 삼각형 위치 조정
+    width: '0',
+    height: '0',
+    borderLeft: '9px solid transparent',
+    borderRight: '9px solid transparent',
+    borderBottom: '9px solid white',
+  },
 });
 
 export const myPageProfileDropdownItemVar = style({

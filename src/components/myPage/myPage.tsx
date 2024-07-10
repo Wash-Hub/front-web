@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Search } from '../search/search';
 import {
   myPageContainer,
@@ -19,6 +19,8 @@ import {
   myPageTop,
 } from './myPage.css';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import { useRecoilState } from 'recoil';
+import { myPageState } from '../../recoil/atoms/myPageState';
 
 export const MyPage = () => {
   const dummy = [
@@ -38,14 +40,15 @@ export const MyPage = () => {
       address: '서울특별시 양천구 신정로 11길',
     },
   ];
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useRecoilState(myPageState);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  console.log(isOpen);
   const onClickMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => ({ ...prev, isDropdownMenuOpened: !prev.isDropdownMenuOpened }));
   };
   const handleClickOutside = (e: any) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-      setIsOpen(false);
+      setIsOpen((prev) => ({ ...prev, isDropdownMenuOpened: false }));
     }
   };
 
@@ -68,7 +71,7 @@ export const MyPage = () => {
         </div>
         <div className={myPageProfileIconContainer} ref={dropdownRef}>
           <RxHamburgerMenu className={myPageProfileIcon} onClick={onClickMenu} />
-          {isOpen && (
+          {isOpen.isDropdownMenuOpened && (
             <div className={myPageProfileDropdown}>
               <div className={myPageProfileDropdownItem({ border: 'BorderBottom' })}>닉네임 수정하기</div>
               <div className={myPageProfileDropdownItem({ border: 'BorderTop' })}>로그아웃</div>

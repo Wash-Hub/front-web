@@ -49,6 +49,7 @@ export const sideBarMenuInfoReviewInfoProfileDate = style({
 
 export const sideBarMenuInfoReviewInfoContent = style({
   fontSize: '12px',
+  paddingBottom: '5px',
 });
 
 export const sideBarMenuInfoReviewButtonContainer = style({
@@ -81,3 +82,28 @@ export const sideBarMenuInfoReviewButton = style({
     backgroundColor: '#f0f0f0',
   },
 });
+
+export const sideBarMenuInfoReviewImg = style({
+  width: '90px',
+  height: '110px',
+  borderRadius: '10px',
+  border: 'none',
+});
+
+export const imgModal = {
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    zIndex: 2,
+    width: '100%',
+    height: '100%',
+  },
+  content: {
+    width: 'fit-content',
+    height: 'fit-content',
+    margin: 'auto',
+    marginTop: '10%',
+    borderRadius: '10px',
+    border: '1px solid #C1C1BB',
+    padding: '8px',
+  },
+};

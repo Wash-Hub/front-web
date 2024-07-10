@@ -1,6 +1,7 @@
 import { useRecoilState } from 'recoil';
-import { menuState, reviewState } from '../recoil/atoms/menuState';
+import { menuState } from '../recoil/atoms/menuState';
 import { sidebarState } from '../recoil/atoms/sidebarState';
+import { reviewState } from '../recoil/atoms/reviewState';
 
 export const useOpen = () => {
   const [, setIsOpened] = useRecoilState(menuState);
@@ -13,14 +14,14 @@ export const useOpen = () => {
   const MenuControllMenu = () => {
     setIsOpened((prevState) => ({ ...prevState, isOpened: !prevState.isOpened }));
     setIsActiveSearch((prevState) => ({ ...prevState, isActiveSearch: false }));
-    setReview({ isOpened: false });
+    setReview((prev) => ({ ...prev, isOpened: false }));
     setIsMyPageOpened((prevState) => ({ ...prevState, isMyPageOpened: false }));
   };
 
   const MenuControllMyPage = () => {
     setIsOpened((prevState) => ({ ...prevState, isOpened: false }));
     setIsActiveSearch((prevState) => ({ ...prevState, isActiveSearch: false }));
-    setReview({ isOpened: false });
+    setReview((prev) => ({ ...prev, isOpened: false }));
     setIsMyPageOpened((prevState) => ({ ...prevState, isMyPageOpened: !prevState.isMyPageOpened }));
   };
 
@@ -29,7 +30,7 @@ export const useOpen = () => {
     isActiveSearch.isActiveSearch
       ? setIsActiveSearch((prevState) => ({ ...prevState, isActiveSearch: true }))
       : setIsActiveSearch((prevState) => ({ ...prevState, isActiveSearch: !prevState.isActiveSearch }));
-    setReview({ isOpened: false });
+    setReview((prev) => ({ ...prev, isOpened: false }));
     setIsMyPageOpened((prevState) => ({ ...prevState, isMyPageOpened: false }));
   };
 
