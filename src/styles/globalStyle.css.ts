@@ -52,3 +52,22 @@ export const pageSearch = style({
   zIndex: '2',
   backgroundColor: '#fff',
 });
+
+export const loginModal = {
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    zIndex: 2,
+    width: '100%',
+    height: '100%',
+  },
+  content: {
+    width: '27%',
+    height: '35%',
+    margin: 'auto',
+    marginTop: '10%',
+    borderRadius: '10px',
+    border: '1px solid #C1C1BB',
+    padding: '0.5rem',
+    paddingTop: '5px',
+  },
+};

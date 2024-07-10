@@ -8,13 +8,11 @@ import {
   searchDetailItemContentText,
   searchDetailItemContentTextContainer,
   searchDetailItemImg,
-  searchDetailItemSemiTitle,
   searchDetailItemTitle,
   searchDetailSearch,
 } from './searchDetail.css';
 import { sidebarState } from '../../../recoil/atoms/sidebarState';
 import { menuState, reviewState } from '../../../recoil/atoms/menuState';
-import { set } from 'react-hook-form';
 
 export const SearchDetail = () => {
   const dummy = [
@@ -50,7 +48,6 @@ export const SearchDetail = () => {
       </div>
       <div className={searchDetailItem}>
         <div className={searchDetailItemTitle}>검색결과</div>
-        <div className={searchDetailItemSemiTitle}>장소</div>
         {dummy.map((item, index) => (
           <div key={index} className={searchDetailItemContent} onClick={() => onClick(item.name)}>
             <img src={item.img} alt="" className={searchDetailItemImg} />

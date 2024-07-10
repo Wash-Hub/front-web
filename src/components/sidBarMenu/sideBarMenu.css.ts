@@ -4,28 +4,33 @@ export const sidebarMenuContainer = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  width: '35vh',
+  width: '350px',
   height: '100vh',
   backgroundColor: 'white',
   borderLeft: '1px solid #e0e0e0',
   borderRight: '1px solid #e0e0e0',
   '@media': {
-    '(max-width: 1600px)': {
-      width: '43vh',
+    '(max-width: 860px)': {
+      overflowY: 'scroll',
+      overflowX: 'hidden',
     },
   },
 });
 
+export const sidebarMenuItem = style({
+  position: 'relative',
+  width: '100%',
+  top: '-70px',
+});
+
 export const sidebarMenuSearch = style({
-  width: '37vh',
-  marginLeft: '140%',
-  position: 'absolute',
-  top: '0',
+  width: '360px',
+  marginLeft: '30%',
   zIndex: '2',
   '@media': {
     '(max-width: 1600px)': {
-      marginLeft: '90%',
-      width: '43vh',
+      width: '300px',
+      marginLeft: '18%',
     },
   },
 });

@@ -11,7 +11,7 @@ import {
   sideBarMenuInfoReviewInfoProfileDate,
 } from './sideBarMenuInfoReview.css';
 import { reviewState } from '../../../../recoil/atoms/menuState';
-
+import { loginModalState, loginState } from '../../../../recoil/atoms/loginState';
 export const SideBarMenuInfoReview = () => {
   const dummy = [
     {
@@ -26,8 +26,11 @@ export const SideBarMenuInfoReview = () => {
     },
   ];
   const [, setReview] = useRecoilState(reviewState);
+  const [, setIsModalOpen] = useRecoilState(loginModalState);
+  const [login] = useRecoilState(loginState);
   const onClick = () => {
-    setReview({ isOpened: true });
+    setIsModalOpen({ isModalOpen: true });
+    if (login.isLogin) setReview({ isOpened: true });
   };
   return (
     <div>

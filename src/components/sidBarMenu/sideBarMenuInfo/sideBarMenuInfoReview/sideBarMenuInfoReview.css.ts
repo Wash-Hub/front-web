@@ -5,6 +5,7 @@ export const sideBarMenuInfoReviewContainer = style({
   flexDirection: 'column',
   gap: '1rem',
   padding: '1rem',
+  paddingBottom: '100px',
   width: '100%',
   height: '100%',
   overflowY: 'auto',
@@ -52,12 +53,17 @@ export const sideBarMenuInfoReviewInfoContent = style({
 
 export const sideBarMenuInfoReviewButtonContainer = style({
   bottom: '0',
-  width: '40vh',
+  width: '330px',
   borderRadius: '10px',
   overflow: 'hidden',
-  position: 'absolute',
+  position: 'fixed',
   zIndex: 1,
-  padding: '0 0 9% 16%',
+  padding: '0 0 0.5% 0.6%',
+  '@media': {
+    '(max-width: 1600px)': {
+      padding: '0 0 0.7% 0.9%',
+    },
+  },
 });
 
 export const sideBarMenuInfoReviewButton = style({

@@ -8,6 +8,7 @@ export const scrollbar = style({
 });
 
 export const sidebarMenuImg = style({
+  position: 'relative',
   width: '100%',
   height: '250px',
 });

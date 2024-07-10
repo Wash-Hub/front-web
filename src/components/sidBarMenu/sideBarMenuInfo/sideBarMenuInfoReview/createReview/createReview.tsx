@@ -20,7 +20,7 @@ import { useState } from 'react';
 
 export const CreateReview = () => {
   const { register, handleSubmit } = useForm();
-  const [review, setReview] = useRecoilState(reviewState);
+  const [, setReview] = useRecoilState(reviewState);
   const [image, setImage] = useState<string | null | ArrayBuffer>(null);
   const handleImageChange = (e: any) => {
     const file = e.target.files[0];
@@ -66,7 +66,7 @@ export const CreateReview = () => {
 
         <div className={createReviewButtonContainer}>
           <button type="submit" className={createReviewButton({ width: 'regist' })}>
-            리뷰 작성하기
+            리뷰 등록하기
           </button>
           <button onClick={onClickCancle} className={createReviewButton({ width: 'cancle' })}>
             취소

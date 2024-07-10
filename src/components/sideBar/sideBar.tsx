@@ -1,31 +1,61 @@
 import { sideBarMenu, sideBarWrapper, sidebarContainer, sidebarLogo, sidebarMainLogo } from './sideBar.css';
 import { useRecoilState } from 'recoil';
-import { menuState, reviewState } from '../../recoil/atoms/menuState';
+import { menuState } from '../../recoil/atoms/menuState';
 import { SidebarMenu } from '../sidBarMenu/sideBarMenu';
 import { sidebarState } from '../../recoil/atoms/sidebarState';
 import { SearchDetail } from '../search/searchDetail/searchDetail';
-
+import Modal from 'react-modal';
+import { loginModalState, loginState } from '../../recoil/atoms/loginState';
+import { loginModal } from '../../styles/globalStyle.css';
+import { SelectLogin } from '../login/selecktLogin/selectLogin';
+import { MyPage } from '../myPage/myPage';
+import { useOpen } from '../../hooks/useOpen';
 export const Sidebar = () => {
-  const [isOpened, setIsOpened] = useRecoilState(menuState);
-  const [isActiveSearch, setIsActiveSearch] = useRecoilState(sidebarState);
-  const [, setReview] = useRecoilState(reviewState);
+  const [isOpened] = useRecoilState(menuState);
+  const [isMyPageOpened] = useRecoilState(menuState);
+  const [isActiveSearch] = useRecoilState(sidebarState);
+  const [isModalOpen, setIsModalOpen] = useRecoilState(loginModalState);
+  const [login] = useRecoilState(loginState);
+  const { MenuControllMenu, MenuControllMyPage } = useOpen();
   const onClickMenu = () => {
-    setIsOpened((prevState) => ({ ...prevState, isOpened: !prevState.isOpened }));
-    setIsActiveSearch((prevState) => ({ ...prevState, isActiveSearch: false }));
-    setReview({ isOpened: false });
+    MenuControllMenu();
+  };
+  const onClickMyPage = () => {
+    MenuControllMyPage();
+    setIsModalOpen((prevState) => ({ ...prevState, isModalOpen: !prevState.isModalOpen }));
   };
   return (
-    <div className={sideBarWrapper}>
-      <div className={sidebarContainer}>
-        <img className={sidebarMainLogo} src="public\logo.webp" alt="" />
-        <img className={sidebarLogo} src="public\icon_menu.webp" alt="" onClick={onClickMenu} />
-        <img className={sidebarLogo} src="public\icon_people_outline.webp" alt="" />
-      </div>
-      {
-        <div className={sideBarMenu}>
-          {isOpened.isOpened && <SidebarMenu />} {isActiveSearch.isActiveSearch && <SearchDetail />}
+    <div>
+      <div className={sideBarWrapper}>
+        <div className={sidebarContainer}>
+          <img className={sidebarMainLogo} src="public\logo.webp" alt="" />
+          <img className={sidebarLogo} src="public\icon_menu.webp" alt="" onClick={onClickMenu} />
+          <img className={sidebarLogo} src="public\icon_people_outline.webp" alt="" onClick={onClickMyPage} />
         </div>
-      }
+        {
+          <div className={sideBarMenu}>
+            {isOpened.isOpened && <SidebarMenu />} {isActiveSearch.isActiveSearch && <SearchDetail />}
+          </div>
+        }
+        {<div>{isMyPageOpened.isMyPageOpened && <MyPage />}</div>}
+      </div>
+      {login.isLogin ? (
+        ''
+      ) : (
+        <Modal
+          ariaHideApp={false}
+          isOpen={isModalOpen.isModalOpen}
+          onRequestClose={() => setIsModalOpen({ isModalOpen: false })}
+          shouldCloseOnEsc={true}
+          shouldCloseOnOverlayClick={true}
+          style={{
+            overlay: loginModal.overlay,
+            content: loginModal.content,
+          }}
+        >
+          <SelectLogin />
+        </Modal>
+      )}
     </div>
   );
 };
