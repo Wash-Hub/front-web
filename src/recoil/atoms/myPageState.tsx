@@ -1,8 +1,5 @@
 import { atom, RecoilState } from 'recoil';
-
-interface MyPageState {
-  isDropdownMenuOpened: boolean;
-}
+import { MyPageState } from '../../type';
 
 export const myPageState: RecoilState<MyPageState> = atom({
   key: 'myPageState',

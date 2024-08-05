@@ -15,13 +15,14 @@ import {
 } from './createReview.css';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { useRecoilState } from 'recoil';
-import { reviewState } from '../../../../../recoil/atoms/menuState';
 import { useState } from 'react';
+import { reviewState } from '../../../../../recoil/atoms/reviewState';
+import { ReviewImg } from '../../../../../type';
 
 export const CreateReview = () => {
   const { register, handleSubmit } = useForm();
   const [, setReview] = useRecoilState(reviewState);
-  const [image, setImage] = useState<string | null | ArrayBuffer>(null);
+  const [image, setImage] = useState<ReviewImg>(null);
   const handleImageChange = (e: any) => {
     const file = e.target.files[0];
     if (file) {
@@ -33,11 +34,10 @@ export const CreateReview = () => {
     }
   };
   const onClickCancle = () => {
-    setReview({ isOpened: false });
+    setReview((prev) => ({ ...prev, isOpened: false }));
   };
   const onSubmit = (data: any) => {
-    console.log(data);
-    setReview({ isOpened: false });
+    setReview((prev) => ({ ...prev, isOpened: false }));
   };
   return (
     <div className={createReviewContainer}>

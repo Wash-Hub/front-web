@@ -1,9 +1,5 @@
 import { RecoilState, atom } from 'recoil';
-
-interface MenuState {
-  isMyPageOpened?: boolean;
-  isOpened?: boolean;
-}
+import { MenuState } from '../../type';
 
 export const menuState: RecoilState<MenuState> = atom({
   key: 'menuState',

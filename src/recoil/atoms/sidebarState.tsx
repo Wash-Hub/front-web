@@ -1,10 +1,5 @@
 import { RecoilState, atom } from 'recoil';
-
-interface SidebarState {
-  isActiveDetail: boolean;
-  isActiveReview: boolean;
-  isActiveSearch: boolean;
-}
+import { SidebarState } from '../../type';
 
 export const sidebarState: RecoilState<SidebarState> = atom({
   key: 'sidebarState',

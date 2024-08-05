@@ -20,6 +20,13 @@ export const SelectLogin = () => {
   const onClickCloseModal = () => {
     setLoginModal((prevState) => ({ ...prevState, isModalOpen: !prevState.isModalOpen }));
   };
+  const onClickKakaoLogin = () => {
+    const link = `https://kauth.kakao.com/oauth/authorize?client_id=${
+      import.meta.env.VITE_KAKAO_REST_API_KEY
+    }&redirect_uri=${import.meta.env.VITE_KAKOA_REDIRECT_URI}&response_type=code`;
+
+    window.location.href = link;
+  };
   return (
     <div className={selectLoginContainer}>
       <div className={selectLoginTitleWrapper}>
@@ -30,7 +37,7 @@ export const SelectLogin = () => {
       </div>
       <span className={selectLoginContent}>로그인이 필요한 서비스입니다.</span>
       <div className={selectLoginButtonWrapper}>
-        <button className={selectLoginButton({ background: 'kakao' })}>
+        <button className={selectLoginButton({ background: 'kakao' })} onClick={onClickKakaoLogin}>
           <div className={selectLoginButtonIcon({ background: 'kakao' })}>
             <RiKakaoTalkFill />
           </div>

@@ -1,14 +1,5 @@
 import { atom } from 'recoil';
-
-interface LoginState {
-  isLogin: boolean | DefaultValue | null;
-}
-
-interface LoginModalState {
-  isModalOpen: boolean;
-}
-
-import { DefaultValue } from 'recoil';
+import { LoginModalState, LoginState } from '../../type';
 
 export const loginState = atom<LoginState>({
   key: 'loginState',

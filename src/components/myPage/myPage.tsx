@@ -21,6 +21,7 @@ import {
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useRecoilState } from 'recoil';
 import { myPageState } from '../../recoil/atoms/myPageState';
+import { dropdownRef } from '../../type';
 
 export const MyPage = () => {
   const dummy = [
@@ -41,8 +42,7 @@ export const MyPage = () => {
     },
   ];
   const [isOpen, setIsOpen] = useRecoilState(myPageState);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
-  console.log(isOpen);
+  const dropdownRef = useRef<dropdownRef>(null);
   const onClickMenu = () => {
     setIsOpen((prev) => ({ ...prev, isDropdownMenuOpened: !prev.isDropdownMenuOpened }));
   };

@@ -37,25 +37,24 @@ export const Sidebar = () => {
             {isOpened.isOpened && <SidebarMenu />} {isActiveSearch.isActiveSearch && <SearchDetail />}
           </div>
         }
-        {<div>{isMyPageOpened.isMyPageOpened && <MyPage />}</div>}
+        {login.isLogin ? (
+          <div>{isMyPageOpened.isMyPageOpened && <MyPage />}</div>
+        ) : (
+          <Modal
+            ariaHideApp={false}
+            isOpen={isModalOpen.isModalOpen}
+            onRequestClose={() => setIsModalOpen({ isModalOpen: false })}
+            shouldCloseOnEsc={true}
+            shouldCloseOnOverlayClick={true}
+            style={{
+              overlay: loginModal.overlay,
+              content: loginModal.content,
+            }}
+          >
+            <SelectLogin />
+          </Modal>
+        )}
       </div>
-      {login.isLogin ? (
-        ''
-      ) : (
-        <Modal
-          ariaHideApp={false}
-          isOpen={isModalOpen.isModalOpen}
-          onRequestClose={() => setIsModalOpen({ isModalOpen: false })}
-          shouldCloseOnEsc={true}
-          shouldCloseOnOverlayClick={true}
-          style={{
-            overlay: loginModal.overlay,
-            content: loginModal.content,
-          }}
-        >
-          <SelectLogin />
-        </Modal>
-      )}
     </div>
   );
 };

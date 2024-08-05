@@ -13,13 +13,13 @@ import { useRecoilState } from 'recoil';
 import { sidebarState } from '../../../recoil/atoms/sidebarState';
 import { SideBarMenuInfoDetail } from './sideBarMenuInfoDetail/sideBarMenuInfoDetail';
 import { SideBarMenuInfoReview } from './sideBarMenuInfoReview/sideBarMenuInfoReview';
-import { reviewState } from '../../../recoil/atoms/menuState';
 import { CreateReview } from './sideBarMenuInfoReview/createReview/createReview';
 import { loginModalState, loginState } from '../../../recoil/atoms/loginState';
 import Modal from 'react-modal';
 import { SelectLogin } from '../../login/selecktLogin/selectLogin';
 import { loginModal } from '../../../styles/globalStyle.css';
 import { useOpen } from '../../../hooks/useOpen';
+import { reviewState } from '../../../recoil/atoms/reviewState';
 export const SideBarMenuInfo = () => {
   const [isActiveDetail] = useRecoilState(sidebarState);
   const [isActiveReview] = useRecoilState(sidebarState);

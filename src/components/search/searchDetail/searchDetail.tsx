@@ -12,7 +12,8 @@ import {
   searchDetailSearch,
 } from './searchDetail.css';
 import { sidebarState } from '../../../recoil/atoms/sidebarState';
-import { menuState, reviewState } from '../../../recoil/atoms/menuState';
+import { menuState } from '../../../recoil/atoms/menuState';
+import { reviewState } from '../../../recoil/atoms/reviewState';
 
 export const SearchDetail = () => {
   const dummy = [
@@ -39,7 +40,7 @@ export const SearchDetail = () => {
   const onClick = (title: string) => {
     setIsOpened((prevState) => ({ ...prevState, isOpened: !prevState.isOpened }));
     setIsActiveSearch((prevState) => ({ ...prevState, isActiveSearch: !prevState.isActiveSearch }));
-    setReview({ isOpened: false });
+    setReview((prev) => ({ ...prev, isOpened: false }));
   };
   return (
     <div className={searchDetailContainer}>

@@ -1,10 +1,5 @@
 import { RecoilState, atom } from 'recoil';
-
-interface ReviewState {
-  isImgModalOpen: boolean;
-  selectedImg: string;
-  isOpened: boolean;
-}
+import { ReviewState } from '../../type';
 
 export const reviewState: RecoilState<ReviewState> = atom({
   key: 'reviewState',

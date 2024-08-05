@@ -32,8 +32,6 @@ export const SideBarMenuInfoReview = () => {
   const [, setReview] = useRecoilState(reviewState);
   const [, setIsModalOpen] = useRecoilState(loginModalState);
   const [login] = useRecoilState(loginState);
-  // const [isImgModalOpen, setIsImgModalOpen] = useState({ isImgModalOpen: false });
-  // const [selectedImg, setSelectedImg] = useState('' as string);
   const [isImgModalOpen, setIsImgModalOpen] = useRecoilState(reviewState);
   const [selectedImg, setSelectedImg] = useRecoilState(reviewState);
   const onClick = () => {
