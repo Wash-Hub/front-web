@@ -4,25 +4,20 @@ export const searchDetailContainer = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  width: '35vh',
+  width: '350px',
   height: '100vh',
   backgroundColor: 'white',
   borderLeft: '1px solid #e0e0e0',
   borderRight: '1px solid #e0e0e0',
-  '@media': {
-    '(max-width: 1600px)': {
-      width: '43vh',
-    },
-  },
 });
 
 export const searchDetailSearch = style({
-  width: '37vh',
+  width: '360px',
   marginLeft: '30%',
   '@media': {
     '(max-width: 1600px)': {
-      marginLeft: '17%',
-      width: '43vh',
+      width: '300px',
+      marginLeft: '18%',
     },
   },
 });
@@ -41,18 +36,8 @@ export const searchDetailItemTitle = style({
   justifyContent: 'center',
   width: '100%',
   height: '7vh',
-  borderBottom: '1px solid #e0e0e0',
   fontSize: '1.1rem',
   fontWeight: 'bold',
-});
-
-export const searchDetailItemSemiTitle = style({
-  fontSize: '1rem',
-  fontWeight: 'bold',
-  marginBottom: '5px',
-  padding: '10px',
-  paddingLeft: '15px',
-  paddingBottom: '0',
 });
 
 export const searchDetailItemContent = style({
@@ -60,6 +45,11 @@ export const searchDetailItemContent = style({
   flexDirection: 'row',
   padding: '10px',
   cursor: 'pointer',
+  border: '1px solid #e0e0e0',
+  borderRadius: '10px',
+  width: '90%',
+  margin: '5px',
+  marginLeft: '8px',
 });
 
 export const searchDetailItemImg = style({

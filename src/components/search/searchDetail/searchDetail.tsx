@@ -8,13 +8,12 @@ import {
   searchDetailItemContentText,
   searchDetailItemContentTextContainer,
   searchDetailItemImg,
-  searchDetailItemSemiTitle,
   searchDetailItemTitle,
   searchDetailSearch,
 } from './searchDetail.css';
 import { sidebarState } from '../../../recoil/atoms/sidebarState';
-import { menuState, reviewState } from '../../../recoil/atoms/menuState';
-import { set } from 'react-hook-form';
+import { menuState } from '../../../recoil/atoms/menuState';
+import { reviewState } from '../../../recoil/atoms/reviewState';
 
 export const SearchDetail = () => {
   const dummy = [
@@ -41,7 +40,7 @@ export const SearchDetail = () => {
   const onClick = (title: string) => {
     setIsOpened((prevState) => ({ ...prevState, isOpened: !prevState.isOpened }));
     setIsActiveSearch((prevState) => ({ ...prevState, isActiveSearch: !prevState.isActiveSearch }));
-    setReview({ isOpened: false });
+    setReview((prev) => ({ ...prev, isOpened: false }));
   };
   return (
     <div className={searchDetailContainer}>
@@ -50,7 +49,6 @@ export const SearchDetail = () => {
       </div>
       <div className={searchDetailItem}>
         <div className={searchDetailItemTitle}>검색결과</div>
-        <div className={searchDetailItemSemiTitle}>장소</div>
         {dummy.map((item, index) => (
           <div key={index} className={searchDetailItemContent} onClick={() => onClick(item.name)}>
             <img src={item.img} alt="" className={searchDetailItemImg} />

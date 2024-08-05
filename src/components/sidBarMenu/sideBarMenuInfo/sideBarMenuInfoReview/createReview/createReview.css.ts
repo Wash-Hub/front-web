@@ -58,6 +58,18 @@ export const createReviewInputImgLabel = style({
   marginTop: '25%',
 });
 
+export const createReviewInputImgLabelWrapper = style({
+  display: 'flex',
+  flexDirection: 'row',
+});
+
+export const createReviewInputImgLabelImg = style({
+  width: '90px',
+  height: '110px',
+  borderRadius: '10px',
+  marginLeft: '10px',
+});
+
 export const createReviewInputImgIcon = style({
   fontSize: '20px',
   marginBottom: '7px',

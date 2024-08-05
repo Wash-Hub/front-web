@@ -6,6 +6,7 @@ export const sideBarMenuInfoDetailContainer = style({
   display: 'flex',
   flexDirection: 'column',
   padding: '20px',
+  paddingBottom: '0',
   boxSizing: 'border-box',
   overflowY: 'scroll',
 });

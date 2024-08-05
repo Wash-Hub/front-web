@@ -11,10 +11,11 @@ import {
 import { FiPhone } from 'react-icons/fi';
 import { RiMapPin2Line } from 'react-icons/ri';
 import { useQuery } from 'react-query';
+import { location } from '../../../../type';
 
 export const SideBarMenuInfoDetail = () => {
   // 현재 위치 정보 받아오기
-  const location = useLocate() as { latitude: number; longitude: number };
+  const location: location = useLocate();
   // 임시 데이터 나중에 서버랑 연결할 때는 좌표값이랑 이름 변경해주기
   const { data } = useQuery('data', () =>
     fetch(
@@ -34,19 +35,15 @@ export const SideBarMenuInfoDetail = () => {
   return (
     <div className={sideBarMenuInfoDetailContainer}>
       <div>
-        {typeof location.latitude === 'undefined' && typeof location.longitude === 'undefined' ? (
-          -'loading...'
-        ) : (
-          <Map
-            center={{
-              // 지도의 중심좌표
-              lat: location.latitude, // 해당 장소 좌표로 바꿔주기
-              lng: location.longitude, // 마커도 표시해야함
-            }}
-            level={2} // 지도의 확대 레벨
-            className={sidebarMenuImg}
-          />
-        )}
+        <Map
+          center={{
+            // 지도의 중심좌표
+            lat: location.latitude, // 해당 장소 좌표로 바꿔주기
+            lng: location.longitude, // 마커도 표시해야함
+          }}
+          level={2} // 지도의 확대 레벨
+          className={sidebarMenuImg}
+        />
       </div>
       <div>
         <div className={sidebarMenuInfoDetail}>

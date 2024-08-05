@@ -1,5 +1,5 @@
 import { Search } from '../search/search';
-import { sidebarMenuContainer, sidebarMenuSearch } from './sideBarMenu.css';
+import { sidebarMenuContainer, sidebarMenuItem, sidebarMenuSearch } from './sideBarMenu.css';
 import { SideBarMenuInfo } from './sideBarMenuInfo/sideBarMenuInfo';
 
 export const SidebarMenu = () => {
@@ -8,7 +8,7 @@ export const SidebarMenu = () => {
       <div className={sidebarMenuSearch}>
         <Search />
       </div>
-      <div>
+      <div className={sidebarMenuItem}>
         <SideBarMenuInfo />
       </div>
     </div>

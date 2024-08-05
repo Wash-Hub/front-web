@@ -1,14 +1,10 @@
 import { atom, RecoilState } from 'recoil';
+import { location } from '../../type';
 
-interface MapState {
-  latitude: number;
-  longitude: number;
-}
-
-export const mapState: RecoilState<MapState> = atom({
+export const mapState: RecoilState<location> = atom({
   key: 'mapState',
   default: {
-    latitude: 37.5665,
-    longitude: 126.978,
+    latitude: 0,
+    longitude: 0,
   },
 });

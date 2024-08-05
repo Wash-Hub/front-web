@@ -5,6 +5,7 @@ export const sideBarMenuInfoReviewContainer = style({
   flexDirection: 'column',
   gap: '1rem',
   padding: '1rem',
+  paddingBottom: '100px',
   width: '100%',
   height: '100%',
   overflowY: 'auto',
@@ -48,16 +49,22 @@ export const sideBarMenuInfoReviewInfoProfileDate = style({
 
 export const sideBarMenuInfoReviewInfoContent = style({
   fontSize: '12px',
+  paddingBottom: '5px',
 });
 
 export const sideBarMenuInfoReviewButtonContainer = style({
   bottom: '0',
-  width: '40vh',
+  width: '330px',
   borderRadius: '10px',
   overflow: 'hidden',
-  position: 'absolute',
+  position: 'fixed',
   zIndex: 1,
-  padding: '0 0 9% 16%',
+  padding: '0 0 0.5% 0.6%',
+  '@media': {
+    '(max-width: 1600px)': {
+      padding: '0 0 0.7% 0.9%',
+    },
+  },
 });
 
 export const sideBarMenuInfoReviewButton = style({
@@ -75,3 +82,28 @@ export const sideBarMenuInfoReviewButton = style({
     backgroundColor: '#f0f0f0',
   },
 });
+
+export const sideBarMenuInfoReviewImg = style({
+  width: '90px',
+  height: '110px',
+  borderRadius: '10px',
+  border: 'none',
+});
+
+export const imgModal = {
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    zIndex: 2,
+    width: '100%',
+    height: '100%',
+  },
+  content: {
+    width: 'fit-content',
+    height: 'fit-content',
+    margin: 'auto',
+    marginTop: '10%',
+    borderRadius: '10px',
+    border: '1px solid #C1C1BB',
+    padding: '8px',
+  },
+};

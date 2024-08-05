@@ -13,17 +13,26 @@ import { useRecoilState } from 'recoil';
 import { sidebarState } from '../../../recoil/atoms/sidebarState';
 import { SideBarMenuInfoDetail } from './sideBarMenuInfoDetail/sideBarMenuInfoDetail';
 import { SideBarMenuInfoReview } from './sideBarMenuInfoReview/sideBarMenuInfoReview';
-import { reviewState } from '../../../recoil/atoms/menuState';
 import { CreateReview } from './sideBarMenuInfoReview/createReview/createReview';
-
+import { loginModalState, loginState } from '../../../recoil/atoms/loginState';
+import Modal from 'react-modal';
+import { SelectLogin } from '../../login/selecktLogin/selectLogin';
+import { loginModal } from '../../../styles/globalStyle.css';
+import { useOpen } from '../../../hooks/useOpen';
+import { reviewState } from '../../../recoil/atoms/reviewState';
 export const SideBarMenuInfo = () => {
-  const [isActiveDetail, setIsActiveDetail] = useRecoilState(sidebarState);
-  const [isActiveReview, setIsActiveReview] = useRecoilState(sidebarState);
-  const [review, setReview] = useRecoilState(reviewState);
-  const onClick = () => {
-    setIsActiveDetail((prevState) => ({ ...prevState, isActiveDetail: !prevState.isActiveDetail }));
-    setIsActiveReview((prevState) => ({ ...prevState, isActiveReview: !prevState.isActiveReview }));
+  const [isActiveDetail] = useRecoilState(sidebarState);
+  const [isActiveReview] = useRecoilState(sidebarState);
+  const [review] = useRecoilState(reviewState);
+  const { MenuControllDetail, MenuControllReview } = useOpen();
+  const onClickDetail = () => {
+    MenuControllDetail();
   };
+  const onClickReview = () => {
+    MenuControllReview();
+  };
+  const [isModalOpen, setIsModalOpen] = useRecoilState(loginModalState);
+  const [login] = useRecoilState(loginState);
   return (
     <div className={review.isOpened ? scrollbar : ''}>
       <img src="public\test.jpg" alt="" className={sidebarMenuImg} />
@@ -39,7 +48,7 @@ export const SideBarMenuInfo = () => {
       <div>
         <div className={sidebarMenuInfoDetail}>
           <div
-            onClick={onClick}
+            onClick={onClickDetail}
             className={sidebarMenuInfoDetailItem({
               active: isActiveDetail.isActiveDetail ? 'borderBottom' : undefined,
             })}
@@ -47,7 +56,7 @@ export const SideBarMenuInfo = () => {
             상세정보
           </div>
           <div
-            onClick={onClick}
+            onClick={onClickReview}
             className={sidebarMenuInfoDetailItem({
               active: isActiveReview.isActiveReview ? 'borderBottom' : undefined,
             })}
@@ -61,9 +70,26 @@ export const SideBarMenuInfo = () => {
           </div>
         ) : null}
         {isActiveReview.isActiveReview ? (
-          <div>{review.isOpened ? <CreateReview /> : <SideBarMenuInfoReview />}</div>
+          <div>{review.isOpened && login.isLogin ? <CreateReview /> : <SideBarMenuInfoReview />}</div>
         ) : null}
       </div>
+      {login.isLogin ? (
+        ''
+      ) : (
+        <Modal
+          ariaHideApp={false}
+          isOpen={isModalOpen.isModalOpen}
+          onRequestClose={() => setIsModalOpen({ isModalOpen: false })}
+          shouldCloseOnEsc={true}
+          shouldCloseOnOverlayClick={true}
+          style={{
+            overlay: loginModal.overlay,
+            content: loginModal.content,
+          }}
+        >
+          <SelectLogin />
+        </Modal>
+      )}
     </div>
   );
 };
