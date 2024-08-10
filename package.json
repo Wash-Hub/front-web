@@ -13,6 +13,7 @@
     "@vanilla-extract/css": "^1.15.2",
     "@vanilla-extract/recipes": "^0.5.3",
     "@vanilla-extract/vite-plugin": "^4.0.10",
+    "axios": "^1.7.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.52.0",
