@@ -7,7 +7,7 @@ export const KakaoRedirection = () => {
   const navigate = useNavigate();
   if (code) {
     const { data, error } = useQuery('kakao', () =>
-      axios.get(`http://172.30.1.35:8000/api/auth/kakao/callback?code=${code}`)
+      axios.get(`http://localhost:8000/api/auth/kakao/callback?code=${code}`)
     );
     if (error) {
       alert('카카오 로그인에 실패했습니다.');
