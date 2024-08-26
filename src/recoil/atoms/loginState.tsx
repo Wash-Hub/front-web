@@ -115,7 +115,7 @@ export const loginAtom = selector({
       throw new Error('Authorization code not found.');
     }
 
-    const { data } = await client.get(`/api/auth/kakao/callback?code=${code}`);
+    const { data } = await client.get(`/auth/kakao/callback?code=${code}`);
     const token = data.data.accessToken;
     return token;
   },
@@ -129,7 +129,7 @@ export const logoutAtom = selector({
   key: 'logoutAtom',
   get: ({ get }) => {
     const client = get(defaultClientAtom);
-    client.post('/api/auth/logout');
+    client.post('/auth/logout');
     return null;
   },
   set: ({ set }) => {
