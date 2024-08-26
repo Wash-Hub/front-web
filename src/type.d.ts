@@ -45,3 +45,7 @@ export type MapScript = (
     title: string;
   }[]
 ) => void;
+
+type JwtPayload = {
+  userId: String;
+};
