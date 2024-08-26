@@ -1,23 +1,30 @@
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { memo } from 'react';
 import { RecoilRoot } from 'recoil';
-import './styles/globalStyle.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { KakaoRedirection } from './components/login/kakao/kakaoRedirection';
-import { Main } from './routes/main';
-function App() {
-  const queryClient = new QueryClient();
-  return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/api/auth/kakao/callback" element={<KakaoRedirection />} />
-          </Routes>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </RecoilRoot>
-  );
-}
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './router';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+      onError: (error) => {
+        if (error instanceof Error) {
+          alert('데이터를 불러오지 못했습니다.');
+        }
+      },
+    },
+  },
+});
+
+const App = memo(() => (
+  <RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  </RecoilRoot>
+));
+
+App.displayName = 'App';
 
 export default App;
