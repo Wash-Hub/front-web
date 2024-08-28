@@ -3,12 +3,19 @@ import { useLocate } from '../../hooks/useLocate';
 import { location } from '../../type';
 import { useRecoilState } from 'recoil';
 import { mapState } from '../../recoil/atoms/mapState';
-import { mapScript } from '../../utils/mapScript';
+import { useMapScript } from '../../hooks/useMapScript';
 import { mapButton } from './map.css';
+import { useMap } from '../../hooks/useMap';
 
 export const KakaoMap = () => {
+  const data = useMap();
+  useEffect(() => {
+    console.log(data.contents);
+  }, [data]);
+
   const markerTestData = [
     {
+      id: '1',
       lat: 37.5062528,
       lng: 126.8379591,
       title: '코인세탁소',
@@ -16,6 +23,7 @@ export const KakaoMap = () => {
       address: '서울특별시 양천구',
     },
     {
+      id: '2',
       lat: 37.5072528,
       lng: 126.8379591,
       title: '코인세탁소',
@@ -26,9 +34,7 @@ export const KakaoMap = () => {
   // 현재 위치 정보 받아오기
   const [locate] = useRecoilState<location>(mapState);
   useLocate();
-  useEffect(() => {
-    mapScript(locate.latitude, locate.longitude, markerTestData);
-  }, [locate]);
+  useMapScript(locate.latitude, locate.longitude, markerTestData);
 
   return (
     <div>

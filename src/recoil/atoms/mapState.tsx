@@ -27,11 +27,7 @@ export const getMapDataAtom = selector({
   key: 'getMapDataAtom',
   get: async ({ get }) => {
     const client = get(defaultClientMapAtom);
-    const locate = get(mapState);
-    const { data } = await client.post('/map/coordinates', {
-      latitude: locate.latitude,
-      longitude: locate.longitude,
-    });
+    const { data } = await client.post('/map/coordinates');
     return data;
   },
 });

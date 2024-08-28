@@ -10,11 +10,9 @@ export const useLogin = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (tokenLoadable.state === 'hasValue') {
-      console.log(tokenLoadable.contents);
       const fetchedToken = tokenLoadable.contents;
       setToken(fetchedToken);
       setIsLogin((prevState) => ({ ...prevState, isLogin: true }));
-      console.log(fetchedToken);
       navigate('/');
     } else if (tokenLoadable.state === 'hasError') {
       alert('로그인에 실패하였습니다. 다시 시도해주세요.');

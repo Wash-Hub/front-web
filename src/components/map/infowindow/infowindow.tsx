@@ -9,7 +9,7 @@ export const Infowindow = (info: any) => {
           <span class="${infowindowText({ fontSize: 'small' })}">리뷰 ${info.review.length}</span>  
         </div>
         <span class="${infowindowText({ fontSize: 'medium' })}">${info.address}</span>
-        <a class="${infowindowText({ fontSize: 'link' })}">상세보기</a>
+        <div id="${info.id}" class="${infowindowText({ fontSize: 'link' })}">상세보기</div>
       </div>
     </div>
   `;

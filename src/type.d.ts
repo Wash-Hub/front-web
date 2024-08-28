@@ -43,6 +43,7 @@ export type MapScript = (
     lat: number;
     lng: number;
     title: string;
+    id: string;
   }[]
 ) => void;
 
