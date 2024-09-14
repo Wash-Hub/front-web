@@ -45,7 +45,7 @@ export const selectLoginContent = style({
 export const selectLoginButtonWrapper = style({
   display: 'flex',
   flexDirection: 'column',
-  padding: '0 0 0 0',
+  padding: '0 0 5% 0',
   margin: '0 0 0 0',
 });
 
@@ -93,6 +93,9 @@ export const selectLoginButton = recipe({
     '@media': {
       '(max-width: 1500px)': {
         width: '30vh',
+      },
+      '(max-width: 1000px)': {
+        width: '20vh',
       },
     },
   },

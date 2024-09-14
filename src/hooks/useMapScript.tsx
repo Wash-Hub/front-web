@@ -1,44 +1,46 @@
-import { MapScript } from '../type';
+import { customoverlay, MapScript } from '../type';
 import { useEffect } from 'react';
 import { Infowindow } from '../components/map/infowindow/infowindow';
 import { useOpen } from '../hooks/useOpen';
 import { useRecoilState } from 'recoil';
 import { mapState } from '../recoil/atoms/mapState';
 import { debouncedUpdateLocate } from '../utils/debounceUpdateLotate';
+import _ from 'lodash';
 
-export const useMapScript: MapScript = (lat, lng, marker) => {
+export const useMapScript: MapScript = (lat, lng, marker, draggable = true) => {
   const { MenuControllMenu } = useOpen();
   const [locate, setLocate] = useRecoilState(mapState);
   useEffect(() => {
     const container = document.getElementById('map')!;
     const options = {
-      center: new window.kakao.maps.LatLng(lat, lng),
+      center: new kakao.maps.LatLng(lat, lng),
       level: 3,
     };
 
-    const map = new window.kakao.maps.Map(container, options);
-    let currentInfoWindow: kakao.maps.CustomOverlay | null = null;
+    const map = new kakao.maps.Map(container, options);
+    draggable ? map.setDraggable(true) : map.setDraggable(false);
+    let currentInfoWindow: customoverlay = null;
     const imageSrc = 'public/marker.png';
-    const imageSize = new window.kakao.maps.Size(35, 35);
+    const imageSize = new kakao.maps.Size(35, 35);
     const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
 
     marker.forEach((data) => {
-      const mark = new window.kakao.maps.Marker({
+      const mark = new kakao.maps.Marker({
         map: map,
-        position: new window.kakao.maps.LatLng(data.lat, data.lng),
+        position: new kakao.maps.LatLng(data.lat, data.lng),
         title: data.title,
         image: markerImage,
       });
 
       const content = Infowindow(data);
-      const overlay = new window.kakao.maps.CustomOverlay({
+      const overlay = new kakao.maps.CustomOverlay({
         content: content,
         map: map,
-        position: new window.kakao.maps.LatLng(data.lat, data.lng),
+        position: new kakao.maps.LatLng(data.lat, data.lng),
         clickable: true,
       });
 
-      window.kakao.maps.event.addListener(mark, 'click', function () {
+      kakao.maps.event.addListener(mark, 'click', function () {
         if (currentInfoWindow) {
           currentInfoWindow.setMap(null);
           currentInfoWindow = null;
@@ -47,12 +49,8 @@ export const useMapScript: MapScript = (lat, lng, marker) => {
         currentInfoWindow = overlay;
       });
 
-      document.addEventListener('click', function (event) {
-        const target = event.target as HTMLElement;
-        if (target && target.id === data.id) {
-          MenuControllMenu();
-          console.log('click');
-        }
+      document.getElementById(data.id)?.addEventListener('click', () => {
+        MenuControllMenu();
       });
 
       overlay.setMap(null);
@@ -66,7 +64,7 @@ export const useMapScript: MapScript = (lat, lng, marker) => {
       }
     });
 
-    kakao.maps.event.addListener(map, 'bounds_changed', function () {
+    kakao.maps.event.addListener(map, 'dragend', function () {
       debouncedUpdateLocate(map, locate, setLocate);
     });
   }, [lat, lng, marker]);

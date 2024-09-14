@@ -1,5 +1,5 @@
 import { useLocate } from '../../../../hooks/useLocate';
-import { Map } from 'react-kakao-maps-sdk';
+import { Map, useMap } from 'react-kakao-maps-sdk';
 import {
   sidbarMenuInfoDetailButton,
   sideBarMenuInfoDetailContainer,
@@ -12,11 +12,28 @@ import { FiPhone } from 'react-icons/fi';
 import { RiMapPin2Line } from 'react-icons/ri';
 import { useQuery } from 'react-query';
 import { location } from '../../../../type';
+import { useRecoilState } from 'recoil';
+import { mapState } from '../../../../recoil/atoms/mapState';
+import { useMapScript } from '../../../../hooks/useMapScript';
 
 export const SideBarMenuInfoDetail = () => {
+  const markerTestData = [
+    {
+      id: '1',
+      lat: 37.5062528,
+      lng: 126.8318208,
+      title: '코인세탁소',
+      review: ['1', '2', '3'],
+      address: '서울특별시 양천구',
+    },
+  ];
   // 현재 위치 정보 받아오기
-  const location: location = useLocate();
+  const [locate] = useRecoilState<location>(mapState);
+  useLocate();
+  useMapScript(locate.latitude, locate.longitude, markerTestData, false);
+
   // 임시 데이터 나중에 서버랑 연결할 때는 좌표값이랑 이름 변경해주기
+
   const { data } = useQuery('data', () =>
     fetch(
       'https://dapi.kakao.com/v2/local/search/keyword.json?y=37.514322572335935&x=127.06283102249932&radius=20000&query=카카오프렌즈',
@@ -34,17 +51,8 @@ export const SideBarMenuInfoDetail = () => {
   };
   return (
     <div className={sideBarMenuInfoDetailContainer}>
-      <div>
-        <Map
-          center={{
-            // 지도의 중심좌표
-            lat: location.latitude, // 해당 장소 좌표로 바꿔주기
-            lng: location.longitude, // 마커도 표시해야함
-          }}
-          level={2} // 지도의 확대 레벨
-          className={sidebarMenuImg}
-        />
-      </div>
+      <div className={sidebarMenuImg} id="map" />
+      {/* </div> */}
       <div>
         <div className={sidebarMenuInfoDetail}>
           <div className={sidebarMenuInfoDetailIcon}>

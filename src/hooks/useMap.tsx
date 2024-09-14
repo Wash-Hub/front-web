@@ -8,7 +8,7 @@ export const useMap = () => {
     if (mapDataLoadable.state === 'loading') {
       console.log('loading');
     } else if (mapDataLoadable.state === 'hasValue') {
-      console.log(mapDataLoadable.contents);
+      console.log(mapDataLoadable.contents, mapDataLoadable);
     } else if (mapDataLoadable.state === 'hasError') {
       console.error('Error:', mapDataLoadable.contents);
     }

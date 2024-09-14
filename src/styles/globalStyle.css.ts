@@ -62,7 +62,7 @@ export const loginModal = {
   },
   content: {
     width: '27%',
-    height: '35%',
+    height: 'fit-content',
     margin: 'auto',
     marginTop: '10%',
     borderRadius: '10px',

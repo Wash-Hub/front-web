@@ -4,6 +4,7 @@ import axios from 'axios';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { useRefreshToken } from '../../hooks/useMutation';
 import { CONFIG } from '../../../config';
+import { Cookies } from 'react-cookie';
 export const loginState = atom<LoginState>({
   key: 'loginState',
   default: {
@@ -57,7 +58,7 @@ export const defaultClientAtom = selector({
     instance.interceptors.request.use((config: any) => {
       const token = get(updateTokenAtom);
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `${token}`;
       }
       return config;
     });
@@ -75,7 +76,7 @@ export const defaultClientAtom = selector({
           try {
             const newToken = await refreshMutation.mutateAsync();
             setToken(newToken);
-            originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+            originalRequest.headers['Authorization'] = `${newToken}`;
             return instance.request(originalRequest);
           } catch (error) {
             alert('예기치 못한 오류가 발생하였습니다. 다시 로그인해주세요.');
@@ -117,6 +118,8 @@ export const loginAtom = selector({
 
     const { data } = await client.get(`/auth/kakao/callback?code=${code}`);
     const token = data.data.accessToken;
+    const cookies = new Cookies();
+    cookies.set('refreshToken', data.data.refreshToken, { path: '/' });
     return token;
   },
   set: ({ set }, newValue) => {
@@ -129,7 +132,8 @@ export const logoutAtom = selector({
   key: 'logoutAtom',
   get: ({ get }) => {
     const client = get(defaultClientAtom);
-    client.post('/auth/logout');
+    client.defaults.headers.Authorization !== undefined && client.post('/auth/logout');
+
     return null;
   },
   set: ({ set }) => {

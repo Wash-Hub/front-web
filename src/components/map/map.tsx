@@ -34,7 +34,7 @@ export const KakaoMap = () => {
   // 현재 위치 정보 받아오기
   const [locate] = useRecoilState<location>(mapState);
   useLocate();
-  useMapScript(locate.latitude, locate.longitude, markerTestData);
+  useMapScript(locate.latitude, locate.longitude, markerTestData, true);
 
   return (
     <div>

@@ -2,6 +2,7 @@ import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
 import { loginAtom, loginState, logoutAtom, updateTokenAtom } from '../recoil/atoms/loginState';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
 
 export const useLogin = () => {
   const tokenLoadable = useRecoilValueLoadable(loginAtom);
@@ -24,17 +25,24 @@ export const useLogin = () => {
   }, [tokenLoadable, setToken]);
 };
 
-export const useLogout = () => {
-  const setIsLogin = useSetRecoilState(loginState);
+export const useLogout = (): (() => void) => {
   const tokenLoadable = useRecoilValueLoadable(logoutAtom);
+  const setIsLogin = useSetRecoilState(loginState);
   const setToken = useSetRecoilState(logoutAtom);
-  useEffect(() => {
+  const navigate = useNavigate();
+  const cookies = new Cookies();
+
+  return () => {
     if (tokenLoadable.state === 'hasValue') {
       setToken(null);
+      cookies.remove('refreshToken', { path: '/' });
       setIsLogin((prevState) => ({ ...prevState, isLogin: false }));
+      navigate('/');
     } else if (tokenLoadable.state === 'hasError') {
       alert('로그아웃에 실패하였습니다. 다시 시도해주세요.');
       console.error('Error:', tokenLoadable.contents);
+    } else if (tokenLoadable.state === 'loading') {
+      console.log('loading');
     }
-  }, [setIsLogin]);
+  };
 };
