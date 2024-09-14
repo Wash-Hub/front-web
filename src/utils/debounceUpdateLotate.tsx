@@ -6,8 +6,6 @@ export const debouncedUpdateLocate: debounce = _.debounce((map, locate, setLocat
   const swLatLng = bounds.getSouthWest();
   const neLatLng = bounds.getNorthEast();
 
-  console.log(swLatLng.getLat(), neLatLng.getLat());
-
   const newLatitude = (swLatLng.getLat() + neLatLng.getLat()) / 2;
   const newLongitude = (swLatLng.getLng() + neLatLng.getLng()) / 2;
 

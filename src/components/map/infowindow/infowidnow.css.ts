@@ -3,9 +3,9 @@ import { recipe } from '@vanilla-extract/recipes';
 
 export const infowindowContainer = style({
   position: 'absolute',
-  left: '3.4rem',
+  left: '0.9rem',
   bottom: '35px',
-  width: '200px',
+  width: '300px',
   height: '89px',
   marginLeft: '-144px',
   textAlign: 'left',
@@ -15,7 +15,7 @@ export const infowindowContainer = style({
 });
 
 export const infowindowWrapper = style({
-  width: '180px',
+  width: '300px',
   height: '77px',
   borderRadius: '15px',
   overflow: 'hidden',

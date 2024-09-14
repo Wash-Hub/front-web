@@ -42,3 +42,27 @@ export const getDetailMapDataAtom = selectorFamily({
       return data;
     },
 });
+
+export const mapInfoState = atom({
+  key: 'mapInfoState',
+  default: [
+    {
+      id: '',
+      latitude: 0,
+      longitude: 0,
+      picture: '',
+      placeName: '',
+      roadName: '',
+    },
+  ],
+});
+
+export const mapInfoAtom = selector({
+  key: 'mapInfoAtom',
+  get: ({ get }) => {
+    return get(mapInfoState);
+  },
+  set: ({ set }, newValue) => {
+    set(mapInfoState, newValue);
+  },
+});

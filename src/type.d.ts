@@ -38,17 +38,7 @@ export interface location {
   longitude: number;
 }
 
-export type MapScript = (
-  lat: number,
-  lng: number,
-  marker: {
-    lat: number;
-    lng: number;
-    title: string;
-    id: string;
-  }[],
-  draggable: boolean
-) => void;
+export type MapScript = (lat: number, lng: number, draggable: boolean) => void;
 
 type JwtPayload = {
   userId: String;

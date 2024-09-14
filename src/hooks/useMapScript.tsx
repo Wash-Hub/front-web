@@ -2,19 +2,17 @@ import { customoverlay, MapScript } from '../type';
 import { useEffect } from 'react';
 import { Infowindow } from '../components/map/infowindow/infowindow';
 import { useOpen } from '../hooks/useOpen';
-import { useRecoilState } from 'recoil';
-import { mapState } from '../recoil/atoms/mapState';
-import { debouncedUpdateLocate } from '../utils/debounceUpdateLotate';
+import { useRecoilValue } from 'recoil';
+import { mapInfoAtom } from '../recoil/atoms/mapState';
 import _ from 'lodash';
 
-export const useMapScript: MapScript = (lat, lng, marker, draggable = true) => {
+export const useMapScript: MapScript = (lat, lng, draggable = true) => {
   const { MenuControllMenu } = useOpen();
-  const [locate, setLocate] = useRecoilState(mapState);
+  const marker = useRecoilValue(mapInfoAtom);
   useEffect(() => {
     const container = document.getElementById('map')!;
     const options = {
       center: new kakao.maps.LatLng(lat, lng),
-      level: 3,
     };
 
     const map = new kakao.maps.Map(container, options);
@@ -24,11 +22,11 @@ export const useMapScript: MapScript = (lat, lng, marker, draggable = true) => {
     const imageSize = new kakao.maps.Size(35, 35);
     const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
 
-    marker.forEach((data) => {
+    marker?.forEach((data) => {
       const mark = new kakao.maps.Marker({
         map: map,
-        position: new kakao.maps.LatLng(data.lat, data.lng),
-        title: data.title,
+        position: new kakao.maps.LatLng(data.latitude, data.longitude),
+        title: data.placeName,
         image: markerImage,
       });
 
@@ -36,7 +34,7 @@ export const useMapScript: MapScript = (lat, lng, marker, draggable = true) => {
       const overlay = new kakao.maps.CustomOverlay({
         content: content,
         map: map,
-        position: new kakao.maps.LatLng(data.lat, data.lng),
+        position: new kakao.maps.LatLng(data.latitude, data.longitude),
         clickable: true,
       });
 
@@ -47,10 +45,19 @@ export const useMapScript: MapScript = (lat, lng, marker, draggable = true) => {
         }
         overlay.setMap(map);
         currentInfoWindow = overlay;
-      });
 
-      document.getElementById(data.id)?.addEventListener('click', () => {
-        MenuControllMenu();
+        // 오버레이가 표시된 후 DOM 요소를 찾아 이벤트 리스너 추가
+        setTimeout(() => {
+          const element = document.getElementById(data.id);
+          if (element) {
+            element.addEventListener('click', () => {
+              console.log('상세보기 클릭');
+              MenuControllMenu();
+            });
+          } else {
+            console.warn(`Element with ID ${data.id} not found`);
+          }
+        }, 0); // DOM이 렌더링된 후 바로 실행되도록 지연 시간 0 설정
       });
 
       overlay.setMap(null);
@@ -64,8 +71,8 @@ export const useMapScript: MapScript = (lat, lng, marker, draggable = true) => {
       }
     });
 
-    kakao.maps.event.addListener(map, 'dragend', function () {
-      debouncedUpdateLocate(map, locate, setLocate);
-    });
-  }, [lat, lng, marker]);
+    // kakao.maps.event.addListener(map, 'dragend', function () {
+    //   debouncedUpdateLocate(map, locate, setLocate);
+    // });
+  }, [marker, lat, lng]);
 };
