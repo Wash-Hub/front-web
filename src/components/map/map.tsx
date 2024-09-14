@@ -1,33 +1,23 @@
-import { useEffect } from 'react';
 import { useLocate } from '../../hooks/useLocate';
 import { location } from '../../type';
 import { useRecoilState } from 'recoil';
 import { mapState } from '../../recoil/atoms/mapState';
-import { mapScript } from '../../utils/mapScript';
+import { useMapScript } from '../../hooks/useMapScript';
+import { mapButton } from './map.css';
+import { useMap } from '../../hooks/useMap';
 
 export const KakaoMap = () => {
-  const markerTestData = [
-    {
-      lat: 37.5062528,
-      lng: 126.8379591,
-      title: 'test1',
-    },
-    {
-      lat: 37.5072528,
-      lng: 126.8379591,
-      title: 'test3',
-    },
-  ];
+  useMap();
+
   // 현재 위치 정보 받아오기
   const [locate] = useRecoilState<location>(mapState);
   useLocate();
-  useEffect(() => {
-    mapScript(locate.latitude, locate.longitude, markerTestData);
-  }, [locate]);
+  useMapScript(locate.latitude, locate.longitude, true);
 
   return (
     <div>
       <div id="map" style={{ width: '100%', height: '100vh' }} />
+      <div className={mapButton}>현위치에서 검색하기</div>
     </div>
   );
 };

@@ -77,7 +77,7 @@ export const createReviewInputImgIcon = style({
 
 export const createReviewButtonContainer = style({
   bottom: '0',
-  width: '40vh',
+  width: '100%',
   overflow: 'hidden',
   position: 'absolute',
   zIndex: 1,

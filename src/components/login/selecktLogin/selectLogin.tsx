@@ -13,7 +13,7 @@ import { RiKakaoTalkFill } from 'react-icons/ri';
 import { IoIosClose } from 'react-icons/io';
 import { loginModalState } from '../../../recoil/atoms/loginState';
 import { useRecoilState } from 'recoil';
-import { FcGoogle } from 'react-icons/fc';
+// import { FcGoogle } from 'react-icons/fc';
 
 export const SelectLogin = () => {
   const [, setLoginModal] = useRecoilState(loginModalState);
@@ -43,12 +43,12 @@ export const SelectLogin = () => {
           </div>
           <div className={selectLoginButtonText()}>카카오 로그인</div>
         </button>
-        <button className={selectLoginButton({ background: 'google' })}>
+        {/* <button className={selectLoginButton({ background: 'google' })}>
           <div className={selectLoginButtonIcon({ background: 'google' })}>
             <FcGoogle />
           </div>
           <div className={selectLoginButtonText({ margin: 'google' })}>구글 로그인</div>
-        </button>
+        </button> */}
       </div>
     </div>
   );

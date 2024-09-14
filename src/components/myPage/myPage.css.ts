@@ -35,14 +35,15 @@ export const myPageProfile = style({
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
+  fontWeight: 'bold',
 });
 
 export const myPageProfileImg = style({
-  width: '35px',
-  height: '35px',
+  width: '40px',
+  height: '40px',
   borderRadius: '50%',
   marginRight: '0.5rem',
-  border: '1px solid black',
+  // border: '1px solid black',
 });
 
 export const myPageProfileIconContainer = style({

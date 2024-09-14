@@ -31,21 +31,27 @@ export type ReviewImg = string | ArrayBuffer | null;
 
 export type dropdownRef = HTMLDivElement | null;
 
+export type customoverlay = kakao.maps.CustomOverlay | null;
+
 export interface location {
   latitude: number;
   longitude: number;
 }
 
-export type MapScript = (
-  lat: number,
-  lng: number,
-  marker: {
-    lat: number;
-    lng: number;
-    title: string;
-  }[]
-) => void;
+export type MapScript = (lat: number, lng: number, draggable: boolean) => void;
 
 type JwtPayload = {
   userId: String;
 };
+
+export interface debounce {
+  (map: kakao.maps.Map, locate: location, setLocate: SetterOrUpdater<location>): void;
+}
+
+export interface userInfo {
+  name: string;
+  email: string;
+  nickname: string;
+  profileImg: string;
+  id: string;
+}
