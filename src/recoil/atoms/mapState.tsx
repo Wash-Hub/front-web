@@ -11,6 +11,18 @@ export const mapState: RecoilState<location> = atom({
   },
 });
 
+export const currentLocationAtom = atom({
+  key: 'currentLocationAtom',
+  default: {
+    id: '',
+  },
+});
+
+export const mapInitializedAtom = atom({
+  key: 'mapInitializedAtom',
+  default: false,
+});
+
 export const defaultClientMapAtom = selector({
   key: 'defaultClientMapAtom',
   get: () => {

@@ -1,18 +1,20 @@
 import { customoverlay, MapScript } from '../type';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Infowindow } from '../components/map/infowindow/infowindow';
 import { useOpen } from '../hooks/useOpen';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { mapInfoAtom, mapState } from '../recoil/atoms/mapState';
+import { currentLocationAtom, mapInfoAtom, mapInitializedAtom, mapState } from '../recoil/atoms/mapState';
 import _ from 'lodash';
 import { debouncedUpdateLocate } from '../utils/debounceUpdateLotate';
 
 export const useMapScript: MapScript = (lat, lng, draggable = true) => {
-  const { MenuControllMenu } = useOpen();
+  const { MenuControlldetail } = useOpen();
   const marker = useRecoilValue(mapInfoAtom);
   const mapRef = useRef<kakao.maps.Map | null>(null);
   const [locate, setLocate] = useRecoilState(mapState);
-  const [isMapInitialized, setIsMapInitialized] = useState(false);
+  const [isMapInitialized, setIsMapInitialized] = useRecoilState(mapInitializedAtom);
+  const [, setCurrentLocation] = useRecoilState(currentLocationAtom);
+
   useEffect(() => {
     if (!mapRef.current) {
       const container = document.getElementById('map')!;
@@ -60,11 +62,12 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
           const element = document.getElementById(data.id);
           if (element) {
             element.addEventListener('click', () => {
-              console.log('상세보기 클릭');
-              MenuControllMenu();
+              setCurrentLocation({ id: data.id });
+              MenuControlldetail();
             });
           } else {
             console.warn(`Element with ID ${data.id} not found`);
+            alert('다시 싣어주세요');
           }
         }, 0);
       });

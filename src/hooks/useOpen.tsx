@@ -18,6 +18,13 @@ export const useOpen = () => {
     setIsMyPageOpened((prevState) => ({ ...prevState, isMyPageOpened: false }));
   };
 
+  const MenuControlldetail = () => {
+    setIsOpened((prevState) => ({ ...prevState, isOpened: true }));
+    setIsActiveSearch((prevState) => ({ ...prevState, isActiveSearch: false }));
+    setReview((prev) => ({ ...prev, isOpened: false }));
+    setIsMyPageOpened((prevState) => ({ ...prevState, isMyPageOpened: false }));
+  };
+
   const MenuControllMyPage = () => {
     setIsOpened((prevState) => ({ ...prevState, isOpened: false }));
     setIsActiveSearch((prevState) => ({ ...prevState, isActiveSearch: false }));
@@ -44,5 +51,12 @@ export const useOpen = () => {
     setIsActiveReview((prevState) => ({ ...prevState, isActiveReview: true }));
   };
 
-  return { MenuControllMenu, MenuControllMyPage, MenuControllSearch, MenuControllReview, MenuControllDetail };
+  return {
+    MenuControllMenu,
+    MenuControllMyPage,
+    MenuControllSearch,
+    MenuControllReview,
+    MenuControllDetail,
+    MenuControlldetail,
+  };
 };
