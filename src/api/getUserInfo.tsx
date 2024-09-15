@@ -10,13 +10,12 @@ export const getUserInfo = () => {
     },
     {
       retry: false,
-      onError: (error) => {
-        console.log(error);
+      onError: () => {
         alert('데이터를 불러오는데 실패하였습니다. 다시 시도해주세요.');
       },
     }
   );
-  console.log(data);
+
   if (data === undefined) return undefined;
   return data?.data?.data;
 };

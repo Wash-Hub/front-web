@@ -17,5 +17,6 @@ export const debouncedUpdateLocate: debounce = _.debounce((map, locate, setLocat
       latitude: newLatitude,
       longitude: newLongitude,
     });
+    map.panTo(new kakao.maps.LatLng(newLatitude, newLongitude));
   }
 }, 100); // 100ms 지연 후 실행

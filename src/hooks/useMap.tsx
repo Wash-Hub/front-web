@@ -7,12 +7,10 @@ export const useMap = () => {
   const setMapData = useSetRecoilState(mapInfoAtom);
   useEffect(() => {
     if (mapDataLoadable.state === 'loading') {
-      console.log('loading');
     } else if (mapDataLoadable.state === 'hasValue') {
-      console.log(mapDataLoadable.contents, mapDataLoadable);
       setMapData(mapDataLoadable.contents.data);
     } else if (mapDataLoadable.state === 'hasError') {
-      console.error('Error:', mapDataLoadable.contents);
+      alert('지도 데이터를 불러오는데 실패했습니다. 잠시 후 다시 시도해주세요.');
     }
   }, [mapDataLoadable]);
 

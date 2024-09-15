@@ -1,21 +1,33 @@
 import { customoverlay, MapScript } from '../type';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Infowindow } from '../components/map/infowindow/infowindow';
 import { useOpen } from '../hooks/useOpen';
-import { useRecoilValue } from 'recoil';
-import { mapInfoAtom } from '../recoil/atoms/mapState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { currentLocationAtom, mapInfoAtom, mapInitializedAtom, mapState } from '../recoil/atoms/mapState';
 import _ from 'lodash';
+import { debouncedUpdateLocate } from '../utils/debounceUpdateLotate';
 
 export const useMapScript: MapScript = (lat, lng, draggable = true) => {
-  const { MenuControllMenu } = useOpen();
+  const { MenuControlldetail } = useOpen();
   const marker = useRecoilValue(mapInfoAtom);
-  useEffect(() => {
-    const container = document.getElementById('map')!;
-    const options = {
-      center: new kakao.maps.LatLng(lat, lng),
-    };
+  const mapRef = useRef<kakao.maps.Map | null>(null);
+  const [locate, setLocate] = useRecoilState(mapState);
+  const [isMapInitialized, setIsMapInitialized] = useRecoilState(mapInitializedAtom);
+  const [, setCurrentLocation] = useRecoilState(currentLocationAtom);
 
-    const map = new kakao.maps.Map(container, options);
+  useEffect(() => {
+    if (!mapRef.current) {
+      const container = document.getElementById('map')!;
+      const options = {
+        center: new kakao.maps.LatLng(lat, lng),
+      };
+      const map = new kakao.maps.Map(container, options);
+      mapRef.current = map; // 지도 객체를 저장하여 재사용
+      setIsMapInitialized(true);
+    }
+
+    const map = mapRef.current;
+
     draggable ? map.setDraggable(true) : map.setDraggable(false);
     let currentInfoWindow: customoverlay = null;
     const imageSrc = 'public/marker.png';
@@ -46,18 +58,18 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
         overlay.setMap(map);
         currentInfoWindow = overlay;
 
-        // 오버레이가 표시된 후 DOM 요소를 찾아 이벤트 리스너 추가
         setTimeout(() => {
           const element = document.getElementById(data.id);
           if (element) {
             element.addEventListener('click', () => {
-              console.log('상세보기 클릭');
-              MenuControllMenu();
+              setCurrentLocation({ id: data.id });
+              MenuControlldetail();
             });
           } else {
             console.warn(`Element with ID ${data.id} not found`);
+            alert('다시 싣어주세요');
           }
-        }, 0); // DOM이 렌더링된 후 바로 실행되도록 지연 시간 0 설정
+        }, 0);
       });
 
       overlay.setMap(null);
@@ -71,8 +83,15 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
       }
     });
 
-    // kakao.maps.event.addListener(map, 'dragend', function () {
-    //   debouncedUpdateLocate(map, locate, setLocate);
-    // });
+    kakao.maps.event.addListener(map, 'bounds_changed', function () {
+      debouncedUpdateLocate(map, locate, setLocate);
+    });
   }, [marker, lat, lng]);
+
+  useEffect(() => {
+    if (isMapInitialized && mapRef.current) {
+      const map = mapRef.current;
+      map.panTo(new kakao.maps.LatLng(lat, lng)); // 중심 좌표 부드럽게 이동
+    }
+  }, [lat, lng, isMapInitialized]);
 };
