@@ -66,8 +66,7 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
               MenuControlldetail();
             });
           } else {
-            console.warn(`Element with ID ${data.id} not found`);
-            alert('다시 싣어주세요');
+            alert('다시 시도해주세요');
           }
         }, 0);
       });

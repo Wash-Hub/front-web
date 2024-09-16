@@ -55,3 +55,14 @@ export interface userInfo {
   profileImg: string;
   id: string;
 }
+
+export interface mapInfo {
+  id: string;
+  placeName: string;
+  isBookmark: boolean;
+  latitude: string;
+  longitude: string;
+  picture: string;
+  reviewCount: number;
+  roadName: string;
+}

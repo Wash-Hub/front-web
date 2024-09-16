@@ -1,6 +1,13 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+export const sidebarMenuInfoLoading = style({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100vh',
+});
+
 export const scrollbar = style({
   overflowY: 'scroll',
   overflowX: 'hidden',

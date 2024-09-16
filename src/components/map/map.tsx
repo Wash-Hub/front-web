@@ -5,6 +5,7 @@ import { mapState } from '../../recoil/atoms/mapState';
 import { useMapScript } from '../../hooks/useMapScript';
 import { mapButton } from './map.css';
 import { useMap } from '../../hooks/useMap';
+import { getMapAllInfo } from '../../api/getMapInfo';
 
 export const KakaoMap = () => {
   useMap();
@@ -12,6 +13,7 @@ export const KakaoMap = () => {
   // 현재 위치 정보 받아오기
   const [locate] = useRecoilState<location>(mapState);
   useLocate();
+  getMapAllInfo(locate);
   useMapScript(locate.latitude, locate.longitude, true);
 
   return (
