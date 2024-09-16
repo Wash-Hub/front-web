@@ -35,7 +35,7 @@ export const getMapAllInfo = (locate: location) => {
   const { data } = useQuery(
     ['mapAllInfo', locate],
     async () => {
-      const response = await instance.get(`/map?x=${locate.latitude}&y=${locate.longitude}`);
+      const response = await instance.get(`/map?x=${locate.longitude}&y=${locate.latitude}`);
       return response.data;
     },
     {
@@ -43,7 +43,6 @@ export const getMapAllInfo = (locate: location) => {
       retry: false,
     }
   );
-
-  if (!data) return undefined;
+  if (!data) return [];
   return data;
 };

@@ -1,18 +1,15 @@
-import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
-import { getMapDataAtom, mapInfoAtom } from '../recoil/atoms/mapState';
+import { useSetRecoilState } from 'recoil';
+import { mapInfoAtom } from '../recoil/atoms/mapState';
 import { useEffect } from 'react';
+import { getMapAllInfo } from '../api/getMapInfo';
+import { location } from '../type';
 
-export const useMap = () => {
-  const mapDataLoadable = useRecoilValueLoadable(getMapDataAtom);
+export const useMap = (locate: location) => {
   const setMapData = useSetRecoilState(mapInfoAtom);
+  const data = getMapAllInfo(locate);
   useEffect(() => {
-    if (mapDataLoadable.state === 'loading') {
-    } else if (mapDataLoadable.state === 'hasValue') {
-      setMapData(mapDataLoadable.contents.data);
-    } else if (mapDataLoadable.state === 'hasError') {
-      alert('지도 데이터를 불러오는데 실패했습니다. 잠시 후 다시 시도해주세요.');
+    if (data.data) {
+      setMapData(data.data);
     }
-  }, [mapDataLoadable]);
-
-  return mapDataLoadable.contents;
+  }, [setMapData]);
 };

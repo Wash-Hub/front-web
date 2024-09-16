@@ -33,7 +33,6 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
     const imageSrc = 'public/marker.png';
     const imageSize = new kakao.maps.Size(35, 35);
     const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
-
     marker?.forEach((data) => {
       const mark = new kakao.maps.Marker({
         map: map,
