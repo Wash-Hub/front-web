@@ -6,6 +6,7 @@ export const sideBarMenuInfoDetailContainer = style({
   display: 'flex',
   flexDirection: 'column',
   padding: '20px',
+  paddingBottom: '0',
   boxSizing: 'border-box',
   overflowY: 'scroll',
 });
@@ -15,7 +16,7 @@ export const sidebarMenuImg = style({
   height: '150px',
   objectFit: 'cover',
   borderRadius: '30px',
-  border: '1px solid #e0e0e0',
+  // border: '1px solid #e0e0e0',
 });
 
 export const sidebarMenuInfoDetail = style({

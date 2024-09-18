@@ -1,16 +1,19 @@
 import { useForm } from 'react-hook-form';
 import { searchButton, searchContainer, searchInput, searchWrapper } from './search.css';
 import { LuSearch } from 'react-icons/lu';
+import { useOpen } from '../../hooks/useOpen';
 import { useRecoilState } from 'recoil';
-import { sidebarState } from '../../recoil/atoms/sidebarState';
-import { menuState } from '../../recoil/atoms/menuState';
+import { searchState } from '../../recoil/atoms/searchState';
 export const Search = () => {
   const { register, handleSubmit } = useForm();
-  const [, setIsOpened] = useRecoilState(menuState);
-  const [, setIsActiveSearch] = useRecoilState(sidebarState);
-  const onSubmit = (data: any) => {
-    setIsOpened((prevState) => ({ ...prevState, isOpened: !prevState.isOpened }));
-    setIsActiveSearch((prevState) => ({ ...prevState, isActiveSearch: !prevState.isActiveSearch }));
+  const { MenuControllSearch, Close } = useOpen();
+  const [, setContent] = useRecoilState(searchState);
+  const onSubmit = (e: any) => {
+    setContent({ contents: e.search, page: 1 });
+    Close();
+    setTimeout(() => {
+      MenuControllSearch();
+    }, 0);
   };
   return (
     <div className={searchContainer}>
@@ -20,6 +23,7 @@ export const Search = () => {
           type="text"
           placeholder="검색어를 입력하세요"
           className={searchInput}
+          required
           {...register('search')}
         />
         <button className={searchButton} type="submit">
