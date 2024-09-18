@@ -10,7 +10,7 @@ import {
   sidebarMenuInfoLoading,
   sidebarMenuInfoTitle,
 } from './sideBarMenuInfo.css';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { sidebarState } from '../../../recoil/atoms/sidebarState';
 import { SideBarMenuInfoDetail } from './sideBarMenuInfoDetail/sideBarMenuInfoDetail';
 import { SideBarMenuInfoReview } from './sideBarMenuInfoReview/sideBarMenuInfoReview';
@@ -22,7 +22,6 @@ import { loginModal } from '../../../styles/globalStyle.css';
 import { useOpen } from '../../../hooks/useOpen';
 import { reviewState } from '../../../recoil/atoms/reviewState';
 import { getMapInfo } from '../../../api/getMapInfo';
-import { currentLocationAtom } from '../../../recoil/atoms/mapState';
 export const SideBarMenuInfo = () => {
   const [isActiveDetail] = useRecoilState(sidebarState);
   const [isActiveReview] = useRecoilState(sidebarState);
@@ -34,16 +33,16 @@ export const SideBarMenuInfo = () => {
   const onClickReview = () => {
     MenuControllReview();
   };
+
   const [isModalOpen, setIsModalOpen] = useRecoilState(loginModalState);
   const [login] = useRecoilState(loginState);
-  const currentLocation = useRecoilValue(currentLocationAtom);
-  const data = getMapInfo(currentLocation.id);
+  const data = getMapInfo();
   return (
     <div>
       {data === undefined ? (
         <div className={sidebarMenuInfoLoading}>열람할 정보를 선택해주세요</div>
       ) : (
-        <div className={review.isOpened ? scrollbar : ''}>
+        <div className={scrollbar}>
           <img src={data.picture} alt="" className={sidebarMenuImg} />
           <div className={sidebarMenuInfo}>
             <div>
