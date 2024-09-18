@@ -10,6 +10,7 @@ import { loginModal } from '../../styles/globalStyle.css';
 import { SelectLogin } from '../login/selecktLogin/selectLogin';
 import { MyPage } from '../myPage/myPage';
 import { useOpen } from '../../hooks/useOpen';
+import { useRef } from 'react';
 export const Sidebar = () => {
   const [isOpened] = useRecoilState(menuState);
   const [isMyPageOpened] = useRecoilState(menuState);
@@ -17,6 +18,9 @@ export const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useRecoilState(loginModalState);
   const [login] = useRecoilState(loginState);
   const { MenuControllMenu, MenuControllMyPage } = useOpen();
+
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
   const onClickMenu = () => {
     MenuControllMenu();
   };
@@ -24,19 +28,19 @@ export const Sidebar = () => {
     MenuControllMyPage();
     setIsModalOpen((prevState) => ({ ...prevState, isModalOpen: !prevState.isModalOpen }));
   };
+
   return (
-    <div>
+    <div ref={sidebarRef}>
       <div className={sideBarWrapper}>
         <div className={sidebarContainer}>
-          <img className={sidebarMainLogo} src="public\logo.webp" alt="" />
-          <img className={sidebarLogo} src="public\icon_menu.webp" alt="" onClick={onClickMenu} />
-          <img className={sidebarLogo} src="public\icon_people_outline.webp" alt="" onClick={onClickMyPage} />
+          <img className={sidebarMainLogo} src="public/logo.webp" alt="Main Logo" />
+          <img className={sidebarLogo} src="public/icon_menu.webp" alt="Menu" onClick={onClickMenu} />
+          <img className={sidebarLogo} src="public/icon_people_outline.webp" alt="My Page" onClick={onClickMyPage} />
         </div>
-        {
-          <div className={sideBarMenu}>
-            {isOpened.isOpened && <SidebarMenu />} {isActiveSearch.isActiveSearch && <SearchDetail />}
-          </div>
-        }
+        <div className={sideBarMenu}>
+          {isOpened.isOpened && <SidebarMenu />}
+          {isActiveSearch.isActiveSearch && <SearchDetail />}
+        </div>
         {login.isLogin ? (
           <div>{isMyPageOpened.isMyPageOpened && <MyPage />}</div>
         ) : (

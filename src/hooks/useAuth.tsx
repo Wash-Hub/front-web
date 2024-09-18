@@ -17,10 +17,7 @@ export const useLogin = () => {
       navigate('/');
     } else if (tokenLoadable.state === 'hasError') {
       alert('로그인에 실패하였습니다. 다시 시도해주세요.');
-      console.error('Error:', tokenLoadable.contents);
       navigate('/');
-    } else if (tokenLoadable.state === 'loading') {
-      console.log('loading');
     }
   }, [tokenLoadable, setToken]);
 };
@@ -40,9 +37,6 @@ export const useLogout = (): (() => void) => {
       navigate('/');
     } else if (tokenLoadable.state === 'hasError') {
       alert('로그아웃에 실패하였습니다. 다시 시도해주세요.');
-      console.error('Error:', tokenLoadable.contents);
-    } else if (tokenLoadable.state === 'loading') {
-      console.log('loading');
     }
   };
 };

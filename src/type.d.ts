@@ -40,6 +40,10 @@ export interface location {
 
 export type MapScript = (lat: number, lng: number, draggable: boolean) => void;
 
+export type MiniMapScript = (lat: number, lng: number) => void;
+
+export type KakaoMapId = (longitude: number, latitude: number, placeName: string) => void;
+
 type JwtPayload = {
   userId: String;
 };
@@ -54,4 +58,15 @@ export interface userInfo {
   nickname: string;
   profileImg: string;
   id: string;
+}
+
+export interface mapInfo {
+  id: string;
+  placeName: string;
+  isBookmark: boolean;
+  latitude: string;
+  longitude: string;
+  picture: string;
+  reviewCount: number;
+  roadName: string;
 }
