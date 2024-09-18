@@ -10,31 +10,16 @@ import { loginModal } from '../../styles/globalStyle.css';
 import { SelectLogin } from '../login/selecktLogin/selectLogin';
 import { MyPage } from '../myPage/myPage';
 import { useOpen } from '../../hooks/useOpen';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 export const Sidebar = () => {
-  const [isOpened, setIsOpened] = useRecoilState(menuState);
-  const [isMyPageOpened, setIsMyPageOpened] = useRecoilState(menuState);
+  const [isOpened] = useRecoilState(menuState);
+  const [isMyPageOpened] = useRecoilState(menuState);
   const [isActiveSearch] = useRecoilState(sidebarState);
   const [isModalOpen, setIsModalOpen] = useRecoilState(loginModalState);
   const [login] = useRecoilState(loginState);
   const { MenuControllMenu, MenuControllMyPage } = useOpen();
 
   const sidebarRef = useRef<HTMLDivElement>(null);
-
-  // 사이드바 외부를 클릭했을 때 닫히도록 설정
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
-        setIsOpened({ isOpened: false });
-        setIsMyPageOpened({ isMyPageOpened: false });
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [setIsOpened, setIsMyPageOpened]);
 
   const onClickMenu = () => {
     MenuControllMenu();

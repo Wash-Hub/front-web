@@ -44,7 +44,7 @@ export const SideBarMenuInfo = () => {
         <div className={sidebarMenuInfoLoading}>열람할 정보를 선택해주세요</div>
       ) : (
         <div className={review.isOpened ? scrollbar : ''}>
-          <img src="public\test.jpg" alt="" className={sidebarMenuImg} />
+          <img src={data.picture} alt="" className={sidebarMenuImg} />
           <div className={sidebarMenuInfo}>
             <div>
               <div className={sidebarMenuInfoTitle}>{data.placeName}</div>
