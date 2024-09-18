@@ -20,7 +20,6 @@ export const Sidebar = () => {
   const { MenuControllMenu, MenuControllMyPage } = useOpen();
 
   const sidebarRef = useRef<HTMLDivElement>(null);
-
   const onClickMenu = () => {
     MenuControllMenu();
   };

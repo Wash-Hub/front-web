@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 import { CONFIG } from '../../config';
 import { location } from '../type';
+import { currentLocationAtom } from '../recoil/atoms/mapState';
+import { useRecoilValue } from 'recoil';
 
 const instance = axios.create({
   baseURL: CONFIG.DOMAIN,
@@ -11,19 +13,17 @@ const instance = axios.create({
   },
 });
 
-export const getMapInfo = (id: string) => {
-  if (id === '') return undefined;
+export const getMapInfo = () => {
+  const currentLocation = useRecoilValue(currentLocationAtom);
+  if (currentLocation.id === '') return undefined;
   const { data } = useQuery(
     'mapInfo',
     async () => {
-      const response = await instance.get(`/map/${id}`);
+      const response = await instance.get(`/map/${currentLocation.id}`);
       return response.data;
     },
     {
       retry: false,
-      onError: () => {
-        alert('데이터를 불러오는데 실패하였습니다. 다시 시도해주세요.');
-      },
     }
   );
 

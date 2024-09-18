@@ -8,7 +8,7 @@ import _ from 'lodash';
 import { debouncedUpdateLocate } from '../utils/debounceUpdateLotate';
 
 export const useMapScript: MapScript = (lat, lng, draggable = true) => {
-  const { MenuControlldetail, MenuControlldetailClose } = useOpen();
+  const { MenuControlldetail, Close } = useOpen();
   const marker = useRecoilValue(mapInfoAtom);
   const mapRef = useRef<kakao.maps.Map | null>(null);
   const [locate, setLocate] = useRecoilState(mapState);
@@ -79,7 +79,7 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
         setTimeout(() => {
           const element = document.getElementById(data.id);
           if (element) {
-            MenuControlldetailClose();
+            Close();
             element.addEventListener('click', () => {
               setCurrentLocation({ id: data.id });
               MenuControlldetail();

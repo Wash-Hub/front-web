@@ -70,3 +70,5 @@ export interface mapInfo {
   reviewCount: number;
   roadName: string;
 }
+
+export type SearchInfo = () => void;
