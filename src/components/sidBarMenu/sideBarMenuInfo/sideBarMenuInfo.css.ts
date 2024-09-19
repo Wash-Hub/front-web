@@ -3,9 +3,15 @@ import { recipe } from '@vanilla-extract/recipes';
 
 export const sidebarMenuInfoLoading = style({
   display: 'flex',
-  justifyContent: 'center',
   alignItems: 'center',
+  justifyContent: 'center',
   height: '100vh',
+  color: '#888',
+  fontSize: '18px',
+  fontWeight: 'bold',
+  margin: '20px 0',
+  padding: '20px',
+  textAlign: 'center',
 });
 
 export const scrollbar = style({

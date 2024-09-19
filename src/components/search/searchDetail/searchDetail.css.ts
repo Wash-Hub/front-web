@@ -87,3 +87,16 @@ export const searchDetailItemAddress = style({
   paddingBottom: '0',
   paddingTop: '0',
 });
+
+export const noResultsMessage = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '100vh',
+  color: '#888',
+  fontSize: '18px',
+  fontWeight: 'bold',
+  margin: '20px 0',
+  padding: '20px',
+  textAlign: 'center',
+});
