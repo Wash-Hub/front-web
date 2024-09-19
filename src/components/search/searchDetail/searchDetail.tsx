@@ -1,5 +1,6 @@
 import { Search } from '../search';
 import {
+  noResultsMessage,
   searchDetailContainer,
   searchDetailItem,
   searchDetailItemAddress,
@@ -42,7 +43,7 @@ export const SearchDetail = () => {
       <div className={`${searchDetailItem} ${paginationScrollbar}`}>
         <div className={searchDetailItemTitle}>검색결과</div>
         {data.length === 0 ? (
-          <div>검색 결과가 없습니다.</div>
+          <div className={noResultsMessage}>검색 결과가 없습니다.</div>
         ) : (
           <div>
             {data.map((item: any, index: any) => (
