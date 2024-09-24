@@ -16,6 +16,7 @@ export const useAxiosInterceptors = () => {
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
+      console.log(config);
       return config;
     });
 
@@ -25,7 +26,7 @@ export const useAxiosInterceptors = () => {
         const originalRequest = error.config;
         const { response } = error;
         const { data } = response;
-
+        console.log(data);
         if (data.message === 'Expired AccessToken') {
           try {
             const newToken = await refreshMutation.mutateAsync();
@@ -51,7 +52,6 @@ export const useAxiosInterceptors = () => {
 export const useAxiosInterceptorsJson = () => {
   const refreshMutation = useRefreshToken();
   const [, setToken] = useRecoilState(updateTokenAtom);
-
   useEffect(() => {
     instanceJson.interceptors.request.use((config) => {
       const token = JSON.parse(localStorage.getItem(CONFIG.TOKEN_KEY) as string);
@@ -67,7 +67,6 @@ export const useAxiosInterceptorsJson = () => {
         const originalRequest = error.config;
         const { response } = error;
         const { data } = response;
-
         if (data.message === 'Expired AccessToken') {
           try {
             const newToken = await refreshMutation.mutateAsync();

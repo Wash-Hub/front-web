@@ -10,7 +10,6 @@ import { loginModal } from '../../styles/globalStyle.css';
 import { SelectLogin } from '../login/selecktLogin/selectLogin';
 import { MyPage } from '../myPage/myPage';
 import { useOpen } from '../../hooks/useOpen';
-import { useRef } from 'react';
 export const Sidebar = () => {
   const [isOpened] = useRecoilState(menuState);
   const [isMyPageOpened] = useRecoilState(menuState);
@@ -19,7 +18,6 @@ export const Sidebar = () => {
   const [login] = useRecoilState(loginState);
   const { MenuControllMenu, MenuControllMyPage } = useOpen();
 
-  const sidebarRef = useRef<HTMLDivElement>(null);
   const onClickMenu = () => {
     MenuControllMenu();
   };
@@ -29,7 +27,7 @@ export const Sidebar = () => {
   };
 
   return (
-    <div ref={sidebarRef}>
+    <div>
       <div className={sideBarWrapper}>
         <div className={sidebarContainer}>
           <img className={sidebarMainLogo} src="public/logo.webp" alt="Main Logo" />

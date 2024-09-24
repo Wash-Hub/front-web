@@ -36,10 +36,18 @@ export const SideBarMenuInfo = () => {
   const [review] = useRecoilState(reviewState);
   const { MenuControllDetail, MenuControllReview, Close, MenuControlldetail } = useOpen();
   const onClickDetail = () => {
-    MenuControllDetail();
+    Close();
+    setTimeout(() => {
+      MenuControlldetail();
+      MenuControllDetail();
+    }, 0);
   };
   const onClickReview = () => {
-    MenuControllReview();
+    Close();
+    setTimeout(() => {
+      MenuControlldetail();
+      MenuControllReview();
+    }, 0);
   };
   const [isModalOpen, setIsModalOpen] = useRecoilState(loginModalState);
   const [login] = useRecoilState(loginState);
@@ -73,7 +81,6 @@ export const SideBarMenuInfo = () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, [review.isOpened, login.isLogin]);
-
   return (
     <div>
       {data === undefined ? (
@@ -117,14 +124,14 @@ export const SideBarMenuInfo = () => {
                 {review.isOpened ? '리뷰작성하기' : '리뷰보기'}
               </div>
             </div>
-            {isActiveDetail.isActiveDetail ? (
+            {isActiveDetail.isActiveDetail && (
               <div>
                 <SideBarMenuInfoDetail data={data} />
               </div>
-            ) : null}
-            {isActiveReview.isActiveReview ? (
-              <div>{review.isOpened && login.isLogin ? <CreateReview /> : <SideBarMenuInfoReview />}</div>
-            ) : null}
+            )}
+            {isActiveReview.isActiveReview && (
+              <div>{review.isOpened ? <CreateReview /> : <SideBarMenuInfoReview />}</div>
+            )}
           </div>
           {login.isLogin ? (
             ''

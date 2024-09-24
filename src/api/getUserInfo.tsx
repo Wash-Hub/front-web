@@ -17,7 +17,6 @@ export const getUserInfo = () => {
       },
     }
   );
-
   if (data === undefined) return undefined;
   return data?.data?.data;
 };

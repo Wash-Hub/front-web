@@ -1,16 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import { currentLocationAtom } from '../recoil/atoms/mapState';
 import { useQuery } from 'react-query';
-import axios from 'axios';
-import { CONFIG } from '../../config';
-
-const instance = axios.create({
-  baseURL: CONFIG.DOMAIN,
-  withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+import { instanceJson } from './instanceJson';
 
 export const getReviewInfo = () => {
   const currentLocation = useRecoilValue(currentLocationAtom);
@@ -18,7 +9,7 @@ export const getReviewInfo = () => {
   const { data } = useQuery(
     'mapInfo',
     async () => {
-      const response = await instance.get(`/map/${currentLocation.id}`);
+      const response = await instanceJson.get(`/map/${currentLocation.id}`);
       return response.data;
     },
     {
