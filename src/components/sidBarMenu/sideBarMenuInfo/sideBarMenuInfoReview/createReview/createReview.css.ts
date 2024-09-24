@@ -77,7 +77,7 @@ export const createReviewInputImgIcon = style({
 
 export const createReviewButtonContainer = style({
   bottom: '0',
-  width: '100%',
+  width: '95%',
   overflow: 'hidden',
   position: 'absolute',
   zIndex: 1,
@@ -111,3 +111,24 @@ export const createReviewButton = recipe({
     },
   },
 });
+
+export const closeModal = {
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    zIndex: 2,
+    width: '100%',
+    height: '100%',
+  },
+  content: {
+    width: '25%',
+    height: 'fit-content',
+    margin: 'auto',
+    marginTop: '15%',
+    borderRadius: '12px',
+    border: '1px solid #E0E0E0',
+    padding: '1.5rem',
+    backgroundColor: '#fff',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+    textAlign: 'center',
+  },
+};

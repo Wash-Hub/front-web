@@ -19,6 +19,8 @@ export interface ReviewState {
   isImgModalOpen: boolean;
   selectedImg: string;
   isOpened: boolean;
+  isCreateReviewModalOpen: boolean;
+  isDeleteReviewModalOpen: boolean;
 }
 
 export interface SidebarState {
