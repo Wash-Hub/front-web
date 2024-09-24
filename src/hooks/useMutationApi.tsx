@@ -2,7 +2,7 @@ import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import { postBookmark } from '../api/postBookmark';
 import { deleteBookmark } from '../api/deleteBookmark';
-import { BookmarkParams, ReviewData, UseBookmarkOptions } from '../type';
+import { BookmarkParams, DeleteReviewData, ReviewData, UseBookmarkOptions } from '../type';
 import { postReview } from '../api/postReview';
 import { deleteReview } from '../api/deleteReview';
 
@@ -87,10 +87,6 @@ export const usePostReview = () => {
     ...mutation,
   };
 };
-
-interface DeleteReviewData {
-  id: string;
-}
 
 export const useDeleteReview = () => {
   const mutation = useMutation((data: DeleteReviewData) => deleteReview(data.id), {

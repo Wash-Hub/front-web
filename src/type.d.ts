@@ -90,3 +90,7 @@ export interface ReviewData {
   desc: string;
   map: string;
 }
+
+export interface DeleteReviewData {
+  id: string;
+}
