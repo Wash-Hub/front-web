@@ -74,3 +74,13 @@ export interface mapInfo {
 }
 
 export type SearchInfo = () => void;
+
+export interface BookmarkParams {
+  mapId: string;
+}
+
+export interface UseBookmarkOptions {
+  onOpenModal: () => void;
+  onClose: () => void;
+  onUpdateMenuDetail: () => void;
+}

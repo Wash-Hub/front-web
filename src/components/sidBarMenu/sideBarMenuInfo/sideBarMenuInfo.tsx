@@ -1,4 +1,5 @@
 import { GoBookmark } from 'react-icons/go';
+import { GoBookmarkFill } from 'react-icons/go';
 import {
   sidebarMenuBookmark,
   sidebarMenuImg,
@@ -24,23 +25,26 @@ import { getMapInfo } from '../../../api/getMapInfo';
 import { closeModal } from './sideBarMenuInfoReview/createReview/createReview.css';
 import { AlertModal } from './sideBarMenuInfoReview/createReview/alertModal/alertModal';
 import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useAxiosInterceptorsJson } from '../../../hooks/useAxiosInterceptors';
+import { useBookmark } from '../../../hooks/useMutationApi';
 export const SideBarMenuInfo = () => {
+  useAxiosInterceptorsJson();
   const [isActiveDetail] = useRecoilState(sidebarState);
   const [isActiveReview] = useRecoilState(sidebarState);
   const [review] = useRecoilState(reviewState);
-  const { MenuControllDetail, MenuControllReview } = useOpen();
+  const { MenuControllDetail, MenuControllReview, Close, MenuControlldetail } = useOpen();
   const onClickDetail = () => {
     MenuControllDetail();
   };
   const onClickReview = () => {
     MenuControllReview();
   };
-
   const [isModalOpen, setIsModalOpen] = useRecoilState(loginModalState);
   const [login] = useRecoilState(loginState);
   const [isCreateReviewModalOpen, setCreateReviewModalOpen] = useRecoilState(reviewState); // 리뷰 모달 상태
   const data = getMapInfo();
-
   const handleOutsideClick = (event: MouseEvent) => {
     if (review.isOpened && login.isLogin) {
       const createReviewElement = document.getElementById('createReview');
@@ -49,7 +53,20 @@ export const SideBarMenuInfo = () => {
       }
     }
   };
-
+  const { createBookmark, cancelBookmark } = useBookmark(
+    { mapId: data.id },
+    {
+      onOpenModal: () => setIsModalOpen({ isModalOpen: true }),
+      onClose: Close,
+      onUpdateMenuDetail: MenuControlldetail,
+    }
+  );
+  const onClickCreateBookmark = () => {
+    createBookmark();
+  };
+  const onClickCancleBookmark = () => {
+    cancelBookmark();
+  };
   useEffect(() => {
     document.addEventListener('mousedown', handleOutsideClick);
     return () => {
@@ -70,7 +87,15 @@ export const SideBarMenuInfo = () => {
               <div className={sidebarMenuInfoAddress}>{data.roadName}</div>
             </div>
             <div className={sidebarMenuBookmark}>
-              <GoBookmark />
+              {data.isBookMark ? (
+                <div onClick={onClickCancleBookmark}>
+                  <GoBookmarkFill />
+                </div>
+              ) : (
+                <div onClick={onClickCreateBookmark}>
+                  <GoBookmark />
+                </div>
+              )}
             </div>
           </div>
           <div>
@@ -138,6 +163,18 @@ export const SideBarMenuInfo = () => {
           )}
         </div>
       )}
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        limit={1}
+      />
     </div>
   );
 };

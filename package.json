@@ -27,6 +27,7 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.23.1",
     "react-spinners": "^0.14.1",
+    "react-toastify": "^10.0.5",
     "recoil": "^0.7.7",
     "vite-plugin-node-polyfills": "^0.22.0"
   },

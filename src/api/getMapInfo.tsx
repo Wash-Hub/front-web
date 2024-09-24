@@ -1,11 +1,12 @@
-import axios from 'axios';
 import { useQuery } from 'react-query';
-import { CONFIG } from '../../config';
 import { location } from '../type';
 import { currentLocationAtom } from '../recoil/atoms/mapState';
 import { useRecoilValue } from 'recoil';
+import { instanceJson } from './instanceJson';
+import axios from 'axios';
+import { CONFIG } from '../../config';
 
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: CONFIG.DOMAIN,
   withCredentials: true,
   headers: {
@@ -19,14 +20,13 @@ export const getMapInfo = () => {
   const { data } = useQuery(
     'mapInfo',
     async () => {
-      const response = await instance.get(`/map/${currentLocation.id}`);
+      const response = await instanceJson.get(`/map/${currentLocation.id}`);
       return response.data;
     },
     {
       retry: false,
     }
   );
-
   if (data === undefined) return undefined;
   return data?.data?.map;
 };

@@ -16,7 +16,7 @@ export const AlertModal = (id: { id: string }) => {
       }
     },
     onError: () => {
-      alert('리뷰 등록 중 오류가 발생했습니다. 잠시후 다시 시도해주세요.');
+      alert('리뷰 삭제 중 오류가 발생했습니다. 잠시후 다시 시도해주세요.');
     },
   });
   const onClickConfirm = () => {
