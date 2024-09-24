@@ -54,7 +54,7 @@ export const SideBarMenuInfo = () => {
     }
   };
   const { createBookmark, cancelBookmark } = useBookmark(
-    { mapId: data.id },
+    { mapId: data },
     {
       onOpenModal: () => setIsModalOpen({ isModalOpen: true }),
       onClose: Close,
