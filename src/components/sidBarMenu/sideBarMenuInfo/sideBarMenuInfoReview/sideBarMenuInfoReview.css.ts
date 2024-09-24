@@ -21,7 +21,7 @@ export const sideBarMenuInfoReviewInfo = style({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  width: '90%',
+  width: '93%',
   paddingBottom: '0.5rem',
 });
 
@@ -42,9 +42,28 @@ export const sideBarMenuInfoReviewInfoImg = style({
   border: '1px solid black',
 });
 
+export const sideBarMenuInfoReviewInfoProfileDateWrapper = style({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  gap: '1px',
+});
+
 export const sideBarMenuInfoReviewInfoProfileDate = style({
   fontSize: '12px',
   color: '#9e9e9e',
+  fontWeight: 400,
+  paddingRight: '0.5rem',
+});
+
+export const sideBarMenuInfoDeleteIcon = style({
+  cursor: 'pointer',
+  color: '#ff6b6b',
+  transition: 'color 0.3s ease',
+  ':hover': {
+    color: '#ff3b3b',
+  },
 });
 
 export const sideBarMenuInfoReviewInfoContent = style({
@@ -107,3 +126,15 @@ export const imgModal = {
     padding: '8px',
   },
 };
+
+export const noReview = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: '#888',
+  fontSize: '18px',
+  fontWeight: 'bold',
+  margin: '20px 0',
+  padding: '20px',
+  textAlign: 'center',
+});

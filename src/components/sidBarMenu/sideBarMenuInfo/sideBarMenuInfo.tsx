@@ -1,6 +1,5 @@
 import { GoBookmark } from 'react-icons/go';
 import {
-  scrollbar,
   sidebarMenuBookmark,
   sidebarMenuImg,
   sidebarMenuInfo,
@@ -22,6 +21,9 @@ import { loginModal } from '../../../styles/globalStyle.css';
 import { useOpen } from '../../../hooks/useOpen';
 import { reviewState } from '../../../recoil/atoms/reviewState';
 import { getMapInfo } from '../../../api/getMapInfo';
+import { closeModal } from './sideBarMenuInfoReview/createReview/createReview.css';
+import { AlertModal } from './sideBarMenuInfoReview/createReview/alertModal/alertModal';
+import { useEffect } from 'react';
 export const SideBarMenuInfo = () => {
   const [isActiveDetail] = useRecoilState(sidebarState);
   const [isActiveReview] = useRecoilState(sidebarState);
@@ -36,13 +38,31 @@ export const SideBarMenuInfo = () => {
 
   const [isModalOpen, setIsModalOpen] = useRecoilState(loginModalState);
   const [login] = useRecoilState(loginState);
+  const [isCreateReviewModalOpen, setCreateReviewModalOpen] = useRecoilState(reviewState); // 리뷰 모달 상태
   const data = getMapInfo();
+
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (review.isOpened && login.isLogin) {
+      const createReviewElement = document.getElementById('createReview');
+      if (createReviewElement && !createReviewElement.contains(event.target as Node)) {
+        setCreateReviewModalOpen((prev) => ({ ...prev, isCreateReviewModalOpen: true }));
+      }
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [review.isOpened, login.isLogin]);
+
   return (
     <div>
       {data === undefined ? (
         <div className={sidebarMenuInfoLoading}>열람할 정보를 선택해주세요</div>
       ) : (
-        <div className={scrollbar}>
+        <div>
           <img src={data.picture} alt="" className={sidebarMenuImg} />
           <div className={sidebarMenuInfo}>
             <div>
@@ -96,6 +116,24 @@ export const SideBarMenuInfo = () => {
               }}
             >
               <SelectLogin />
+            </Modal>
+          )}
+          {isCreateReviewModalOpen.isCreateReviewModalOpen && (
+            <Modal
+              ariaHideApp={false}
+              isOpen={isCreateReviewModalOpen.isCreateReviewModalOpen}
+              onRequestClose={() => setCreateReviewModalOpen((prev) => ({ ...prev, isCreateReviewModalOpen: false }))}
+              shouldCloseOnEsc={true}
+              shouldCloseOnOverlayClick={true}
+              style={{
+                overlay: closeModal.overlay,
+                content: {
+                  ...closeModal.content,
+                  textAlign: closeModal.content.textAlign as React.CSSProperties['textAlign'],
+                },
+              }}
+            >
+              <AlertModal />
             </Modal>
           )}
         </div>

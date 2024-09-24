@@ -1,11 +1,13 @@
 import { useQuery } from 'react-query';
-import { instance } from './instance';
+import { instanceJson } from './instanceJson';
+import { useAxiosInterceptorsJson } from '../hooks/useAxiosInterceptors';
 
 export const getUserInfo = () => {
+  useAxiosInterceptorsJson();
   const { data } = useQuery(
     'info',
     async () => {
-      const response = await instance.get(`/auth/profile/`);
+      const response = await instanceJson.get(`/auth/profile/`);
       return response.data;
     },
     {
