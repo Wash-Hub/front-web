@@ -6,107 +6,137 @@ export const createReviewContainer = style({
   flexDirection: 'column',
   paddingTop: '20px',
   paddingBottom: '70px',
+  alignItems: 'center',
 });
 
 export const createReviewForm = style({
   display: 'flex',
   flexDirection: 'column',
-  paddingLeft: '15px',
-  paddingRight: '15px',
+  width: '90%',
+  maxWidth: '600px',
+  padding: '0 20px',
+  marginBottom: '20px',
 });
 
 export const createReviewInput = style({
-  width: '92%',
-  height: '15vh',
-  padding: '10px',
+  width: '100%',
+  height: '150px',
+  padding: '12px 15px',
   fontFamily: 'Pretendard-Regular',
+  marginBottom: '20px',
+  border: '1px solid #d0d0d0',
+  borderRadius: '8px',
+  resize: 'none',
+  outline: 'none',
+  boxSizing: 'border-box',
+  transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+  ':focus': {
+    borderColor: '#007BFF',
+    boxShadow: '0 0 6px rgba(0, 123, 255, 0.2)',
+  },
+  '::placeholder': {
+    color: '#a0a0a0',
+  },
+});
+
+export const createReviewInputTitle = style({
+  fontSize: '16px',
+  fontWeight: '600',
   marginBottom: '10px',
-  border: '1px solid #c0c0c0',
-  borderRadius: '5px',
+  color: '#333',
+  paddingLeft: '5px',
 });
 
 export const createReviewUnderLine = style({
   width: '100%',
-  border: '1px solid #c0c0c0',
-  marginBottom: '10px',
-  marginTop: '20px',
+  border: '1px solid #ddd',
+  marginBottom: '20px',
 });
 
-export const createReviewInputTitle = style({
-  fontSize: '15px',
-  fontWeight: 'bold',
-  marginBottom: '10px',
-  padding: '5px 0 0 3px',
+export const createReviewInputImgLabelWrapper = style({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginBottom: '15px',
 });
 
 export const createReviewInputImg = style({
   display: 'block',
-  width: '25%',
-  height: '12vh',
+  width: '35%',
+  height: '120px',
   cursor: 'pointer',
-  border: '1px solid #c0c0c0',
-  borderRadius: '10px',
-  padding: '10px',
+  border: '2px dashed #ccc',
+  borderRadius: '12px',
   textAlign: 'center',
-  fontSize: '10px',
+  fontSize: '12px',
+  transition: 'border-color 0.3s ease',
+  ':hover': {
+    borderColor: '#007BFF',
+  },
 });
 
 export const createReviewInputImgLabel = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  marginTop: '25%',
-});
-
-export const createReviewInputImgLabelWrapper = style({
-  display: 'flex',
-  flexDirection: 'row',
-});
-
-export const createReviewInputImgLabelImg = style({
-  width: '90px',
-  height: '110px',
-  borderRadius: '10px',
-  marginLeft: '10px',
+  justifyContent: 'center',
+  height: '100%',
 });
 
 export const createReviewInputImgIcon = style({
-  fontSize: '20px',
-  marginBottom: '7px',
+  fontSize: '24px',
+  color: '#007BFF',
+  marginBottom: '8px',
+});
+
+export const createReviewInputImgLabelImg = style({
+  width: '35%',
+  height: '13vh',
+  borderRadius: '10px',
+  margin: '0 0 0 5%',
+  objectFit: 'cover',
+  boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
 });
 
 export const createReviewButtonContainer = style({
-  bottom: '0',
-  width: '95%',
-  overflow: 'hidden',
-  position: 'absolute',
-  zIndex: 1,
-  padding: '0 0 10px 0',
+  display: 'flex',
+  justifyContent: 'space-between',
+  width: '100%',
+  padding: '10px 0',
 });
 
 export const createReviewButton = recipe({
   base: {
-    width: '65%',
     height: '50px',
-    margin: '0 0 5px 5px',
-    boxShadow: '0px 0px 5px 0px #e0e0e0',
-    backgroundColor: '#f5f5f5',
-    border: '1px solid #e0e0e0',
-    borderRadius: '10px',
-    fontSize: '14px',
-    fontWeight: 'bold',
+    padding: '0 20px',
+    boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
+    border: 'none',
+    borderRadius: '8px',
+    fontSize: '16px',
+    fontWeight: '600',
     cursor: 'pointer',
+    transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
     ':hover': {
-      backgroundColor: '#f0f0f0',
+      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.15)',
     },
   },
   variants: {
     width: {
       regist: {
-        width: '65%',
+        width: '55%',
+        backgroundColor: '#04befe',
+        color: '#fff',
+        ':hover': {
+          backgroundColor: '#0056b3',
+        },
       },
       cancle: {
-        width: '25%',
+        width: '40%',
+        backgroundColor: 'white',
+        color: 'black',
+        ':hover': {
+          backgroundColor: '#f0f0f0',
+        },
       },
     },
   },
@@ -114,21 +144,21 @@ export const createReviewButton = recipe({
 
 export const closeModal = {
   overlay: {
-    backgroundColor: 'rgba(0,0,0,0.3)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     zIndex: 2,
     width: '100%',
     height: '100%',
   },
   content: {
-    width: '25%',
+    width: '400px',
     height: 'fit-content',
     margin: 'auto',
     marginTop: '15%',
     borderRadius: '12px',
-    border: '1px solid #E0E0E0',
-    padding: '1.5rem',
+    border: '1px solid #e0e0e0',
+    padding: '20px',
     backgroundColor: '#fff',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+    boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)',
     textAlign: 'center',
   },
 };

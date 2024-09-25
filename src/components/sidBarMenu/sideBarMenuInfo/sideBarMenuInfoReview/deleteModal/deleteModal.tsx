@@ -2,11 +2,15 @@ import { useRecoilState } from 'recoil';
 import { modalButton } from '../createReview/alertModal/alertModal.css';
 import { reviewState } from '../../../../../recoil/atoms/reviewState';
 import { useDeleteReview } from '../../../../../hooks/useMutationApi';
+import { useOpen } from '../../../../../hooks/useOpen';
 
 export const AlertModal = (id: { id: string }) => {
   const [, setIsDeleteReviewModalOpen] = useRecoilState(reviewState);
-
-  const { deleteReviewData } = useDeleteReview();
+  const { Close, MenuControlldetail } = useOpen();
+  const { deleteReviewData } = useDeleteReview({
+    onClose: Close,
+    onUpdateMenuDetail: MenuControlldetail,
+  });
   const onClickConfirm = () => {
     deleteReviewData({ id: id.id });
     setIsDeleteReviewModalOpen((prev) => ({ ...prev, isDeleteReviewModalOpen: false }));

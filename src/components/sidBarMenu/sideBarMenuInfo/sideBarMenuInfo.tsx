@@ -96,7 +96,7 @@ export const SideBarMenuInfo = () => {
             <div className={sidebarMenuBookmark}>
               {data.isBookMark ? (
                 <div onClick={onClickCancleBookmark}>
-                  <GoBookmarkFill />
+                  <GoBookmarkFill style={{ color: '#04befe' }} />
                 </div>
               ) : (
                 <div onClick={onClickCreateBookmark}>

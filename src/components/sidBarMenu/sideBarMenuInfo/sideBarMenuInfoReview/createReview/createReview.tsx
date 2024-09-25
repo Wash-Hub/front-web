@@ -24,6 +24,7 @@ import { currentLocationAtom } from '../../../../../recoil/atoms/mapState';
 import Modal from 'react-modal';
 import { AlertModal } from './alertModal/alertModal';
 import { usePostReview } from '../../../../../hooks/useMutationApi';
+import { useOpen } from '../../../../../hooks/useOpen';
 
 export const CreateReview = () => {
   useAxiosInterceptors();
@@ -47,7 +48,11 @@ export const CreateReview = () => {
   const onClickCancle = () => {
     setCreateReviewModalOpen((prev) => ({ ...prev, isCreateReviewModalOpen: true }));
   };
-  const { postReviewData } = usePostReview();
+  const { Close, MenuControlldetail } = useOpen();
+  const { postReviewData } = usePostReview({
+    onClose: Close,
+    onUpdateMenuDetail: MenuControlldetail,
+  });
   const onSubmit = (data: any) => {
     postReviewData({ files: file, desc: data.content, map: currentLocation.id });
     setReview((prev) => ({ ...prev, isOpened: false }));
@@ -55,7 +60,7 @@ export const CreateReview = () => {
   return (
     <div className={createReviewContainer} id="createReview">
       <form className={createReviewForm} onSubmit={handleSubmit(onSubmit)}>
-        <span className={createReviewInputTitle}>리뷰 사진 (필수, 최대 1장)</span>
+        <span className={createReviewInputTitle}>리뷰 사진 (최대 1장)</span>
         <div className={createReviewInputImgLabelWrapper}>
           <label htmlFor="imageUpload" className={createReviewInputImg}>
             <div className={createReviewInputImgLabel}>
