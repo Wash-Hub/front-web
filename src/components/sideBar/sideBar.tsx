@@ -25,7 +25,6 @@ export const Sidebar = () => {
     MenuControllMyPage();
     setIsModalOpen((prevState) => ({ ...prevState, isModalOpen: !prevState.isModalOpen }));
   };
-
   return (
     <div>
       <div className={sideBarWrapper}>

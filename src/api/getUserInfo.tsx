@@ -1,8 +1,11 @@
 import { useQuery } from 'react-query';
 import { instanceJson } from './instanceJson';
 import { useAxiosInterceptorsJson } from '../hooks/useAxiosInterceptors';
+import { useSetRecoilState } from 'recoil';
+import { errorState } from '../recoil/atoms/errorState';
 
 export const getUserInfo = () => {
+  const setError = useSetRecoilState(errorState);
   useAxiosInterceptorsJson();
   const { data } = useQuery(
     'info',
@@ -12,8 +15,8 @@ export const getUserInfo = () => {
     },
     {
       retry: false,
-      onError: () => {
-        alert('데이터를 불러오는데 실패하였습니다. 다시 시도해주세요.');
+      onError: (error) => {
+        setError(error);
       },
     }
   );

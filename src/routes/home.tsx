@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { loginState, userUniqIdAtom } from '../recoil/atoms/loginState';
 import { useEffect } from 'react';
 
-export const Main = () => {
+export const Home = () => {
   const id = useRecoilValue(userUniqIdAtom);
   const setIsLogin = useSetRecoilState(loginState);
 
