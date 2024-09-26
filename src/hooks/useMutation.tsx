@@ -5,6 +5,7 @@ import { Cookies } from 'react-cookie';
 const refreshToken = async () => {
   const cookies = new Cookies();
   const refreshToken = cookies.get('refreshToken');
+  console.log('refreshToken', refreshToken);
   const response = await axios.get('/api/auth/refresh', {
     withCredentials: true,
     headers: {

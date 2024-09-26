@@ -16,6 +16,7 @@ export const getUserInfo = () => {
     {
       retry: false,
       onError: (error) => {
+        console.error(error);
         setError(error);
       },
     }

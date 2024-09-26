@@ -100,7 +100,7 @@ export const SideBarMenuInfo = () => {
                 </div>
               ) : (
                 <div onClick={onClickCreateBookmark}>
-                  <GoBookmark />
+                  <GoBookmark style={{ color: '#04befe' }} />
                 </div>
               )}
             </div>
