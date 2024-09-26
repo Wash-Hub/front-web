@@ -23,7 +23,8 @@ import { MdDelete } from 'react-icons/md';
 import { useAxiosInterceptorsJson } from '../../../../hooks/useAxiosInterceptors';
 import { closeModal } from './createReview/createReview.css';
 import { AlertModal } from './deleteModal/deleteModal';
-
+import { Player } from '@lottiefiles/react-lottie-player';
+import reviewAnimation from '../../../../../public/reviewAnimation.json';
 export const SideBarMenuInfoReview = () => {
   useAxiosInterceptorsJson();
   const data = getReviewInfo();
@@ -49,7 +50,12 @@ export const SideBarMenuInfoReview = () => {
   return (
     <div>
       {data === undefined || data.length === 0 ? (
-        <div className={noReview}>리뷰가 없습니다.</div>
+        <div>
+          <div className={noReview}>👉여러분의 소중한 후기를 남겨주세요.👈</div>
+          <div>
+            <Player autoplay loop src={reviewAnimation} style={{ height: '100px', width: '200px' }} />
+          </div>
+        </div>
       ) : (
         <div className={sideBarMenuInfoReviewContainer}>
           {data.map((item: any) => (

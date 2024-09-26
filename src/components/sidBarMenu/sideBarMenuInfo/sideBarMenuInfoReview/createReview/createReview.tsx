@@ -19,12 +19,12 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { useState } from 'react';
 import { reviewState } from '../../../../../recoil/atoms/reviewState';
 import { ReviewImg } from '../../../../../type';
-import { postReview } from '../../../../../api/postReview';
-import { useMutation } from 'react-query';
 import { useAxiosInterceptors } from '../../../../../hooks/useAxiosInterceptors';
 import { currentLocationAtom } from '../../../../../recoil/atoms/mapState';
 import Modal from 'react-modal';
 import { AlertModal } from './alertModal/alertModal';
+import { usePostReview } from '../../../../../hooks/useMutationApi';
+import { useOpen } from '../../../../../hooks/useOpen';
 
 export const CreateReview = () => {
   useAxiosInterceptors();
@@ -48,27 +48,19 @@ export const CreateReview = () => {
   const onClickCancle = () => {
     setCreateReviewModalOpen((prev) => ({ ...prev, isCreateReviewModalOpen: true }));
   };
-  const mutation = useMutation((data: any) => postReview(data.files, data.desc, data.map), {
-    onSuccess: (status) => {
-      if (Number(status) === 201) {
-        alert('리뷰가 등록되었습니다.');
-      } else {
-        console.log(status);
-        alert('리뷰 등록 중 오류가 발생했습니다. 잠시후 다시 시도해주세요.');
-      }
-    },
-    onError: () => {
-      alert('리뷰 등록 중 오류가 발생했습니다. 잠시후 다시 시도해주세요.');
-    },
+  const { Close, MenuControlldetail } = useOpen();
+  const { postReviewData } = usePostReview({
+    onClose: Close,
+    onUpdateMenuDetail: MenuControlldetail,
   });
   const onSubmit = (data: any) => {
-    mutation.mutate({ files: file, desc: data.content, map: currentLocation.id });
+    postReviewData({ files: file, desc: data.content, map: currentLocation.id });
     setReview((prev) => ({ ...prev, isOpened: false }));
   };
   return (
     <div className={createReviewContainer} id="createReview">
       <form className={createReviewForm} onSubmit={handleSubmit(onSubmit)}>
-        <span className={createReviewInputTitle}>리뷰 사진 (필수, 최대 1장)</span>
+        <span className={createReviewInputTitle}>리뷰 사진 (최대 1장)</span>
         <div className={createReviewInputImgLabelWrapper}>
           <label htmlFor="imageUpload" className={createReviewInputImg}>
             <div className={createReviewInputImgLabel}>

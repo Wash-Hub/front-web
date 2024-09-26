@@ -6,20 +6,21 @@ export const modalButton = {
     border: 'none',
     cursor: 'pointer',
     transition: 'background-color 0.3s ease',
-    margin: '0 0.5rem', // 버튼 사이 간격
+    margin: '0 0.5rem',
   },
   confirm: {
-    backgroundColor: '#007BFF', // 파란색 확인 버튼
+    backgroundColor: '#04befe',
     color: '#fff',
     ':hover': {
-      backgroundColor: '#0056b3', // 호버 시 어두운 파란색
+      backgroundColor: '#0056b3',
     },
   },
   cancel: {
-    backgroundColor: '#6c757d', // 회색 취소 버튼
-    color: '#fff',
+    backgroundColor: 'white',
+    color: 'black',
+    border: '1px solid #ccc',
     ':hover': {
-      backgroundColor: '#5a6268', // 호버 시 어두운 회색
+      backgroundColor: '#f0f0f0',
     },
   },
 };

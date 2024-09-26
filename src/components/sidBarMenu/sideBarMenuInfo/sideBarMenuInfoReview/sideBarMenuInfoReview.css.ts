@@ -91,14 +91,15 @@ export const sideBarMenuInfoReviewButton = style({
   height: '50px',
   margin: '0 0 0 0',
   boxShadow: '0px 0px 5px 0px #e0e0e0',
-  backgroundColor: '#f5f5f5',
+  backgroundColor: '#04befe',
   border: '1px solid #e0e0e0',
   borderRadius: '10px',
-  fontSize: '14px',
+  fontSize: '16px',
   fontWeight: 'bold',
   cursor: 'pointer',
+  color: '#fff',
   ':hover': {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#0056b3',
   },
 });
 
@@ -132,9 +133,9 @@ export const noReview = style({
   alignItems: 'center',
   justifyContent: 'center',
   color: '#888',
-  fontSize: '18px',
+  fontSize: '16px',
   fontWeight: 'bold',
-  margin: '20px 0',
-  padding: '20px',
+  margin: '20px 0 0 0',
+  padding: '20px 0 0 0',
   textAlign: 'center',
 });

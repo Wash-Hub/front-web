@@ -42,10 +42,11 @@ export const sidebarMenuInfoDetailText = style({
 export const sidbarMenuInfoDetailButton = style({
   width: '100%',
   height: '50px',
-  fontSize: '14px',
+  fontSize: '16px',
   borderRadius: '10px',
   border: '1px solid #e0e0e0',
-  backgroundColor: '#f8f8f8',
+  backgroundColor: '#04befe',
+  color: 'white',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -53,6 +54,6 @@ export const sidbarMenuInfoDetailButton = style({
   cursor: 'pointer',
   transition: 'all 0.3s',
   ':hover': {
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#0056b3',
   },
 });

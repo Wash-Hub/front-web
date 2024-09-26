@@ -1,8 +1,9 @@
 import { instanceJson } from './instanceJson';
 
-export const deleteReview = async (reviewId: string) => {
+export const deleteBookmark = async (mapId: string) => {
   try {
-    const response = await instanceJson.delete(`/review/${reviewId}`);
+    const response = await instanceJson.delete(`/bookmark/${mapId}`);
+
     return response.status;
   } catch (error: any) {
     return error.response.status;

@@ -1,28 +1,24 @@
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { currentLocationAtom } from '../recoil/atoms/mapState';
 import { useQuery } from 'react-query';
-import axios from 'axios';
-import { CONFIG } from '../../config';
-
-const instance = axios.create({
-  baseURL: CONFIG.DOMAIN,
-  withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+import { instanceJson } from './instanceJson';
+import { errorState } from '../recoil/atoms/errorState';
 
 export const getReviewInfo = () => {
+  const setError = useSetRecoilState(errorState);
   const currentLocation = useRecoilValue(currentLocationAtom);
   if (currentLocation.id === '') return undefined;
   const { data } = useQuery(
     'mapInfo',
     async () => {
-      const response = await instance.get(`/map/${currentLocation.id}`);
+      const response = await instanceJson.get(`/map/${currentLocation.id}`);
       return response.data;
     },
     {
       retry: false,
+      onError: (error) => {
+        setError(error);
+      },
     }
   );
 

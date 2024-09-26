@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import Modal from 'react-modal';
 import { Search } from '../search/search';
 import {
   myPageContainer,
@@ -17,33 +18,19 @@ import {
   myPageProfileImg,
   myPageSearch,
   myPageTop,
+  profileEditModal,
 } from './myPage.css';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useRecoilState } from 'recoil';
-import { myPageState } from '../../recoil/atoms/myPageState';
+import { myPagePaginationState, myPageState } from '../../recoil/atoms/myPageState';
 import { dropdownRef, userInfo } from '../../type';
 import { useLogout } from '../../hooks/useAuth';
 import { getUserInfo } from '../../api/getUserInfo';
 import { ClipLoader } from 'react-spinners';
 import { loginSpinner } from '../login/kakao/kakaoRedirection.css';
+import { Pagination } from '../pagination/mypage/paginationMypage';
+import { ProfileEditModal } from './profileEditModal/profileEditModal';
 export const MyPage = () => {
-  const dummy = [
-    {
-      img: 'public/test.jpg',
-      name: '코인세탁소',
-      address: '서울특별시 양천구 신정로 11길',
-    },
-    {
-      img: 'public/test.jpg',
-      name: '코인세탁소',
-      address: '서울특별시 양천구 신정로 11길',
-    },
-    {
-      img: 'public/test.jpg',
-      name: '코인세탁소',
-      address: '서울특별시 양천구 신정로 11길',
-    },
-  ];
   const [isOpen, setIsOpen] = useRecoilState(myPageState);
   const dropdownRef = useRef<dropdownRef>(null);
   const onClickMenu = () => {
@@ -54,12 +41,15 @@ export const MyPage = () => {
       setIsOpen((prev) => ({ ...prev, isDropdownMenuOpened: false }));
     }
   };
-  const logout = useLogout();
 
-  const onClick = () => {
+  const logout = useLogout();
+  const onClickLogout = () => {
     logout();
   };
-
+  const onClickProfileEdit = () => {
+    setIsOpen((prev) => ({ ...prev, isModalOpened: true }));
+  };
+  const [page] = useRecoilState(myPagePaginationState);
   const data: userInfo = getUserInfo();
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -87,8 +77,10 @@ export const MyPage = () => {
               <RxHamburgerMenu className={myPageProfileIcon} onClick={onClickMenu} />
               {isOpen.isDropdownMenuOpened && (
                 <div className={myPageProfileDropdown}>
-                  <div className={myPageProfileDropdownItem({ border: 'BorderBottom' })}>닉네임 수정하기</div>
-                  <div className={myPageProfileDropdownItem({ border: 'BorderTop' })} onClick={onClick}>
+                  <div className={myPageProfileDropdownItem({ border: 'BorderBottom' })} onClick={onClickProfileEdit}>
+                    프로필 수정
+                  </div>
+                  <div className={myPageProfileDropdownItem({ border: 'BorderTop' })} onClick={onClickLogout}>
                     로그아웃
                   </div>
                 </div>
@@ -97,17 +89,38 @@ export const MyPage = () => {
           </div>
           <div className={myPageContent}>
             <div className={myPageContentTitle}>북마크 목록</div>
-            {dummy.map((item, index) => (
+            {data.bookmark.map((item, index) => (
               <div key={index} className={myPageItemContent}>
-                <img src={item.img} alt="" className={myPageItemImg} />
+                <img src={item.picture} alt="" className={myPageItemImg} />
                 <div className={myPageItemContentTextContainer}>
-                  <div className={myPageItemContentText}>{item.name}</div>
-                  <div className={myPageItemAddress}>{item.address}</div>
+                  <div className={myPageItemContentText}>{item.placeName}</div>
+                  <div className={myPageItemAddress}>{item.roadName}</div>
                 </div>
               </div>
             ))}
+            <div>
+              <Pagination totalPages={Math.ceil(data.bookmark.length / 5)} pageCount={5} currentPage={page.page} />
+            </div>
           </div>
         </>
+      )}
+      {isOpen.isModalOpened && (
+        <Modal
+          ariaHideApp={false}
+          isOpen={isOpen.isModalOpened}
+          onRequestClose={() => setIsOpen((prev) => ({ ...prev, isModalOpened: false }))}
+          shouldCloseOnEsc={false}
+          shouldCloseOnOverlayClick={false}
+          style={{
+            overlay: profileEditModal.overlay,
+            content: {
+              ...profileEditModal.content,
+              textAlign: profileEditModal.content.textAlign as React.CSSProperties['textAlign'],
+            },
+          }}
+        >
+          <ProfileEditModal name={data.name} email={data.email} />
+        </Modal>
       )}
     </div>
   );

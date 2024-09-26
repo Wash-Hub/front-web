@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { searchState } from '../../recoil/atoms/searchState';
-import { usePagination } from '../../hooks/usePagination';
-import { active, invisible, li, move, pageStyle, ul, wrapper } from './pagination.css';
+import { usePagination } from '../../../hooks/usePagination';
+import { active, invisible, li, move, pageStyle, ul, wrapper } from './paginationMypage.css';
+import { myPagePaginationState } from '../../../recoil/atoms/myPageState';
 
 export const Pagination = ({ totalPages, pageCount, currentPage }: any) => {
-  const [page, setPage] = useRecoilState(searchState);
+  const [page, setPage] = useRecoilState(myPagePaginationState);
 
   const noPrev = page.page === 1;
   const noNext = page.page + pageCount - 1 >= totalPages;
@@ -13,8 +13,7 @@ export const Pagination = ({ totalPages, pageCount, currentPage }: any) => {
   useEffect(() => {
     setPage((prev) => ({ ...prev, page: currentPage }));
   }, [currentPage, setPage]);
-
-  const { onClickPrevious, onClickNext, changePage } = usePagination();
+  const { onClickPrevious, onClickNext, changePage } = usePagination('mypage');
 
   const startPage = Math.floor((page.page - 1) / pageCount) * pageCount + 1;
   const onClickPage = (e: any) => {
