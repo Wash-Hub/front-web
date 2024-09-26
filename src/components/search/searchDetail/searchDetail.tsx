@@ -1,5 +1,6 @@
 import { Search } from '../search';
 import {
+  noResultsMessage,
   searchDetailContainer,
   searchDetailItem,
   searchDetailItemAddress,
@@ -15,9 +16,11 @@ import { useOpen } from '../../../hooks/useOpen';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { currentLocationAtom, mapInfoAtom, mapState } from '../../../recoil/atoms/mapState';
 
-import { Pagination } from '../../pagination/pagination';
+import { Pagination } from '../../pagination/search/paginationSearch';
 import { searchState } from '../../../recoil/atoms/searchState';
-import { paginationScrollbar } from '../../pagination/pagination.css';
+import { paginationScrollbar } from '../../pagination/search/paginationSearch.css';
+import searchAnimation from '../../../../public/searchAnimation.json';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 export const SearchDetail = () => {
   let data = getSearchInfo();
@@ -42,7 +45,12 @@ export const SearchDetail = () => {
       <div className={`${searchDetailItem} ${paginationScrollbar}`}>
         <div className={searchDetailItemTitle}>검색결과</div>
         {data.length === 0 ? (
-          <div>검색 결과가 없습니다.</div>
+          <div>
+            <div className={noResultsMessage}>검색 결과가 없습니다.</div>
+            <div>
+              <Player autoplay loop src={searchAnimation} style={{ height: '100px', width: '200px' }} />
+            </div>
+          </div>
         ) : (
           <div>
             {data.map((item: any, index: any) => (

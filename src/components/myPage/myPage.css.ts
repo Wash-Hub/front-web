@@ -67,7 +67,7 @@ export const myPageProfileDropdown = style({
   border: '1px solid #e0e0e0',
   borderRadius: '10px',
   zIndex: '1',
-  minWidth: '160px',
+  minWidth: '120px',
   padding: '6px 6px',
   '::before': {
     content: '""',
@@ -83,8 +83,8 @@ export const myPageProfileDropdown = style({
   '::after': {
     content: '""',
     position: 'absolute',
-    top: '-8px', // 삼각형 높이만큼 위로 이동
-    left: '12px', // 삼각형 위치 조정
+    top: '-8px',
+    left: '12px',
     width: '0',
     height: '0',
     borderLeft: '9px solid transparent',
@@ -180,3 +180,23 @@ export const myPageItemAddress = style({
   paddingBottom: '0',
   paddingTop: '0',
 });
+
+export const profileEditModal = {
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    zIndex: 2,
+    width: '100%',
+    height: '100%',
+  },
+  content: {
+    width: '30%',
+    height: 'fit-content',
+    margin: 'auto',
+    marginTop: '5%',
+    borderRadius: '12px',
+    border: '1px solid #E0E0E0',
+    backgroundColor: '#fff',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+    textAlign: 'center',
+  },
+};

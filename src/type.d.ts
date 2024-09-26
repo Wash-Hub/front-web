@@ -13,12 +13,15 @@ export interface MenuState {
 
 export interface MyPageState {
   isDropdownMenuOpened: boolean;
+  isModalOpened: boolean;
 }
 
 export interface ReviewState {
   isImgModalOpen: boolean;
   selectedImg: string;
   isOpened: boolean;
+  isCreateReviewModalOpen: boolean;
+  isDeleteReviewModalOpen: boolean;
 }
 
 export interface SidebarState {
@@ -28,6 +31,7 @@ export interface SidebarState {
 }
 
 export type ReviewImg = string | ArrayBuffer | null;
+export type ProfileEditImg = string | ArrayBuffer | null;
 
 export type dropdownRef = HTMLDivElement | null;
 
@@ -53,6 +57,14 @@ export interface debounce {
 }
 
 export interface userInfo {
+  bookmark: [
+    {
+      id: string;
+      picture: string;
+      placeName: string;
+      roadName: string;
+    }
+  ];
   name: string;
   email: string;
   nickname: string;
@@ -72,3 +84,36 @@ export interface mapInfo {
 }
 
 export type SearchInfo = () => void;
+
+export interface BookmarkParams {
+  mapId: mapId;
+}
+
+export interface UseBookmarkOptions {
+  onOpenModal: () => void;
+  onClose: () => void;
+  onUpdateMenuDetail: () => void;
+}
+
+export type UseReviewOptions = Omit<UseBookmarkOptions, 'onOpenModal'>;
+
+export interface UseProfileEditOptions {
+  onClose: () => void;
+  onUpdateMenuMyPage: () => void;
+}
+
+export interface ReviewData {
+  files: File | null;
+  desc: string;
+  map: string;
+}
+
+export interface DeleteReviewData {
+  id: string;
+}
+
+export interface ProfileEditData {
+  name: string;
+  email: string;
+  profileImg: FIle | null;
+}

@@ -1,8 +1,9 @@
 import { useQuery } from 'react-query';
 import { searchState } from '../recoil/atoms/searchState';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import axios from 'axios';
 import { CONFIG } from '../../config';
+import { errorState } from '../recoil/atoms/errorState';
 
 const instance = axios.create({
   baseURL: CONFIG.DOMAIN,
@@ -14,6 +15,7 @@ const instance = axios.create({
 
 export const getSearchInfo = () => {
   const content = useRecoilValue(searchState);
+  const setError = useSetRecoilState(errorState);
   if (content.contents === '') return [];
   const { data } = useQuery(
     'search',
@@ -23,6 +25,9 @@ export const getSearchInfo = () => {
     },
     {
       retry: false,
+      onError: (error) => {
+        setError(error);
+      },
     }
   );
   if (data === undefined) return [];

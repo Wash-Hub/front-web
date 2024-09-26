@@ -1,6 +1,6 @@
 import { GoBookmark } from 'react-icons/go';
+import { GoBookmarkFill } from 'react-icons/go';
 import {
-  scrollbar,
   sidebarMenuBookmark,
   sidebarMenuImg,
   sidebarMenuInfo,
@@ -22,27 +22,71 @@ import { loginModal } from '../../../styles/globalStyle.css';
 import { useOpen } from '../../../hooks/useOpen';
 import { reviewState } from '../../../recoil/atoms/reviewState';
 import { getMapInfo } from '../../../api/getMapInfo';
+import { closeModal } from './sideBarMenuInfoReview/createReview/createReview.css';
+import { AlertModal } from './sideBarMenuInfoReview/createReview/alertModal/alertModal';
+import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useAxiosInterceptorsJson } from '../../../hooks/useAxiosInterceptors';
+import { useBookmark } from '../../../hooks/useMutationApi';
 export const SideBarMenuInfo = () => {
+  useAxiosInterceptorsJson();
   const [isActiveDetail] = useRecoilState(sidebarState);
   const [isActiveReview] = useRecoilState(sidebarState);
   const [review] = useRecoilState(reviewState);
-  const { MenuControllDetail, MenuControllReview } = useOpen();
+  const { MenuControllDetail, MenuControllReview, Close, MenuControlldetail } = useOpen();
   const onClickDetail = () => {
-    MenuControllDetail();
+    Close();
+    setTimeout(() => {
+      MenuControlldetail();
+      MenuControllDetail();
+    }, 0);
   };
   const onClickReview = () => {
-    MenuControllReview();
+    Close();
+    setTimeout(() => {
+      MenuControlldetail();
+      MenuControllReview();
+    }, 0);
   };
-
   const [isModalOpen, setIsModalOpen] = useRecoilState(loginModalState);
   const [login] = useRecoilState(loginState);
+  const [isCreateReviewModalOpen, setCreateReviewModalOpen] = useRecoilState(reviewState); // 리뷰 모달 상태
   const data = getMapInfo();
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (review.isOpened && login.isLogin) {
+      const createReviewElement = document.getElementById('createReview');
+      if (createReviewElement && !createReviewElement.contains(event.target as Node)) {
+        setCreateReviewModalOpen((prev) => ({ ...prev, isCreateReviewModalOpen: true }));
+      }
+    }
+  };
+  const { createBookmark, cancelBookmark } = useBookmark(
+    { mapId: data },
+    {
+      onOpenModal: () => setIsModalOpen({ isModalOpen: true }),
+      onClose: Close,
+      onUpdateMenuDetail: MenuControlldetail,
+    }
+  );
+  const onClickCreateBookmark = () => {
+    createBookmark();
+  };
+  const onClickCancleBookmark = () => {
+    cancelBookmark();
+  };
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [review.isOpened, login.isLogin]);
   return (
     <div>
       {data === undefined ? (
         <div className={sidebarMenuInfoLoading}>열람할 정보를 선택해주세요</div>
       ) : (
-        <div className={scrollbar}>
+        <div>
           <img src={data.picture} alt="" className={sidebarMenuImg} />
           <div className={sidebarMenuInfo}>
             <div>
@@ -50,7 +94,15 @@ export const SideBarMenuInfo = () => {
               <div className={sidebarMenuInfoAddress}>{data.roadName}</div>
             </div>
             <div className={sidebarMenuBookmark}>
-              <GoBookmark />
+              {data.isBookMark ? (
+                <div onClick={onClickCancleBookmark}>
+                  <GoBookmarkFill style={{ color: '#04befe' }} />
+                </div>
+              ) : (
+                <div onClick={onClickCreateBookmark}>
+                  <GoBookmark style={{ color: '#04befe' }} />
+                </div>
+              )}
             </div>
           </div>
           <div>
@@ -72,14 +124,14 @@ export const SideBarMenuInfo = () => {
                 {review.isOpened ? '리뷰작성하기' : '리뷰보기'}
               </div>
             </div>
-            {isActiveDetail.isActiveDetail ? (
+            {isActiveDetail.isActiveDetail && (
               <div>
                 <SideBarMenuInfoDetail data={data} />
               </div>
-            ) : null}
-            {isActiveReview.isActiveReview ? (
-              <div>{review.isOpened && login.isLogin ? <CreateReview /> : <SideBarMenuInfoReview />}</div>
-            ) : null}
+            )}
+            {isActiveReview.isActiveReview && (
+              <div>{review.isOpened ? <CreateReview /> : <SideBarMenuInfoReview />}</div>
+            )}
           </div>
           {login.isLogin ? (
             ''
@@ -98,8 +150,38 @@ export const SideBarMenuInfo = () => {
               <SelectLogin />
             </Modal>
           )}
+          {isCreateReviewModalOpen.isCreateReviewModalOpen && (
+            <Modal
+              ariaHideApp={false}
+              isOpen={isCreateReviewModalOpen.isCreateReviewModalOpen}
+              onRequestClose={() => setCreateReviewModalOpen((prev) => ({ ...prev, isCreateReviewModalOpen: false }))}
+              shouldCloseOnEsc={true}
+              shouldCloseOnOverlayClick={true}
+              style={{
+                overlay: closeModal.overlay,
+                content: {
+                  ...closeModal.content,
+                  textAlign: closeModal.content.textAlign as React.CSSProperties['textAlign'],
+                },
+              }}
+            >
+              <AlertModal />
+            </Modal>
+          )}
         </div>
       )}
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        limit={1}
+      />
     </div>
   );
 };

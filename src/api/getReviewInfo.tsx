@@ -1,26 +1,27 @@
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { currentLocationAtom } from '../recoil/atoms/mapState';
 import { useQuery } from 'react-query';
 import { instanceJson } from './instanceJson';
-import { useAxiosInterceptorsJson } from '../hooks/useAxiosInterceptors';
-import { useSetRecoilState } from 'recoil';
 import { errorState } from '../recoil/atoms/errorState';
 
-export const getUserInfo = () => {
+export const getReviewInfo = () => {
   const setError = useSetRecoilState(errorState);
-  useAxiosInterceptorsJson();
+  const currentLocation = useRecoilValue(currentLocationAtom);
+  if (currentLocation.id === '') return undefined;
   const { data } = useQuery(
-    'info',
+    'mapInfo',
     async () => {
-      const response = await instanceJson.get(`/auth/profile/`);
+      const response = await instanceJson.get(`/map/${currentLocation.id}`);
       return response.data;
     },
     {
       retry: false,
       onError: (error) => {
-        console.error(error);
         setError(error);
       },
     }
   );
+
   if (data === undefined) return undefined;
-  return data?.data?.data;
+  return data?.data?.reviews.data;
 };
