@@ -10,7 +10,9 @@
 
 <body>
   <div id="root"></div>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=%VITE_KAKAO_KEY%"></script>
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=kakaoApiKey%>&libraries=clusterer"></script>
+
   <script type="module" src="/src/main.tsx"></script>
 </body>
 

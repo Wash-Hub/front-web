@@ -1,12 +1,11 @@
-import { instanceFormData } from './instanceFormData';
+import { instanceJson } from './instanceJson';
 
-export const patchProfile = async (name: any, email: any, profileImg: any) => {
+export const patchProfile = async (name: any, email: any) => {
   try {
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('profileImg', profileImg);
-    const response = await instanceFormData.patch(`/auth/`, formData);
+    const response = await instanceJson.patch(`/auth`, {
+      name: name,
+      email: email,
+    });
     return response.status;
   } catch (error: any) {
     return error.response.status;

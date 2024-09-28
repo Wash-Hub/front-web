@@ -24,52 +24,6 @@ export const ProfileEditModalInputTitle = style({
   color: '#333',
 });
 
-export const ProfileEditModalInputImgLabelWrapper = style({
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'center',
-  gap: '10px',
-});
-
-export const ProfileEditModalInputImg = style({
-  width: '30%',
-  height: '15vh',
-  cursor: 'pointer',
-  border: '1px solid #c0c0c0',
-  borderRadius: '10px',
-  padding: '10px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: '12px',
-  color: '#666',
-  backgroundColor: '#fafafa',
-  ':hover': {
-    backgroundColor: '#e9e9e9',
-  },
-});
-
-export const ProfileEditModalInputImgLabel = style({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
-
-export const ProfileEditModalInputImgIcon = style({
-  fontSize: '24px',
-  marginBottom: '5px',
-  color: '#007BFF',
-});
-
-export const ProfileEditModalInputImgLabelImg = style({
-  width: '40%',
-  height: 'auto',
-  borderRadius: '10px',
-  objectFit: 'cover',
-  boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-});
-
 export const ProfileEditModalButtonContainer = style({
   display: 'flex',
   justifyContent: 'center',
