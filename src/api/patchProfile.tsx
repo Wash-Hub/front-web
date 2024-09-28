@@ -5,7 +5,7 @@ export const patchProfile = async (name: any, email: any) => {
     const response = await instanceJson.patch(`/auth/`, {
       name: name,
       email: email,
-      profileImg: null,
+      // profileImg: null,
     });
     return response.status;
   } catch (error: any) {

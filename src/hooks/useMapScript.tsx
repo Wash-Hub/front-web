@@ -15,11 +15,17 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
   const [isMapInitialized, setIsMapInitialized] = useRecoilState(mapInitializedAtom);
   const [, setCurrentLocation] = useRecoilState(currentLocationAtom);
   const markersRef = useRef<kakao.maps.Marker[]>([]);
+  const clustererRef = useRef<kakao.maps.MarkerClusterer | null>(null);
 
-  // 기존 마커를 삭제하는 함수
   const removeMarkers = () => {
-    markersRef.current.forEach((marker) => marker.setMap(null)); // 마커 삭제
-    markersRef.current = []; // 배열 초기화
+    if (markersRef.current.length > 0) {
+      markersRef.current.forEach((marker) => marker.setMap(null));
+      markersRef.current = [];
+    }
+
+    if (clustererRef.current) {
+      clustererRef.current.clear();
+    }
   };
 
   useEffect(() => {
@@ -27,32 +33,39 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
       const container = document.getElementById('map')!;
       const options = {
         center: new kakao.maps.LatLng(lat, lng),
+        level: 3,
       };
       const map = new kakao.maps.Map(container, options);
-      mapRef.current = map; // 지도 객체를 저장하여 재사용
+      mapRef.current = map;
       setIsMapInitialized(true);
 
-      var mapTypeControl = new kakao.maps.MapTypeControl();
-
+      const mapTypeControl = new kakao.maps.MapTypeControl();
       map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
-      var zoomControl = new kakao.maps.ZoomControl();
+      const zoomControl = new kakao.maps.ZoomControl();
       map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
     }
 
     const map = mapRef.current;
-
     draggable ? map.setDraggable(true) : map.setDraggable(false);
     let currentInfoWindow: customoverlay = null;
     const imageSrc = 'public/marker.png';
     const imageSize = new kakao.maps.Size(35, 35);
     const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
 
+    if (!clustererRef.current) {
+      clustererRef.current = new kakao.maps.MarkerClusterer({
+        map: map,
+        averageCenter: true,
+        minLevel: 10,
+        disableClickZoom: true,
+      });
+    }
+
     removeMarkers();
 
-    marker?.forEach((data) => {
+    const markers = marker?.map((data) => {
       const mark = new kakao.maps.Marker({
-        map: map,
         position: new kakao.maps.LatLng(data.latitude, data.longitude),
         title: data.placeName,
         image: markerImage,
@@ -91,14 +104,21 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
       });
 
       overlay.setMap(null);
+      return mark;
     });
 
-    // 지도 클릭 시 인포윈도우 닫기
+    clustererRef.current.addMarkers(markers);
+
     kakao.maps.event.addListener(map, 'click', function () {
       if (currentInfoWindow) {
         currentInfoWindow.setMap(null);
         currentInfoWindow = null;
       }
+    });
+
+    kakao.maps.event.addListener(clustererRef.current, 'clusterclick', function (cluster: any) {
+      const level = map.getLevel() - 1;
+      map.setLevel(level, { anchor: cluster.getCenter() });
     });
 
     kakao.maps.event.addListener(map, 'dragend', function () {
@@ -109,7 +129,7 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
   useEffect(() => {
     if (isMapInitialized && mapRef.current) {
       const map = mapRef.current;
-      map.panTo(new kakao.maps.LatLng(lat, lng)); // 중심 좌표 부드럽게 이동
+      map.panTo(new kakao.maps.LatLng(lat, lng));
     }
   }, [lat, lng, isMapInitialized]);
 };
@@ -126,7 +146,7 @@ export const useMiniMapScript: MiniMapScript = (lat, lng) => {
         center: new kakao.maps.LatLng(lat, lng),
       };
       const map = new kakao.maps.Map(container, options);
-      mapRef.current = map; // 지도 객체를 저장하여 재사용
+      mapRef.current = map;
       setIsMapInitialized(true);
     }
 
@@ -150,7 +170,7 @@ export const useMiniMapScript: MiniMapScript = (lat, lng) => {
   useEffect(() => {
     if (isMapInitialized && mapRef.current) {
       const map = mapRef.current;
-      map.panTo(new kakao.maps.LatLng(lat, lng)); // 중심 좌표 부드럽게 이동
+      map.panTo(new kakao.maps.LatLng(lat, lng));
     }
   }, [isMapInitialized]);
 };
