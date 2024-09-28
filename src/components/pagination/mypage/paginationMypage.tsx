@@ -6,7 +6,6 @@ import { myPagePaginationState } from '../../../recoil/atoms/myPageState';
 
 export const Pagination = ({ totalPages, pageCount, currentPage }: any) => {
   const [page, setPage] = useRecoilState(myPagePaginationState);
-
   const noPrev = page.page === 1;
   const noNext = page.page + pageCount - 1 >= totalPages;
 

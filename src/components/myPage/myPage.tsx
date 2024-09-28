@@ -21,7 +21,7 @@ import {
   profileEditModal,
 } from './myPage.css';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { myPagePaginationState, myPageState } from '../../recoil/atoms/myPageState';
 import { dropdownRef, userInfo } from '../../type';
 import { useLogout } from '../../hooks/useAuth';
@@ -30,6 +30,10 @@ import { ClipLoader } from 'react-spinners';
 import { loginSpinner } from '../login/kakao/kakaoRedirection.css';
 import { Pagination } from '../pagination/mypage/paginationMypage';
 import { ProfileEditModal } from './profileEditModal/profileEditModal';
+import { useOpen } from '../../hooks/useOpen';
+import { currentLocationAtom, mapInfoAtom, mapState } from '../../recoil/atoms/mapState';
+
+import { ToastContainer } from 'react-toastify';
 export const MyPage = () => {
   const [isOpen, setIsOpen] = useRecoilState(myPageState);
   const dropdownRef = useRef<dropdownRef>(null);
@@ -57,6 +61,16 @@ export const MyPage = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+  const { MenuControlldetail } = useOpen();
+  const setCurrentLocation = useSetRecoilState(currentLocationAtom);
+  const setLocate = useSetRecoilState(mapState);
+  const setMapData = useSetRecoilState(mapInfoAtom);
+  const onClickDetail = (id: string, latitude: number, longitude: number, item: any) => {
+    setCurrentLocation({ id });
+    setMapData([item]);
+    setLocate({ latitude, longitude });
+    MenuControlldetail();
+  };
   return (
     <div className={myPageContainer}>
       <div className={myPageSearch}>
@@ -70,8 +84,8 @@ export const MyPage = () => {
         <>
           <div className={myPageTop}>
             <div className={myPageProfile}>
-              <img src={data.profileImg} alt="" className={myPageProfileImg} />
-              <div>{data.nickname} 님</div>
+              <img src={data.profile.profileImg} alt="" className={myPageProfileImg} />
+              <div>{data.profile.name} 님</div>
             </div>
             <div className={myPageProfileIconContainer} ref={dropdownRef}>
               <RxHamburgerMenu className={myPageProfileIcon} onClick={onClickMenu} />
@@ -89,17 +103,21 @@ export const MyPage = () => {
           </div>
           <div className={myPageContent}>
             <div className={myPageContentTitle}>북마크 목록</div>
-            {data.bookmark.map((item, index) => (
-              <div key={index} className={myPageItemContent}>
-                <img src={item.picture} alt="" className={myPageItemImg} />
+            {data.bookmarks.data.map((item, index) => (
+              <div
+                key={index}
+                className={myPageItemContent}
+                onClick={() => onClickDetail(item.map.id, item.map.latitude, item.map.longitude, item.map)}
+              >
+                <img src={item.map.picture} alt="" className={myPageItemImg} />
                 <div className={myPageItemContentTextContainer}>
-                  <div className={myPageItemContentText}>{item.placeName}</div>
-                  <div className={myPageItemAddress}>{item.roadName}</div>
+                  <div className={myPageItemContentText}>{item.map.placeName}</div>
+                  <div className={myPageItemAddress}>{item.map.roadName}</div>
                 </div>
               </div>
             ))}
             <div>
-              <Pagination totalPages={Math.ceil(data.bookmark.length / 5)} pageCount={5} currentPage={page.page} />
+              <Pagination totalPages={data.bookmarks.meta.pageCount} pageCount={5} currentPage={page.page} />
             </div>
           </div>
         </>
@@ -119,9 +137,21 @@ export const MyPage = () => {
             },
           }}
         >
-          <ProfileEditModal name={data.name} email={data.email} />
+          <ProfileEditModal name={data.profile.name} email={data.profile.email} />
         </Modal>
       )}
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        limit={1}
+      />
     </div>
   );
 };

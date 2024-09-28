@@ -57,19 +57,33 @@ export interface debounce {
 }
 
 export interface userInfo {
-  bookmark: [
-    {
-      id: string;
-      picture: string;
-      placeName: string;
-      roadName: string;
-    }
-  ];
-  name: string;
-  email: string;
-  nickname: string;
-  profileImg: string;
-  id: string;
+  bookmarks: {
+    data: [
+      {
+        map: {
+          id: string;
+          picture: string;
+          placeName: string;
+          roadName: string;
+          latitude: number;
+          longitude: number;
+        };
+      }
+    ];
+    meta: {
+      page: number;
+      pageCount: number;
+      take: number;
+      itemCount: number;
+    };
+  };
+  profile: {
+    name: string;
+    email: string;
+    nickname: string;
+    profileImg: string;
+    id: string;
+  };
 }
 
 export interface mapInfo {
@@ -115,5 +129,4 @@ export interface DeleteReviewData {
 export interface ProfileEditData {
   name: string;
   email: string;
-  profileImg: FIle | null;
 }
