@@ -146,7 +146,7 @@ export const usePatchProfile = (options: UseProfileEditOptions) => {
   const notifyError = () => toast('잠시후 다시 시도해주세요.');
   const mutation = useMutation((data: ProfileEditData) => patchProfile(data.name, data.email), {
     onSuccess: (status) => {
-      if (Number(status) === 201) {
+      if (Number(status) === 200) {
         onClose();
         setTimeout(() => {
           onUpdateMenuMyPage();

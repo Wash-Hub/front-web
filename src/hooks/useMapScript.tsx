@@ -6,6 +6,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { currentLocationAtom, mapInfoAtom, mapInitializedAtom, mapState } from '../recoil/atoms/mapState';
 import _ from 'lodash';
 import { debouncedUpdateLocate } from '../utils/debounceUpdateLotate';
+import { toast } from 'react-toastify';
 
 export const useMapScript: MapScript = (lat, lng, draggable = true) => {
   const { MenuControlldetail, Close } = useOpen();
@@ -91,6 +92,7 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
 
         setTimeout(() => {
           const element = document.getElementById(data.id);
+          const notifyError = () => toast('잠시후 다시 시도해주세요.');
           if (element) {
             Close();
             element.addEventListener('click', () => {
@@ -98,7 +100,7 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
               MenuControlldetail();
             });
           } else {
-            alert('다시 시도해주세요');
+            notifyError();
           }
         }, 0);
       });

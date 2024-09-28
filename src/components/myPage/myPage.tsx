@@ -32,6 +32,8 @@ import { Pagination } from '../pagination/mypage/paginationMypage';
 import { ProfileEditModal } from './profileEditModal/profileEditModal';
 import { useOpen } from '../../hooks/useOpen';
 import { currentLocationAtom, mapInfoAtom, mapState } from '../../recoil/atoms/mapState';
+
+import { ToastContainer } from 'react-toastify';
 export const MyPage = () => {
   const [isOpen, setIsOpen] = useRecoilState(myPageState);
   const dropdownRef = useRef<dropdownRef>(null);
@@ -83,7 +85,7 @@ export const MyPage = () => {
           <div className={myPageTop}>
             <div className={myPageProfile}>
               <img src={data.profile.profileImg} alt="" className={myPageProfileImg} />
-              <div>{data.profile.nickname} 님</div>
+              <div>{data.profile.name} 님</div>
             </div>
             <div className={myPageProfileIconContainer} ref={dropdownRef}>
               <RxHamburgerMenu className={myPageProfileIcon} onClick={onClickMenu} />
@@ -138,6 +140,18 @@ export const MyPage = () => {
           <ProfileEditModal name={data.profile.name} email={data.profile.email} />
         </Modal>
       )}
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        limit={1}
+      />
     </div>
   );
 };
