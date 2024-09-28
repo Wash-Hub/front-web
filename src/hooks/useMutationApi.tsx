@@ -142,11 +142,10 @@ export const useDeleteReview = (options: UseReviewOptions) => {
 export const usePatchProfile = (options: UseProfileEditOptions) => {
   const { onClose, onUpdateMenuMyPage } = options;
   const setError = useSetRecoilState(errorState);
-  const notifyProfileEdit = () => toast('프로필 사진이 변경되었습니다.');
+  const notifyProfileEdit = () => toast('프로필 정보가 수정되었습니다.');
   const notifyError = () => toast('잠시후 다시 시도해주세요.');
-  const mutation = useMutation((data: ProfileEditData) => patchProfile(data.name, data.email, data.profileImg), {
+  const mutation = useMutation((data: ProfileEditData) => patchProfile(data.name, data.email), {
     onSuccess: (status) => {
-      console.log(status);
       if (Number(status) === 201) {
         onClose();
         setTimeout(() => {
