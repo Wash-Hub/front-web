@@ -2,12 +2,10 @@ import { style } from '@vanilla-extract/css';
 
 export const mapButton = style({
   position: 'absolute',
-  // top: '1%',
   bottom: '3%',
-  left: '47%',
+  left: '43%',
   zIndex: 1,
   backgroundColor: '#04befe',
-  // background: 'linear-gradient(to top, #4481eb 0%, #04befe 100%)',
   padding: '10px 25px',
   borderRadius: '25px',
   cursor: 'pointer',
@@ -26,5 +24,10 @@ export const mapButton = style({
   ':active': {
     transform: 'scale(0.98)',
     boxShadow: '0 3px 8px rgba(0, 0, 0, 0.2)',
+  },
+  '@media': {
+    '(max-width: 768px)': {
+      left: '50%',
+    },
   },
 });
