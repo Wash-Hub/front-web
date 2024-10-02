@@ -15,7 +15,8 @@ export const getKakaoMapId: KakaoMapId = (longitude, latitude, placeName) => {
           {
             headers: {
               Authorization: `KakaoAK ${import.meta.env.VITE_KAKAO_KEY}`,
-              KA: 'sdk/2.2.0 kakao.js/1.39.17 os/javascript lang/en-GB device/MacIntel origin/http%3A%2F%2Flocalhost%3A3000',
+              // KA: 'sdk/2.2.0 kakao.js/1.39.17 os/javascript lang/en-GB device/MacIntel origin/http%3A%2F%2Flocalhost%3A3000',
+              KA: 'sdk/2.2.0 kakao.js/1.39.17 os/javascript lang/en-GB device/MacIntel origin/https%3A%2F%2Fwww.washhub.co.kr',
             },
           }
         )
