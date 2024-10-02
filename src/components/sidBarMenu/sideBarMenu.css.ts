@@ -9,12 +9,9 @@ export const sidebarMenuContainer = style({
   backgroundColor: 'white',
   borderLeft: '1px solid #e0e0e0',
   borderRight: '1px solid #e0e0e0',
-  '@media': {
-    '(max-width: 860px)': {
-      overflowY: 'scroll',
-      overflowX: 'hidden',
-    },
-  },
+  overflowY: 'scroll',
+  overflowX: 'hidden',
+  scrollbarWidth: 'none',
 });
 
 export const sidebarMenuItem = style({
