@@ -15,7 +15,7 @@ export const searchDetailContainer = style({
       height: 'calc(100vh - 42px)',
     },
     '(max-width: 380px)': {
-      height: 'calc(100vh + 20px)',
+      height: 'calc(100vh - 30px)',
     },
   },
 });

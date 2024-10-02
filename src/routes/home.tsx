@@ -24,12 +24,17 @@ export const Home = () => {
   }, [id, setIsLogin]);
 
   useEffect(() => {
-    if (window.innerWidth > 768) {
-      setDesktop(true);
-    } else {
-      setDesktop(false);
-    }
-  }, [window.innerWidth, setDesktop]);
+    const handleResize = () => {
+      setDesktop(window.innerWidth > 768);
+      console.log(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <div className={container}>
       {isDesktop ? (
