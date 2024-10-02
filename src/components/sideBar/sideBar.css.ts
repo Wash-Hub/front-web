@@ -28,10 +28,13 @@ export const sidebarLogo = style({
 export const sideBarWrapper = style({
   display: 'flex',
   flexDirection: 'row',
+  margin: '0',
+  padding: '0',
+  width: '100%',
+  height: 'fit-content',
 });
 
 export const sideBarMenu = style({
   width: '100%',
-  height: '100%',
-  marginLeft: '9px',
+  height: 'fit-content',
 });

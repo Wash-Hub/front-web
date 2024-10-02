@@ -15,13 +15,10 @@ export const sidebarMenuInfoLoading = style({
 });
 
 export const scrollbar = style({
-  '@media': {
-    '(max-width: 1500px)': {
-      overflowY: 'scroll',
-      overflowX: 'hidden',
-      height: '100vh',
-    },
-  },
+  overflowY: 'scroll',
+  overflowX: 'hidden',
+  height: '100vh',
+  scrollbarWidth: 'none',
 });
 
 export const sidebarMenuImg = style({
