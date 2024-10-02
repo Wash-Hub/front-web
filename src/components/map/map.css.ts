@@ -4,6 +4,7 @@ export const mapButton = style({
   position: 'absolute',
   bottom: '3%',
   left: '43%',
+  // right: '1%',
   zIndex: 1,
   backgroundColor: '#04befe',
   padding: '10px 25px',
@@ -27,7 +28,9 @@ export const mapButton = style({
   },
   '@media': {
     '(max-width: 768px)': {
-      left: '50%',
+      bottom: '10%',
+      right: '1%',
+      left: 'auto',
     },
   },
 });

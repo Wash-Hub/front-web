@@ -9,6 +9,8 @@ globalStyle('body', {
   background: '#fff',
   margin: 0,
   padding: 0,
+  width: '100%',
+  height: '100%',
 });
 
 globalStyle('*::-webkit-scrollbar', {
@@ -31,6 +33,7 @@ export const container = style({
   display: 'flex',
   flexDirection: 'column',
   height: '100vh',
+  width: '100%',
   position: 'relative',
 });
 
@@ -42,6 +45,15 @@ export const pageSideBar = style({
   width: '70px',
   zIndex: '2',
   backgroundColor: '#fff',
+});
+
+export const pageBottomBar = style({
+  position: 'absolute',
+  bottom: '0',
+  left: '0',
+  right: '0',
+  height: '30px',
+  zIndex: '2',
 });
 
 export const pageSearch = style({
@@ -61,10 +73,8 @@ export const loginModal = {
     height: '100%',
   },
   content: {
-    width: '27%',
     height: 'fit-content',
     margin: 'auto',
-    marginTop: '10%',
     borderRadius: '10px',
     border: '1px solid #C1C1BB',
     padding: '0.5rem',

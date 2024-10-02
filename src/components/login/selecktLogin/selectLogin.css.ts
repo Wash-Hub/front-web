@@ -97,6 +97,9 @@ export const selectLoginButton = recipe({
       '(max-width: 1000px)': {
         width: '20vh',
       },
+      '(max-width: 768px)': {
+        width: '40vh',
+      },
     },
   },
   variants: {

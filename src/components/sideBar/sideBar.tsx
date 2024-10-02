@@ -10,6 +10,7 @@ import { loginModal } from '../../styles/globalStyle.css';
 import { SelectLogin } from '../login/selecktLogin/selectLogin';
 import { MyPage } from '../myPage/myPage';
 import { useOpen } from '../../hooks/useOpen';
+
 export const Sidebar = () => {
   const [isOpened] = useRecoilState(menuState);
   const [isMyPageOpened] = useRecoilState(menuState);
@@ -21,10 +22,12 @@ export const Sidebar = () => {
   const onClickMenu = () => {
     MenuControllMenu();
   };
+
   const onClickMyPage = () => {
     MenuControllMyPage();
     setIsModalOpen((prevState) => ({ ...prevState, isModalOpen: !prevState.isModalOpen }));
   };
+
   return (
     <div>
       <div className={sideBarWrapper}>
@@ -48,7 +51,11 @@ export const Sidebar = () => {
             shouldCloseOnOverlayClick={true}
             style={{
               overlay: loginModal.overlay,
-              content: loginModal.content,
+              content: {
+                ...loginModal.content,
+                width: window.innerWidth > 768 ? '30%' : '80%',
+                marginTop: window.innerWidth > 768 ? '10%' : '40%',
+              },
             }}
           >
             <SelectLogin />
