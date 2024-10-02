@@ -4,8 +4,10 @@ import { KakaoMap } from '../components/map/map';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { loginState, userUniqIdAtom } from '../recoil/atoms/loginState';
 import { useEffect } from 'react';
+import { useClearStorageOnClose } from '../hooks/useClearStorageOnClose';
 
 export const Home = () => {
+  useClearStorageOnClose();
   const id = useRecoilValue(userUniqIdAtom);
   const setIsLogin = useSetRecoilState(loginState);
 
