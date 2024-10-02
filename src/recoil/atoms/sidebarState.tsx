@@ -9,3 +9,8 @@ export const sidebarState: RecoilState<SidebarState> = atom({
     isActiveSearch: false,
   } as SidebarState,
 });
+
+export const windowSizeState = atom({
+  key: 'windowSizeState',
+  default: true,
+});

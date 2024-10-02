@@ -144,7 +144,11 @@ export const SideBarMenuInfo = () => {
               shouldCloseOnOverlayClick={true}
               style={{
                 overlay: loginModal.overlay,
-                content: loginModal.content,
+                content: {
+                  ...loginModal.content,
+                  width: window.innerWidth > 768 ? '30%' : '80%',
+                  marginTop: window.innerWidth > 768 ? '10%' : '40%',
+                },
               }}
             >
               <SelectLogin />
