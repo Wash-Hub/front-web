@@ -4,11 +4,20 @@ import { recipe } from '@vanilla-extract/recipes';
 export const myPageContainer = style({
   display: 'flex',
   flexDirection: 'column',
-  width: '350px',
+  width: '360px',
   height: '100vh',
   backgroundColor: 'white',
   borderLeft: '1px solid #e0e0e0',
   borderRight: '1px solid #e0e0e0',
+  '@media': {
+    '(max-width: 764px)': {
+      width: '100vw',
+      height: 'calc(90vh - 25px)',
+    },
+    '(max-width: 380px)': {
+      height: 'calc(90vh - 12px)',
+    },
+  },
 });
 
 export const myPageSearch = style({
@@ -61,7 +70,7 @@ export const myPageProfileDropdown = style({
   display: 'block',
   position: 'absolute',
   top: '110%',
-  left: '-10px',
+  left: '-110px',
   backgroundColor: 'white',
   boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
   border: '1px solid #e0e0e0',
@@ -73,7 +82,7 @@ export const myPageProfileDropdown = style({
     content: '""',
     position: 'absolute',
     top: '-10px',
-    left: '11px',
+    left: '110px',
     width: '0',
     height: '0',
     borderLeft: '10px solid transparent',
@@ -84,7 +93,7 @@ export const myPageProfileDropdown = style({
     content: '""',
     position: 'absolute',
     top: '-8px',
-    left: '12px',
+    left: '111px',
     width: '0',
     height: '0',
     borderLeft: '9px solid transparent',
@@ -189,7 +198,6 @@ export const profileEditModal = {
     height: '100%',
   },
   content: {
-    width: '30%',
     height: 'fit-content',
     margin: 'auto',
     marginTop: '5%',

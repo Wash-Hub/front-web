@@ -10,6 +10,7 @@ import { loginModal } from '../../styles/globalStyle.css';
 import { SelectLogin } from '../login/selecktLogin/selectLogin';
 import { MyPage } from '../myPage/myPage';
 import { useOpen } from '../../hooks/useOpen';
+import { activeMenuDisplay } from './mobile/bottomBar.css';
 
 export const Sidebar = () => {
   const [isOpened] = useRecoilState(menuState);
@@ -17,7 +18,7 @@ export const Sidebar = () => {
   const [isActiveSearch] = useRecoilState(sidebarState);
   const [isModalOpen, setIsModalOpen] = useRecoilState(loginModalState);
   const [login] = useRecoilState(loginState);
-  const { MenuControllMenu, MenuControllMyPage } = useOpen();
+  const { MenuControllMenu, MenuControllMyPage, Close } = useOpen();
 
   const onClickMenu = () => {
     MenuControllMenu();
@@ -28,13 +29,27 @@ export const Sidebar = () => {
     setIsModalOpen((prevState) => ({ ...prevState, isModalOpen: !prevState.isModalOpen }));
   };
 
+  const onClickMain = () => {
+    Close();
+  };
+
   return (
     <div>
       <div className={sideBarWrapper}>
         <div className={sidebarContainer}>
-          <img className={sidebarMainLogo} src="public/logo.webp" alt="Main Logo" />
-          <img className={sidebarLogo} src="public/icon_menu.webp" alt="Menu" onClick={onClickMenu} />
-          <img className={sidebarLogo} src="public/icon_people_outline.webp" alt="My Page" onClick={onClickMyPage} />
+          <img className={sidebarMainLogo} src="public/logo.webp" alt="Main Logo" onClick={onClickMain} />
+          <img
+            className={`${sidebarLogo} ${isOpened.isOpened && activeMenuDisplay}`}
+            src="public/icon_menu.webp"
+            alt="Menu"
+            onClick={onClickMenu}
+          />
+          <img
+            className={`${sidebarLogo} ${isMyPageOpened.isMyPageOpened && login.isLogin && activeMenuDisplay}`}
+            src="public/icon_people_outline.webp"
+            alt="My Page"
+            onClick={onClickMyPage}
+          />
         </div>
         <div className={sideBarMenu}>
           {isOpened.isOpened && <SidebarMenu />}

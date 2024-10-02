@@ -134,6 +134,7 @@ export const MyPage = () => {
             content: {
               ...profileEditModal.content,
               textAlign: profileEditModal.content.textAlign as React.CSSProperties['textAlign'],
+              width: window.innerWidth > 768 ? '30%' : '70%',
             },
           }}
         >

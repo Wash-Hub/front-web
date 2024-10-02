@@ -9,11 +9,10 @@ import { BottomBar } from '../components/sideBar/mobile/bottomBar';
 import { windowSizeState } from '../recoil/atoms/sidebarState';
 
 export const Home = () => {
-  useClearStorageOnClose();
+  // useClearStorageOnClose();
   const id = useRecoilValue(userUniqIdAtom);
   const setIsLogin = useSetRecoilState(loginState);
   const [isDesktop, setDesktop] = useRecoilState(windowSizeState);
-
   useEffect(() => {
     if (id === null) {
       setIsLogin((prevState) => ({ ...prevState, isLogin: false }));
@@ -26,7 +25,6 @@ export const Home = () => {
   useEffect(() => {
     const handleResize = () => {
       setDesktop(window.innerWidth > 768);
-      console.log(window.innerWidth);
     };
 
     window.addEventListener('resize', handleResize);

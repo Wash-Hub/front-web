@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
 import { loginModalState, loginState } from '../../../recoil/atoms/loginState';
 import { useOpen } from '../../../hooks/useOpen';
-import { bottomBarLogo, bottomBarWrapper, pageBottomBarMenu } from './bottomBar.css';
+import { activeMenuDisplay, bottomBarLogo, bottomBarWrapper, pageBottomBarMenu } from './bottomBar.css';
 import { sideBarMenu, sideBarWrapper } from '../sideBar.css';
 import { menuState } from '../../../recoil/atoms/menuState';
 import { sidebarState } from '../../../recoil/atoms/sidebarState';
@@ -17,7 +17,7 @@ export const BottomBar = () => {
   const [isActiveSearch] = useRecoilState(sidebarState);
   const [isModalOpen, setIsModalOpen] = useRecoilState(loginModalState);
   const [login] = useRecoilState(loginState);
-  const { MenuControllMenu, MenuControllMyPage } = useOpen();
+  const { MenuControllMenu, MenuControllMyPage, Close } = useOpen();
 
   const onClickMenu = () => {
     MenuControllMenu();
@@ -28,13 +28,27 @@ export const BottomBar = () => {
     setIsModalOpen((prevState) => ({ ...prevState, isModalOpen: !prevState.isModalOpen }));
   };
 
+  const onClickMain = () => {
+    Close();
+  };
+
   return (
     <div>
       <div className={pageBottomBar}>
         <div className={bottomBarWrapper}>
-          <img className={bottomBarLogo} src="public/logo.webp" alt="Main Logo" />
-          <img className={bottomBarLogo} src="public/icon_menu.webp" alt="Menu" onClick={onClickMenu} />
-          <img className={bottomBarLogo} src="public/icon_people_outline.webp" alt="My Page" onClick={onClickMyPage} />
+          <img className={bottomBarLogo} src="public/logo.webp" alt="Main Logo" onClick={onClickMain} />
+          <img
+            className={`${bottomBarLogo} ${isOpened.isOpened && activeMenuDisplay}`}
+            src="public/icon_menu.webp"
+            alt="Menu"
+            onClick={onClickMenu}
+          />
+          <img
+            className={`${bottomBarLogo} ${isMyPageOpened.isMyPageOpened && login.isLogin && activeMenuDisplay}`}
+            src="public/icon_people_outline.webp"
+            alt="My Page"
+            onClick={onClickMyPage}
+          />
         </div>
       </div>
       <div className={pageBottomBarMenu}>

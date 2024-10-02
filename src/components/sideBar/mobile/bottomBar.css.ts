@@ -5,7 +5,7 @@ export const bottomBarWrapper = style({
   display: 'flex',
   justifyContent: 'space-around',
   alignItems: 'center',
-  // height: '40px',
+  height: '50px',
   width: '100%',
   backgroundColor: '#fff',
   borderTop: '1px solid #ccc',
@@ -14,16 +14,28 @@ export const bottomBarWrapper = style({
   right: 0,
 });
 
+export const activeMenuDisplay = style({
+  marginTop: '10px',
+  fontSize: '14px',
+  border: '1px solid #000',
+});
+
 export const bottomBarItem = style({
   textAlign: 'center',
   cursor: 'pointer',
 });
 
 export const bottomBarLogo = style({
-  width: '30px',
-  height: '30px',
+  width: '35px',
+  height: '35px',
   margin: '0',
-  padding: '0',
+  padding: '3px',
+  borderRadius: '50px',
+  cursor: 'pointer',
+  transition: 'transform 0.2s',
+  ':hover': {
+    transform: 'scale(1.1)',
+  },
 });
 
 export const bottomBarMenu = style({
@@ -41,5 +53,4 @@ export const pageBottomBarMenu = style({
   width: 'fit-content',
   height: 'fit-content',
   zIndex: '2',
-  // backgroundColor: '#fff',
 });

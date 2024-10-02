@@ -26,13 +26,13 @@ export const map = style({
   position: 'relative',
   zIndex: '1',
   width: '100%',
-  height: '100vh',
+  height: '100%',
 });
 
 export const container = style({
   display: 'flex',
   flexDirection: 'column',
-  height: '100vh',
+  height: '100%',
   width: '100%',
   position: 'relative',
 });
@@ -42,7 +42,7 @@ export const pageSideBar = style({
   top: '0',
   left: '0',
   height: '100vh',
-  width: '70px',
+  width: '80px',
   zIndex: '2',
   backgroundColor: '#fff',
 });
@@ -52,7 +52,6 @@ export const pageBottomBar = style({
   bottom: '0',
   left: '0',
   right: '0',
-  height: '30px',
   zIndex: '2',
 });
 

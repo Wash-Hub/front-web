@@ -84,7 +84,7 @@ export const sideBarMenuInfoReviewButtonContainer = style({
       padding: '0 0 0.7% 0.9%',
     },
     '(max-width: 768px)': {
-      bottom: '8%',
+      bottom: '15%',
       right: '3%',
       width: '30%',
     },

@@ -16,16 +16,16 @@ export const sidebarMenuContainer = style({
 
 export const sidebarMenuItem = style({
   position: 'relative',
-  width: '100%',
-  height: '100vh',
+  width: '360px',
+  height: '93.1vh',
   top: '-70px',
   '@media': {
     '(max-width: 764px)': {
       width: '100vw',
-      height: 'calc(100vh - 92px)',
+      height: 'calc(90vh - 87px)',
     },
     '(max-width: 380px)': {
-      height: 'calc(100vh - 92px)',
+      height: 'calc(90vh - 87px)',
     },
   },
 });

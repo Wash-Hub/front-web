@@ -12,5 +12,5 @@ export const sidebarState: RecoilState<SidebarState> = atom({
 
 export const windowSizeState = atom({
   key: 'windowSizeState',
-  default: true,
+  default: window.innerWidth > 768,
 });

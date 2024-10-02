@@ -33,7 +33,7 @@ export const KakaoMap = () => {
 
   return (
     <div>
-      <div id="map" style={{ width: '100%', height: '100vh' }} />
+      <div id="map" style={{ width: '100%', height: window.innerWidth > 768 ? '100vh' : '93vh' }} />
       <div className={mapButton} onClick={changeLocate}>
         {isSmallScreen.isSmallScreen ? <IoMdLocate /> : '현위치에서 검색하기'}
       </div>

@@ -150,7 +150,6 @@ export const closeModal = {
     height: '100%',
   },
   content: {
-    width: '400px',
     height: 'fit-content',
     margin: 'auto',
     marginTop: '15%',

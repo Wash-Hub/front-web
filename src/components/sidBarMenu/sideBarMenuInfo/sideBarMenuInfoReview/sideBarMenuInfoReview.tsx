@@ -92,6 +92,7 @@ export const SideBarMenuInfoReview = () => {
                     content: {
                       ...closeModal.content,
                       textAlign: closeModal.content.textAlign as React.CSSProperties['textAlign'],
+                      width: window.innerWidth > 768 ? '30%' : '60%',
                     },
                   }}
                 >

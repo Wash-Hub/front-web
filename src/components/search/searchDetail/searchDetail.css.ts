@@ -4,7 +4,7 @@ export const searchDetailContainer = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  width: '100%',
+  width: '360px',
   height: '100vh',
   backgroundColor: 'white',
   borderLeft: '1px solid #e0e0e0',
@@ -12,10 +12,10 @@ export const searchDetailContainer = style({
   '@media': {
     '(max-width: 764px)': {
       width: '100vw',
-      height: 'calc(100vh - 42px)',
+      height: 'calc(90vh - 28px)',
     },
     '(max-width: 380px)': {
-      height: 'calc(100vh - 30px)',
+      height: 'calc(90vh - 15px)',
     },
   },
 });
