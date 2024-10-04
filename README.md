@@ -24,6 +24,11 @@
 
 <br>
 
+## 프론트엔드 아키텍처
+
+![image](https://github.com/user-attachments/assets/ac0b78e9-0e63-419b-b19f-1c11319713af)
+
+
 ## 1. 개발 환경
 
 - Front : typescript, React, vanilla-extract, Recoil, React-query
