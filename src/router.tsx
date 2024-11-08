@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { KakaoRedirection } from './components/login/kakao/kakaoRedirection';
 import { Home } from './routes/home';
-import { ErrorBoundary } from './components/errorBoundary/errorBoundary';
+import { KakaoRedirection } from './components/Auth/KakaoRedirection';
 
 type routeElement = {
   path: string;
@@ -14,7 +13,6 @@ const routes: routeElement[] = [
   {
     path: '/',
     element: <Home />,
-    errorElement: <ErrorBoundary />,
   },
   {
     path: '/api/auth/kakao/callback',

@@ -1,6 +1,6 @@
 import { customoverlay, MapScript, MiniMapScript } from '../type';
 import { useEffect, useRef } from 'react';
-import { Infowindow } from '../components/map/infowindow/infowindow';
+import { Infowindow } from '@/components/Infowindow/Infowindow';
 import { useOpen } from '../hooks/useOpen';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { currentLocationAtom, mapInfoAtom, mapInitializedAtom, mapState } from '../recoil/atoms/mapState';

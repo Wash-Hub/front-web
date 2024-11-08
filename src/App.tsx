@@ -3,7 +3,6 @@ import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
-import { ErrorBoundary } from './components/errorBoundary/errorBoundary';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,11 +14,9 @@ const queryClient = new QueryClient({
 
 const App = memo(() => (
   <RecoilRoot>
-    <ErrorBoundary>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </RecoilRoot>
 ));
 

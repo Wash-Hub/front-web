@@ -1,3 +1,5 @@
+declare module '@/*';
+
 export interface LoginState {
   isLogin: boolean | DefaultValue | null;
 }
@@ -68,7 +70,7 @@ export interface userInfo {
           latitude: number;
           longitude: number;
         };
-      }
+      },
     ];
     meta: {
       page: number;
@@ -130,3 +132,7 @@ export interface ProfileEditData {
   name: string;
   email: string;
 }
+
+type ChildrenProps = {
+  children: React.ReactNode;
+};

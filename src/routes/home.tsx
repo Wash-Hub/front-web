@@ -1,15 +1,14 @@
-import { Sidebar } from '../components/sideBar/sideBar';
 import { container, map, pageSideBar } from '../styles/globalStyle.css';
-import { KakaoMap } from '../components/map/map';
+import { KakaoMap } from '../components/Map/Map';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { loginState, userUniqIdAtom } from '../recoil/atoms/loginState';
 import { useEffect } from 'react';
 import { useClearStorageOnClose } from '../hooks/useClearStorageOnClose';
-import { BottomBar } from '../components/sideBar/mobile/bottomBar';
 import { windowSizeState } from '../recoil/atoms/sidebarState';
+import { SideBar } from '@/components/SideBar/Sidebar';
 
 export const Home = () => {
-  // useClearStorageOnClose();
+  useClearStorageOnClose();
   const id = useRecoilValue(userUniqIdAtom);
   const setIsLogin = useSetRecoilState(loginState);
   const [isDesktop, setDesktop] = useRecoilState(windowSizeState);
@@ -35,15 +34,9 @@ export const Home = () => {
   }, []);
   return (
     <div className={container}>
-      {isDesktop ? (
-        <div className={pageSideBar}>
-          <Sidebar />
-        </div>
-      ) : (
-        <div>
-          <BottomBar />
-        </div>
-      )}
+      <div className={pageSideBar}>
+        <SideBar />
+      </div>
       <div className={map}>
         <KakaoMap />
       </div>
