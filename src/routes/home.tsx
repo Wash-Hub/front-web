@@ -1,5 +1,3 @@
-import { container, map, pageSideBar } from '../styles/globalStyle.css';
-import { KakaoMap } from '../components/Map/Map';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { loginState, userUniqIdAtom } from '../recoil/atoms/loginState';
 import { useEffect } from 'react';
@@ -11,7 +9,8 @@ export const Home = () => {
   useClearStorageOnClose();
   const id = useRecoilValue(userUniqIdAtom);
   const setIsLogin = useSetRecoilState(loginState);
-  const [isDesktop, setDesktop] = useRecoilState(windowSizeState);
+  const [, setDesktop] = useRecoilState(windowSizeState);
+
   useEffect(() => {
     if (id === null) {
       setIsLogin((prevState) => ({ ...prevState, isLogin: false }));
@@ -32,14 +31,10 @@ export const Home = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
   return (
-    <div className={container}>
-      <div className={pageSideBar}>
-        <SideBar />
-      </div>
-      <div className={map}>
-        <KakaoMap />
-      </div>
+    <div className={`absolute left-0 top-0 z-[10]`}>
+      <SideBar />
     </div>
   );
 };

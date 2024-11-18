@@ -6,7 +6,6 @@ export const sidebarState: RecoilState<SidebarState> = atom({
   default: {
     isActiveDetail: true,
     isActiveReview: false,
-    isActiveSearch: false,
   } as SidebarState,
 });
 

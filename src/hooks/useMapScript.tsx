@@ -7,9 +7,10 @@ import { currentLocationAtom, mapInfoAtom, mapInitializedAtom, mapState } from '
 import _ from 'lodash';
 import { debouncedUpdateLocate } from '../utils/debounceUpdateLotate';
 import { toast } from 'react-toastify';
+import 'react-kakao-maps-sdk';
+import { useNavigate } from 'react-router-dom';
 
 export const useMapScript: MapScript = (lat, lng, draggable = true) => {
-  const { MenuControlldetail, Close } = useOpen();
   const marker = useRecoilValue(mapInfoAtom);
   const mapRef = useRef<kakao.maps.Map | null>(null);
   const [locate, setLocate] = useRecoilState(mapState);
@@ -17,6 +18,7 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
   const [, setCurrentLocation] = useRecoilState(currentLocationAtom);
   const markersRef = useRef<kakao.maps.Marker[]>([]);
   const clustererRef = useRef<kakao.maps.MarkerClusterer | null>(null);
+  const navigate = useNavigate();
 
   const removeMarkers = () => {
     if (markersRef.current.length > 0) {
@@ -50,7 +52,7 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
     const map = mapRef.current;
     draggable ? map.setDraggable(true) : map.setDraggable(false);
     let currentInfoWindow: customoverlay = null;
-    const imageSrc = 'public/marker.png';
+    const imageSrc = '/marker.png';
     const imageSize = new kakao.maps.Size(35, 35);
     const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
 
@@ -94,10 +96,9 @@ export const useMapScript: MapScript = (lat, lng, draggable = true) => {
           const element = document.getElementById(data.id);
           const notifyError = () => toast('잠시후 다시 시도해주세요.');
           if (element) {
-            Close();
             element.addEventListener('click', () => {
               setCurrentLocation({ id: data.id });
-              MenuControlldetail();
+              navigate(`/detail/${data.id}`);
             });
           } else {
             notifyError();

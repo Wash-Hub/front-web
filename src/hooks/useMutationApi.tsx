@@ -9,7 +9,6 @@ import {
   ReviewData,
   UseBookmarkOptions,
   UseProfileEditOptions,
-  UseReviewOptions,
 } from '../type';
 import { postReview } from '../api/postReview';
 import { deleteReview } from '../api/deleteReview';
@@ -18,7 +17,7 @@ import { errorState } from '../recoil/atoms/errorState';
 import { patchProfile } from '../api/patchProfile';
 
 export const useBookmark = (data: BookmarkParams, options: UseBookmarkOptions) => {
-  const { onOpenModal, onClose, onUpdateMenuDetail } = options;
+  const { onOpenModal } = options;
   const notifyCreateReview = () => toast('북마크에 추가되었습니다.');
   const notifyCancelBookmark = () => toast('북마크가 취소되었습니다.');
   const notifyError = () => toast('잠시후 다시 시도해주세요.');
@@ -26,9 +25,7 @@ export const useBookmark = (data: BookmarkParams, options: UseBookmarkOptions) =
   const mutationPostBookmark = useMutation((item: BookmarkParams) => postBookmark(item.mapId.id), {
     onSuccess: (status) => {
       if (Number(status) === 201) {
-        onClose();
         setTimeout(() => {
-          onUpdateMenuDetail();
           notifyCreateReview();
         }, 0);
       } else if (Number(status) === 401) {
@@ -45,9 +42,7 @@ export const useBookmark = (data: BookmarkParams, options: UseBookmarkOptions) =
   const mutationDeleteBookmark = useMutation((item: BookmarkParams) => deleteBookmark(item.mapId.id), {
     onSuccess: (status) => {
       if (Number(status) === 200) {
-        onClose();
         setTimeout(() => {
-          onUpdateMenuDetail();
           notifyCancelBookmark();
         }, 0);
       } else if (Number(status) === 401) {
@@ -75,17 +70,14 @@ export const useBookmark = (data: BookmarkParams, options: UseBookmarkOptions) =
   };
 };
 
-export const usePostReview = (options: UseReviewOptions) => {
-  const { onClose, onUpdateMenuDetail } = options;
+export const usePostReview = () => {
   const setError = useSetRecoilState(errorState);
   const notifyCreateReview = () => toast('리뷰가 등록되었습니다.');
   const notifyError = () => toast('잠시후 다시 시도해주세요.');
   const mutation = useMutation((data: ReviewData) => postReview(data.files, data.desc, data.map), {
     onSuccess: (status) => {
       if (Number(status) === 201) {
-        onClose();
         setTimeout(() => {
-          onUpdateMenuDetail();
           notifyCreateReview();
         }, 0);
       } else {
@@ -107,17 +99,14 @@ export const usePostReview = (options: UseReviewOptions) => {
   };
 };
 
-export const useDeleteReview = (options: UseReviewOptions) => {
-  const { onClose, onUpdateMenuDetail } = options;
+export const useDeleteReview = () => {
   const setError = useSetRecoilState(errorState);
   const notifyCreateReview = () => toast('리뷰가 삭제되었습니다.');
   const notifyError = () => toast('잠시후 다시 시도해주세요.');
   const mutation = useMutation((data: DeleteReviewData) => deleteReview(data.id), {
     onSuccess: (status) => {
       if (Number(status) === 200) {
-        onClose();
         setTimeout(() => {
-          onUpdateMenuDetail();
           notifyCreateReview();
         }, 0);
       } else {

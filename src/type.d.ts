@@ -107,11 +107,7 @@ export interface BookmarkParams {
 
 export interface UseBookmarkOptions {
   onOpenModal: () => void;
-  onClose: () => void;
-  onUpdateMenuDetail: () => void;
 }
-
-export type UseReviewOptions = Omit<UseBookmarkOptions, 'onOpenModal'>;
 
 export interface UseProfileEditOptions {
   onClose: () => void;

@@ -21,7 +21,7 @@ export const screenSizeState = atom({
 export const currentLocationAtom = atom({
   key: 'currentLocationAtom',
   default: {
-    id: '',
+    id: 'undefined',
   },
 });
 

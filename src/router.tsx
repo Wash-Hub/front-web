@@ -1,6 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Home } from './routes/home';
 import { KakaoRedirection } from './components/Auth/KakaoRedirection';
+import { Map } from './routes/Map';
+import { Home } from '@/routes/Home';
+import { LocationInfo } from './routes/LocationInfo';
 
 type routeElement = {
   path: string;
@@ -12,7 +14,17 @@ type routeElement = {
 const routes: routeElement[] = [
   {
     path: '/',
-    element: <Home />,
+    element: <Map />,
+    children: [
+      {
+        path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/detail/:id',
+        element: <LocationInfo />,
+      },
+    ],
   },
   {
     path: '/api/auth/kakao/callback',

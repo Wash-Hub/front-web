@@ -6,7 +6,6 @@ export const reviewState: RecoilState<ReviewState> = atom({
   default: {
     isImgModalOpen: false,
     selectedImg: '',
-    isOpened: false,
     isCreateReviewModalOpen: false,
     isDeleteReviewModalOpen: false,
   } as ReviewState,

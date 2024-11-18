@@ -18,22 +18,26 @@ export const instance = axios.create({
 export const getMapInfo = () => {
   const currentLocation = useRecoilValue(currentLocationAtom);
   const setError = useSetRecoilState(errorState);
-  if (currentLocation.id === '') return undefined;
+
   const { data } = useQuery(
-    'mapInfo',
+    ['mapInfo', currentLocation.id],
     async () => {
+      if (!currentLocation.id) {
+        return undefined;
+      }
       const response = await instanceJson.get(`/map/${currentLocation.id}`);
       return response.data;
     },
     {
+      enabled: !!currentLocation.id,
       onError: (error) => {
         setError(error);
       },
       retry: false,
-    }
+    },
   );
-  if (data === undefined) return undefined;
-  return data?.data?.map;
+
+  return data?.data?.map ?? undefined;
 };
 
 export const getMapAllInfo = (locate: location) => {
@@ -50,7 +54,7 @@ export const getMapAllInfo = (locate: location) => {
       onError: (error) => {
         setError(error);
       },
-    }
+    },
   );
   if (!data) return [];
   return data;
