@@ -37,7 +37,7 @@ export const InfoNavigation = () => {
             isActiveReview.isActiveReview ? 'border-black' : 'border-gray-200'
           }`}
         >
-          {review.isOpened ? '리뷰작성하기' : '리뷰보기'}
+          {review.isOpened ? '리뷰등록' : '리뷰보기'}
         </div>
       </div>
     </div>

@@ -156,7 +156,7 @@ export const useMiniMapScript: MiniMapScript = (lat, lng) => {
     const map = mapRef.current;
 
     map.setDraggable(false);
-    const imageSrc = 'public/marker.png';
+    const imageSrc = '/marker.png';
     const imageSize = new kakao.maps.Size(35, 35);
     const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
 

@@ -2,7 +2,9 @@ import { reviewState } from '@/recoil/atoms/reviewState';
 import { closeModal } from '@/styles/globalStyle.css';
 import Modal from 'react-modal';
 import { useRecoilState } from 'recoil';
-export const InfoModal = () => {
+import { ReviewAlert } from './ReviewAlert';
+
+export const ReviewModal = () => {
   const [isCreateReviewModalOpen, setCreateReviewModalOpen] = useRecoilState(reviewState);
   return (
     <Modal
@@ -16,11 +18,11 @@ export const InfoModal = () => {
         content: {
           ...closeModal.content,
           textAlign: closeModal.content.textAlign as React.CSSProperties['textAlign'],
-          width: window.innerWidth > 768 ? '30%' : '60%',
+          width: window.innerWidth > 768 ? '33%' : '60%',
         },
       }}
     >
-      {/* <AlertModal /> */}
+      <ReviewAlert />
     </Modal>
   );
 };

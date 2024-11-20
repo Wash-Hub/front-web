@@ -1,4 +1,3 @@
-import { getMapInfo } from '@/api/getMapInfo';
 import { Info } from '@/components/LocationInfo/Info';
 import { SidebarSmall } from '@/components/SideBar/SidebarSmall';
 import { currentLocationAtom } from '@/recoil/atoms/mapState';
@@ -7,7 +6,6 @@ import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 export const LocationInfo = () => {
-  const data = getMapInfo();
   const { id } = useParams<{ id: string }>();
   const [, setCurrentLocation] = useRecoilState(currentLocationAtom);
   useEffect(() => {
@@ -18,7 +16,13 @@ export const LocationInfo = () => {
   return (
     <div>
       <SidebarSmall />
-      <div className="absolute left-16 top-0 h-screen w-[360px] bg-white">
+      <div
+        className="absolute left-16 top-0 h-screen w-[360px] overflow-y-scroll bg-white"
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+        }}
+      >
         <Info />
       </div>
     </div>

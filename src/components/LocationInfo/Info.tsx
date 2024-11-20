@@ -6,13 +6,14 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { InfoTitle } from './InfoTitle';
 import { InfoNavigation } from './InfoNavigation';
-import { InfoModal } from './InfoModal';
 import { LoginModal } from '../Auth/LoginModal';
 import { Toast } from '../Toast/Toast';
 import { InfoLoading } from './InfoLoading';
 import { Detail } from './Detail/Detail';
 import { sidebarState } from '@/recoil/atoms/sidebarState';
 import { Review } from './Review/Review';
+import { ReviewCreate } from './Review/ReviewCreate';
+import { ReviewModal } from './Review/ReviewModal/ReviewModal';
 
 export const Info = () => {
   useAxiosInterceptorsJson();
@@ -39,17 +40,17 @@ export const Info = () => {
   }, [review.isOpened, login.isLogin]);
 
   return (
-    <div className="h-screen">
+    <div>
       {MapData === undefined ? (
         <InfoLoading />
       ) : (
-        <div className="h-full">
+        <div>
           <InfoTitle data={MapData} />
           <InfoNavigation />
           {isActiveDetail.isActiveDetail && <Detail mapData={MapData} />}
           {!login.isLogin && <LoginModal />}
-          {isCreateReviewModalOpen.isCreateReviewModalOpen && <InfoModal />}
-          {isActiveReview.isActiveReview && <Review />}
+          {isCreateReviewModalOpen.isCreateReviewModalOpen && <ReviewModal />}
+          {isActiveReview.isActiveReview && <div>{review.isOpened ? <ReviewCreate /> : <Review />}</div>}
         </div>
       )}
       <Toast />

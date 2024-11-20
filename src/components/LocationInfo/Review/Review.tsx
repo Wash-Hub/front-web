@@ -5,7 +5,7 @@ import { reviewState } from '@/recoil/atoms/reviewState';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { ReviewEmpty } from './ReviewEmpty';
 import { ReviewContent } from './ReviewContent';
-import { ReviewModal } from './ReviewModal';
+import { ReviewModal } from './ReviewModal/ReviewModal';
 import { ReviewButton } from './ReviewButton';
 import { ReviewImgModal } from './ReviewImgModal';
 import { ReviewImg } from './ReviewImg';
@@ -21,7 +21,7 @@ export const Review = () => {
       {ReviewData === undefined || ReviewData.length === 0 ? (
         <ReviewEmpty />
       ) : (
-        <div className="flex h-full w-full flex-col gap-4 overflow-y-auto p-4 pb-24">
+        <div className="flex h-full w-full flex-col gap-4 p-4">
           {ReviewData.map((item: any) => (
             <div key={item.id} className="flex flex-col pt-2">
               <ReviewContent item={item} id={id} />
