@@ -1,22 +1,22 @@
 import { usePagination } from '@/hooks/usePagination';
-import { myPagePaginationState } from '@/recoil/atoms/myPageState';
-import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
 import Container from './Container';
 import { PaginationList } from './PaginationList';
-import PaginationItem from './PaginationItem';
+import { PaginationItem } from './PaginationItem';
+import { useParams } from 'react-router-dom';
 
-export const Pagination = ({ totalPages, pageCount, currentPage }: any) => {
-  const [page, setPage] = useRecoilState(myPagePaginationState);
-  const noPrev = page.page === 1;
-  const noNext = page.page + pageCount - 1 >= totalPages;
+export const Pagination = ({ totalPages, pageCount }: any) => {
+  const { title = '', page } = useParams();
+  const currentPage = Number(page);
+  const noPrev = currentPage === 1;
+  const noNext = currentPage + pageCount - 1 >= totalPages;
 
-  useEffect(() => {
-    setPage((prev) => ({ ...prev, page: currentPage }));
-  }, [currentPage, setPage]);
-  const { onClickPrevious, onClickNext, changePage } = usePagination('mypage');
+  const { onClickPrevious, onClickNext, changePage } = usePagination({
+    menu: 'mypage',
+    title: title,
+    page: currentPage,
+  });
 
-  const startPage = Math.floor((page.page - 1) / pageCount) * pageCount + 1;
+  const startPage = Math.floor((currentPage - 1) / pageCount) * pageCount + 1;
   const onClickPage = (e: any) => {
     changePage(e);
   };

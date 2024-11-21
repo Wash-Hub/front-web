@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
-import { searchState } from '../recoil/atoms/searchState';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import axios from 'axios';
 import { CONFIG } from '../../config';
 import { errorState } from '../recoil/atoms/errorState';
+import { useParams } from 'react-router-dom';
 
 const instance = axios.create({
   baseURL: CONFIG.DOMAIN,
@@ -14,21 +14,20 @@ const instance = axios.create({
 });
 
 export const getSearchInfo = () => {
-  const content = useRecoilValue(searchState);
   const setError = useSetRecoilState(errorState);
-  if (content.contents === '') return [];
+  const { title, page } = useParams();
+  if (title === '') return [];
   const { data } = useQuery(
-    'search',
+    ['search', title, page],
     async () => {
-      const response = await instance.get(`/map/search?title=${content.contents}&page=${content.page}`);
+      const response = await instance.get(`/map/search?title=${title}&page=${page}`);
       return response.data;
     },
     {
-      retry: false,
       onError: (error) => {
         setError(error);
       },
-    }
+    },
   );
   if (data === undefined) return [];
   const result = [data.data.meta.pageCount, ...data.data.data];

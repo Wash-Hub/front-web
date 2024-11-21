@@ -8,10 +8,3 @@ export const myPageState: RecoilState<MyPageState> = atom({
     isModalOpened: false,
   } as MyPageState,
 });
-
-export const myPagePaginationState = atom({
-  key: 'myPagePaginationState',
-  default: {
-    page: 1,
-  },
-});

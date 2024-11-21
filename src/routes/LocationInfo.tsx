@@ -1,5 +1,5 @@
+import { MenuContainer } from '@/components/Container/MenuContainer';
 import { Info } from '@/components/LocationInfo/Info';
-import { SidebarSmall } from '@/components/SideBar/SidebarSmall';
 import { currentLocationAtom } from '@/recoil/atoms/mapState';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -14,17 +14,8 @@ export const LocationInfo = () => {
     }
   }, [id]);
   return (
-    <div>
-      <SidebarSmall />
-      <div
-        className="absolute left-16 top-0 h-screen w-[360px] overflow-y-scroll bg-white"
-        style={{
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-        }}
-      >
-        <Info />
-      </div>
-    </div>
+    <MenuContainer>
+      <Info />
+    </MenuContainer>
   );
 };

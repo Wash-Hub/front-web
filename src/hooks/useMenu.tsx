@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { location } from '@/type';
 import { mapInfoAtom, mapState } from '@/recoil/atoms/mapState';
 import { useNavigate } from 'react-router-dom';
-import { loginModalState } from '@/recoil/atoms/loginState';
+import { loginModalState, loginState } from '@/recoil/atoms/loginState';
 
 export const useMenu = () => {
   const [locate] = useRecoilState<location>(mapState);
@@ -11,6 +11,7 @@ export const useMenu = () => {
   const navigate = useNavigate();
   const setMapData = useSetRecoilState(mapInfoAtom);
   const [, setIsModalOpen] = useRecoilState(loginModalState);
+  const [login] = useRecoilState(loginState);
 
   const onClickHome = () => {
     navigate('/');
@@ -21,8 +22,13 @@ export const useMenu = () => {
   };
 
   const onClickMyPage = () => {
-    navigate('/mypage');
-    setIsModalOpen((prevState) => ({ ...prevState, isModalOpen: !prevState.isModalOpen }));
+    if (!login.isLogin) {
+      setIsModalOpen((prevState) => ({ ...prevState, isModalOpen: !prevState.isModalOpen }));
+    } else {
+      navigate('/mypage');
+    }
+
+    // navigate('/mypage');
   };
 
   const changeLocate = () => {

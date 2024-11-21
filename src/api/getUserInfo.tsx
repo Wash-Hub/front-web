@@ -1,17 +1,17 @@
 import { useQuery } from 'react-query';
 import { instanceJson } from './instanceJson';
 import { useAxiosInterceptorsJson } from '../hooks/useAxiosInterceptors';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { errorState } from '../recoil/atoms/errorState';
-import { myPagePaginationState } from '../recoil/atoms/myPageState';
+import { useParams } from 'react-router-dom';
 export const getUserInfo = () => {
   const setError = useSetRecoilState(errorState);
-  const content = useRecoilValue(myPagePaginationState);
+  const { page } = useParams();
   useAxiosInterceptorsJson();
   const { data } = useQuery(
-    'info',
+    ['info', page],
     async () => {
-      const response = await instanceJson.get(`/auth/profile?page=${content.page}`);
+      const response = await instanceJson.get(`/auth/profile?page=${page}`);
       return response.data;
     },
     {
@@ -19,7 +19,7 @@ export const getUserInfo = () => {
       onError: (error) => {
         setError(error);
       },
-    }
+    },
   );
   if (data === undefined) return undefined;
   return data?.data?.data;

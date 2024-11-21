@@ -1,57 +1,25 @@
-import { useRecoilState } from 'recoil';
-import { searchState } from '../recoil/atoms/searchState';
-import { useOpen } from './useOpen';
-import { myPagePaginationState } from '../recoil/atoms/myPageState';
+import { useNavigate } from 'react-router-dom';
 
-export const usePagination = (menu: string) => {
-  const { MenuControllMyPage, MenuControllSearch, Close } = useOpen();
-  const [searchPage, setSearchPage] = useRecoilState(searchState);
-  const [myPage, setMyPage] = useRecoilState(myPagePaginationState);
-  const refreshSearch = () => {
-    Close();
-    setTimeout(() => {
-      MenuControllSearch();
-    }, 0);
-  };
-  const refreshMyPage = () => {
-    Close();
-    setTimeout(() => {
-      MenuControllMyPage();
-    }, 0);
-  };
+type PaginationProps = {
+  title: string;
+  page: number;
+  menu: string;
+};
+
+export const usePagination = ({ menu, title, page }: PaginationProps) => {
+  const navigate = useNavigate();
   const onClickPrevious = (noPrev: boolean, pageCount: number) => {
     if (noPrev) return;
-    if (menu === 'mypage') {
-      setMyPage((prev) => ({ ...prev, page: Math.max(1, myPage.page - pageCount) }));
-      refreshMyPage();
-    }
-    if (menu === 'search') {
-      setSearchPage((prev) => ({ ...prev, page: Math.max(1, searchPage.page - pageCount) }));
-      refreshSearch();
-    }
+    navigate(`/${menu}/${title}/${Math.max(1, page - pageCount)}`);
   };
 
   const onClickNext = (noNext: boolean, totalPages: number, pageCount: number) => {
     if (noNext) return;
-    if (menu === 'mypage') {
-      setMyPage((prev) => ({ ...prev, page: Math.min(totalPages, myPage.page + pageCount) }));
-      refreshMyPage();
-    }
-    if (menu === 'search') {
-      setSearchPage((prev) => ({ ...prev, page: Math.min(totalPages, searchPage.page + pageCount) }));
-      refreshSearch();
-    }
+    navigate(`/${menu}/${title}/${Math.min(totalPages, page + pageCount)}`);
   };
 
   const changePage = (e: any) => {
-    if (menu === 'mypage') {
-      setMyPage((prev) => ({ ...prev, page: Number(e.target.textContent) }));
-      refreshMyPage();
-    }
-    if (menu === 'search') {
-      setSearchPage((prev) => ({ ...prev, page: Number(e.target.textContent) }));
-      refreshSearch();
-    }
+    navigate(`/${menu}/${title}/${Number(e)}`);
   };
 
   return { onClickPrevious, onClickNext, changePage };

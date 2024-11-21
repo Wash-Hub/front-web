@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { InfoTitle } from './InfoTitle';
 import { InfoNavigation } from './InfoNavigation';
-import { LoginModal } from '../Auth/LoginModal';
 import { Toast } from '../Toast/Toast';
 import { InfoLoading } from './InfoLoading';
 import { Detail } from './Detail/Detail';
@@ -31,7 +30,6 @@ export const Info = () => {
       }
     }
   };
-
   useEffect(() => {
     document.addEventListener('mousedown', handleOutsideClick);
     return () => {
@@ -48,7 +46,6 @@ export const Info = () => {
           <InfoTitle data={MapData} />
           <InfoNavigation />
           {isActiveDetail.isActiveDetail && <Detail mapData={MapData} />}
-          {!login.isLogin && <LoginModal />}
           {isCreateReviewModalOpen.isCreateReviewModalOpen && <ReviewModal />}
           {isActiveReview.isActiveReview && <div>{review.isOpened ? <ReviewCreate /> : <Review />}</div>}
         </div>

@@ -109,11 +109,6 @@ export interface UseBookmarkOptions {
   onOpenModal: () => void;
 }
 
-export interface UseProfileEditOptions {
-  onClose: () => void;
-  onUpdateMenuMyPage: () => void;
-}
-
 export interface ReviewData {
   files: File | null;
   desc: string;

@@ -1,4 +1,3 @@
-import { IconSearch } from '@/assets/icons/IconSearch';
 import { IconHome } from '@/assets/icons/IconHome';
 import { IconMenu } from '@/assets/icons/IconMenu';
 import { IconUser } from '@/assets/icons/IconUser';
@@ -9,11 +8,16 @@ import { Link } from 'react-router-dom';
 import { useMenu } from '@/hooks/useMenu';
 import { currentLocationAtom } from '@/recoil/atoms/mapState';
 import { useRecoilState } from 'recoil';
-
+import { loginModalState, loginState } from '@/recoil/atoms/loginState';
+import { LoginModal } from '../Auth/LoginModal';
+import { SearchBar } from '../Search/SearchBar';
 export const SideBar = () => {
   const { onClickHome, onClickMenu, onClickMyPage, changeLocate } = useMenu();
 
+  const [login] = useRecoilState(loginState);
+  const [loginModal] = useRecoilState(loginModalState);
   const [currentLocation] = useRecoilState(currentLocationAtom);
+
   return (
     <div>
       <aside className="flex h-screen w-64 flex-col overflow-y-auto border-r bg-white px-5 py-8 rtl:border-l rtl:border-r-0 dark:border-gray-700 dark:bg-gray-900">
@@ -24,17 +28,7 @@ export const SideBar = () => {
 
         <div className="mt-6 flex flex-1 flex-col justify-between">
           <nav className="-mx-3 flex-1 space-y-3">
-            <div className="relative mx-3">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <IconSearch />
-              </span>
-
-              <input
-                type="text"
-                className="w-full rounded-md border bg-white py-1.5 pl-10 pr-4 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
-                placeholder="Search"
-              />
-            </div>
+            <SearchBar />
 
             <SideBarButton onClick={onClickHome}>
               <IconHome />
@@ -90,6 +84,7 @@ export const SideBar = () => {
           </div>
         </div>
       </aside>
+      {loginModal.isModalOpen && !login.isLogin && <LoginModal />}
     </div>
   );
 };

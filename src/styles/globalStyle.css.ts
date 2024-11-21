@@ -52,3 +52,22 @@ export const imgModal = {
     padding: '8px',
   },
 };
+
+export const profileEditModal = {
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    zIndex: 2,
+    width: '100%',
+    height: '100%',
+  },
+  content: {
+    height: 'fit-content',
+    margin: 'auto',
+    marginTop: '5%',
+    borderRadius: '12px',
+    border: '1px solid #E0E0E0',
+    backgroundColor: '#fff',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+    textAlign: 'center',
+  },
+};

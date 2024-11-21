@@ -5,15 +5,15 @@ type PaginationItemProps = {
   children: React.ReactNode;
 };
 
-const PaginationItem = ({ isActive, isDisabled, onClick, children }: PaginationItemProps) => {
+export const PaginationItem = ({ isActive, isDisabled, onClick, children }: PaginationItemProps) => {
   return (
     <li className={`mx-1 flex h-10 items-center rounded-full ${isDisabled ? 'invisible' : ''}`}>
       <div
         onClick={!isDisabled ? onClick : undefined}
-        className={`${
+        className={`flex items-center justify-center rounded-full px-3 py-2 text-[14px] text-sm transition-colors duration-300 ${
           isActive
             ? 'bg-gradient-to-t from-sky-400 to-sky-500 font-bold text-white'
-            : 'flex cursor-pointer items-center justify-center rounded-full p-2 text-sm text-gray-500 transition-colors duration-300 hover:bg-gray-200 hover:text-black'
+            : 'cursor-pointer text-gray-500 hover:bg-gray-200 hover:text-black'
         }`}
       >
         {children}
@@ -21,5 +21,3 @@ const PaginationItem = ({ isActive, isDisabled, onClick, children }: PaginationI
     </li>
   );
 };
-
-export default PaginationItem;

@@ -3,6 +3,8 @@ import { KakaoRedirection } from './components/Auth/KakaoRedirection';
 import { Map } from './routes/Map';
 import { Home } from '@/routes/Home';
 import { LocationInfo } from './routes/LocationInfo';
+import { Mypage } from './routes/Mypage';
+import { SearchDetail } from './routes/SearchDetail';
 
 type routeElement = {
   path: string;
@@ -23,6 +25,14 @@ const routes: routeElement[] = [
       {
         path: '/detail/:id',
         element: <LocationInfo />,
+      },
+      {
+        path: '/mypage/:title/:page',
+        element: <Mypage />,
+      },
+      {
+        path: '/search/:title/:page',
+        element: <SearchDetail />,
       },
     ],
   },

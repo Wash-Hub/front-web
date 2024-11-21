@@ -2,14 +2,7 @@ import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import { postBookmark } from '../api/postBookmark';
 import { deleteBookmark } from '../api/deleteBookmark';
-import {
-  BookmarkParams,
-  DeleteReviewData,
-  ProfileEditData,
-  ReviewData,
-  UseBookmarkOptions,
-  UseProfileEditOptions,
-} from '../type';
+import { BookmarkParams, DeleteReviewData, ProfileEditData, ReviewData, UseBookmarkOptions } from '../type';
 import { postReview } from '../api/postReview';
 import { deleteReview } from '../api/deleteReview';
 import { useSetRecoilState } from 'recoil';
@@ -128,17 +121,14 @@ export const useDeleteReview = () => {
   };
 };
 
-export const usePatchProfile = (options: UseProfileEditOptions) => {
-  const { onClose, onUpdateMenuMyPage } = options;
+export const usePatchProfile = () => {
   const setError = useSetRecoilState(errorState);
   const notifyProfileEdit = () => toast('프로필 정보가 수정되었습니다.');
   const notifyError = () => toast('잠시후 다시 시도해주세요.');
   const mutation = useMutation((data: ProfileEditData) => patchProfile(data.name, data.email), {
     onSuccess: (status) => {
       if (Number(status) === 200) {
-        onClose();
         setTimeout(() => {
-          onUpdateMenuMyPage();
           notifyProfileEdit();
         }, 0);
       } else {
