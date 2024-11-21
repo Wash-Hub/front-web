@@ -11,13 +11,23 @@ import { useRecoilState } from 'recoil';
 import { loginModalState, loginState } from '@/recoil/atoms/loginState';
 import { LoginModal } from '../Auth/LoginModal';
 import { SearchBar } from '../Search/SearchBar';
+import { ProfileLogout } from '../Profile/ProfileLogout';
+import { ProfileLogin } from '../Profile/ProfileLogin';
+import { LoginButton } from '../Button/LoginButton';
+import { useLogout } from '@/hooks/useAuth';
 export const SideBar = () => {
   const { onClickHome, onClickMenu, onClickMyPage, changeLocate } = useMenu();
 
   const [login] = useRecoilState(loginState);
-  const [loginModal] = useRecoilState(loginModalState);
+  const [loginModal, setLoginModal] = useRecoilState(loginModalState);
   const [currentLocation] = useRecoilState(currentLocationAtom);
-
+  const onClickLogin = () => {
+    setLoginModal({ isModalOpen: true });
+  };
+  const logout = useLogout();
+  const onClickLogout = () => {
+    logout();
+  };
   return (
     <div>
       <aside className="flex h-screen w-64 flex-col overflow-y-auto border-r bg-white px-5 py-8 rtl:border-l rtl:border-r-0 dark:border-gray-700 dark:bg-gray-900">
@@ -65,21 +75,21 @@ export const SideBar = () => {
             </div>
 
             <div className="mt-6 flex items-center justify-between">
-              <Link to="#" className="flex items-center gap-x-2">
-                <img
-                  className="h-7 w-7 rounded-full object-cover"
-                  src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&h=634&q=80"
-                  alt="avatar"
-                />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-200">John Doe</span>
-              </Link>
-
-              <Link
-                to="#"
-                className="rotate-180 text-gray-500 transition-colors duration-200 hover:text-blue-500 rtl:rotate-0 dark:text-gray-400 dark:hover:text-blue-400"
-              >
-                <IconExit />
-              </Link>
+              {login.isLogin ? (
+                <>
+                  <ProfileLogin />
+                  <LoginButton onClick={onClickLogout}>
+                    <IconExit />
+                  </LoginButton>
+                </>
+              ) : (
+                <>
+                  <ProfileLogout />
+                  <LoginButton onClick={onClickLogin}>
+                    <IconExit />
+                  </LoginButton>
+                </>
+              )}
             </div>
           </div>
         </div>

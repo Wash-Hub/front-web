@@ -7,8 +7,13 @@ import { IconMenu } from '@/assets/icons/IconMenu';
 import { useMenu } from '@/hooks/useMenu';
 import { useRecoilState } from 'recoil';
 import { currentLocationAtom } from '@/recoil/atoms/mapState';
+import { loginState } from '@/recoil/atoms/loginState';
+import { ProfileLogin } from '../Profile/ProfileLogin';
+import { ProfileLogout } from '../Profile/ProfileLogout';
 export const SidebarSmall = () => {
   const { onClickHome, onClickMenu, onClickMyPage, changeLocate } = useMenu();
+
+  const [login] = useRecoilState(loginState);
   const [currentLocation] = useRecoilState(currentLocationAtom);
   return (
     <aside className="flex h-screen w-16 flex-col items-center overflow-y-auto border-r bg-white py-8 rtl:border-l rtl:border-r-0 dark:border-gray-700 dark:bg-gray-900">
@@ -34,11 +39,15 @@ export const SidebarSmall = () => {
       </nav>
 
       <div className="flex flex-col space-y-6">
-        <img
-          className="h-8 w-8 rounded-full object-cover"
-          src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=880&h=880&q=100"
-          alt=""
-        />
+        {login.isLogin ? (
+          <>
+            <ProfileLogin name={false} />
+          </>
+        ) : (
+          <>
+            <ProfileLogout name={false} />
+          </>
+        )}
       </div>
     </aside>
   );

@@ -27,7 +27,7 @@ const routes: routeElement[] = [
         element: <LocationInfo />,
       },
       {
-        path: '/mypage/:title/:page',
+        path: '/mypage/:page',
         element: <Mypage />,
       },
       {

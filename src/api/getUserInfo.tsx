@@ -11,8 +11,13 @@ export const getUserInfo = () => {
   const { data } = useQuery(
     ['info', page],
     async () => {
-      const response = await instanceJson.get(`/auth/profile?page=${page}`);
-      return response.data;
+      if (!page) {
+        const response = await instanceJson.get('/auth/profile?page=1');
+        return response.data;
+      } else {
+        const response = await instanceJson.get(`/auth/profile?page=${page}`);
+        return response.data;
+      }
     },
     {
       retry: false,

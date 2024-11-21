@@ -5,14 +5,13 @@ import { PaginationItem } from './PaginationItem';
 import { useParams } from 'react-router-dom';
 
 export const Pagination = ({ totalPages, pageCount }: any) => {
-  const { title = '', page } = useParams();
+  const { page } = useParams();
   const currentPage = Number(page);
   const noPrev = currentPage === 1;
   const noNext = currentPage + pageCount - 1 >= totalPages;
 
   const { onClickPrevious, onClickNext, changePage } = usePagination({
     menu: 'mypage',
-    title: title,
     page: currentPage,
   });
 

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 type PaginationProps = {
-  title: string;
+  title?: string;
   page: number;
   menu: string;
 };

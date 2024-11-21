@@ -1,11 +1,11 @@
 import { currentLocationAtom, mapInfoAtom, mapState } from '@/recoil/atoms/mapState';
-import { myPagePaginationState } from '@/recoil/atoms/myPageState';
 import { userInfo } from '@/type';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { Pagination } from '../Pagination/PaginationMyPage';
+import { useParams } from 'react-router-dom';
 
 export const MypageContent = ({ data }: { data: userInfo }) => {
-  const [page] = useRecoilState(myPagePaginationState);
+  const { page } = useParams();
   const setCurrentLocation = useSetRecoilState(currentLocationAtom);
   const setLocate = useSetRecoilState(mapState);
   const setMapData = useSetRecoilState(mapInfoAtom);
@@ -31,7 +31,7 @@ export const MypageContent = ({ data }: { data: userInfo }) => {
         </div>
       ))}
       <div>
-        <Pagination totalPages={data.bookmarks.meta.pageCount} pageCount={5} currentPage={page.page} />
+        <Pagination totalPages={data.bookmarks.meta.pageCount} pageCount={5} currentPage={page} />
       </div>
     </div>
   );
