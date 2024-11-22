@@ -1,8 +1,8 @@
 import { useSetRecoilState } from 'recoil';
-import { mapInfoAtom } from '../recoil/atoms/mapState';
+import { mapInfoAtom } from '../../recoil/atoms/mapState';
 import { useEffect } from 'react';
-import { getMapAllInfo } from '../api/getMapInfo';
-import { location } from '../type';
+import { getMapAllInfo } from '../../api/getMapInfo';
+import { location } from '../../type';
 
 export const useMap = (locate: location) => {
   const setMapData = useSetRecoilState(mapInfoAtom);
@@ -12,4 +12,6 @@ export const useMap = (locate: location) => {
       setMapData(data.data);
     }
   }, [setMapData]);
+
+  return data;
 };

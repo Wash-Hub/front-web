@@ -1,5 +1,5 @@
 import { getReviewInfo } from '@/api/getReviewInfo';
-import { useAxiosInterceptorsJson } from '@/hooks/useAxiosInterceptors';
+import { useAxiosInterceptorsJson } from '@/hooks/Auth/useAxiosInterceptors';
 import { userUniqIdAtom } from '@/recoil/atoms/loginState';
 import { reviewState } from '@/recoil/atoms/reviewState';
 import { useRecoilState, useRecoilValue } from 'recoil';

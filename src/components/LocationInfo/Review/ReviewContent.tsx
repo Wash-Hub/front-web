@@ -1,10 +1,13 @@
+import { useReview } from '@/hooks/Queries/useReivew';
 import { reviewState } from '@/recoil/atoms/reviewState';
 import { MdDelete } from 'react-icons/md';
 import { useRecoilState } from 'recoil';
 
 export const ReviewContent = ({ item, id }: any) => {
   const [, setIsDeleteReviewModalOpen] = useRecoilState(reviewState);
+  const { deleteReviewData } = useReview();
   const onClickDeleteReview = () => {
+    deleteReviewData(item.id);
     setIsDeleteReviewModalOpen((prev) => ({ ...prev, isDeleteReviewModalOpen: true }));
   };
   return (

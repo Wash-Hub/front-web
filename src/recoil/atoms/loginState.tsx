@@ -2,9 +2,9 @@ import { atom, DefaultValue, selector, useRecoilState } from 'recoil';
 import { LoginModalState, LoginState } from '../../type';
 import axios from 'axios';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
-import { useRefreshToken } from '../../hooks/useMutation';
 import { CONFIG } from '../../../config';
 import { Cookies } from 'react-cookie';
+import { useRefreshToken } from '@/hooks/Queries/useRefreshToken';
 export const loginState = atom<LoginState>({
   key: 'loginState',
   default: {
@@ -88,7 +88,7 @@ export const defaultClientAtom = selector({
           window.localStorage.removeItem(CONFIG.TOKEN_KEY);
           window.location.href = `/`;
         }
-      }
+      },
     );
     return instance;
   },

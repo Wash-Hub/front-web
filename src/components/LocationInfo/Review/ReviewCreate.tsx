@@ -1,5 +1,4 @@
-import { useAxiosInterceptors } from '@/hooks/useAxiosInterceptors';
-import { usePostReview } from '@/hooks/useMutationApi';
+import { useAxiosInterceptors } from '@/hooks/Auth/useAxiosInterceptors';
 import { currentLocationAtom } from '@/recoil/atoms/mapState';
 import { reviewState } from '@/recoil/atoms/reviewState';
 import { ReviewImg } from '@/type';
@@ -8,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { ReviewModal } from './ReviewModal/ReviewModal';
+import { useReview } from '@/hooks/Queries/useReivew';
 
 export const ReviewCreate = () => {
   useAxiosInterceptors();
@@ -39,10 +39,10 @@ export const ReviewCreate = () => {
     setCreateReviewModalOpen((prev) => ({ ...prev, isCreateReviewModalOpen: true }));
   };
 
-  const { postReviewData } = usePostReview();
-
+  const { postReviewData } = useReview();
   const onSubmit = (data: any) => {
-    postReviewData({ files: file, desc: data.content, map: currentLocation.id });
+    data = { files: file, desc: data.content, map: currentLocation.id };
+    postReviewData(data);
     setReview((prev) => ({ ...prev, isOpened: false }));
   };
 

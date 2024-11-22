@@ -22,7 +22,7 @@ export const getMapInfo = () => {
   const { data } = useQuery(
     ['mapInfo', currentLocation.id],
     async () => {
-      if (!currentLocation.id) {
+      if (currentLocation.id === 'undefined') {
         return undefined;
       }
       const response = await instanceJson.get(`/map/${currentLocation.id}`);

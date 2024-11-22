@@ -1,6 +1,6 @@
 import { getKakaoMapId } from '@/api/getKakaoMapId';
-import { useLocate } from '@/hooks/useLocate';
-import { useMiniMapScript } from '@/hooks/useMapScript';
+import { useLocate } from '@/hooks/Map/useLocate';
+import { useMiniMapScript } from '@/hooks/Map/useMapScript';
 import { RiMapPin2Line } from 'react-icons/ri';
 
 export const Detail = (mapData: any) => {

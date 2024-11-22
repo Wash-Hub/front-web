@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { instanceJson } from './instanceJson';
-import { useAxiosInterceptorsJson } from '../hooks/useAxiosInterceptors';
+import { useAxiosInterceptorsJson } from '../hooks/Auth/useAxiosInterceptors';
 import { useSetRecoilState } from 'recoil';
 import { errorState } from '../recoil/atoms/errorState';
 import { useParams } from 'react-router-dom';

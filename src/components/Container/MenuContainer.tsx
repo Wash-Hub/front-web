@@ -2,6 +2,7 @@ import { useRecoilState } from 'recoil';
 import { SidebarSmall } from '../SideBar/SidebarSmall';
 import { loginModalState, loginState } from '@/recoil/atoms/loginState';
 import { LoginModal } from '../Auth/LoginModal';
+import { Toast } from '../Toast/Toast';
 
 export const MenuContainer = ({ children }: React.PropsWithChildren<{}>) => {
   const [login] = useRecoilState(loginState);
@@ -20,6 +21,7 @@ export const MenuContainer = ({ children }: React.PropsWithChildren<{}>) => {
       </div>
 
       {loginModal.isModalOpen && !login.isLogin && <LoginModal />}
+      <Toast />
     </div>
   );
 };

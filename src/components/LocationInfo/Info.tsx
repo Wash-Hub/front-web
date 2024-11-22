@@ -1,5 +1,5 @@
 import { getMapInfo } from '@/api/getMapInfo';
-import { useAxiosInterceptorsJson } from '@/hooks/useAxiosInterceptors';
+import { useAxiosInterceptorsJson } from '@/hooks/Auth/useAxiosInterceptors';
 import { loginState } from '@/recoil/atoms/loginState';
 import { reviewState } from '@/recoil/atoms/reviewState';
 import { useEffect } from 'react';
@@ -20,8 +20,7 @@ export const Info = () => {
   const [login] = useRecoilState(loginState);
   const [isCreateReviewModalOpen, setCreateReviewModalOpen] = useRecoilState(reviewState);
   const MapData = getMapInfo();
-  const [isActiveReview] = useRecoilState(sidebarState);
-  const [isActiveDetail] = useRecoilState(sidebarState);
+  const [isActive] = useRecoilState(sidebarState);
   const handleOutsideClick = (event: MouseEvent) => {
     if (review.isOpened && login.isLogin) {
       const createReviewElement = document.getElementById('createReview');
@@ -45,9 +44,9 @@ export const Info = () => {
         <div>
           <InfoTitle data={MapData} />
           <InfoNavigation />
-          {isActiveDetail.isActiveDetail && <Detail mapData={MapData} />}
+          {isActive.isActiveDetail && <Detail mapData={MapData} />}
           {isCreateReviewModalOpen.isCreateReviewModalOpen && <ReviewModal />}
-          {isActiveReview.isActiveReview && <div>{review.isOpened ? <ReviewCreate /> : <Review />}</div>}
+          {isActive.isActiveReview && <div>{review.isOpened ? <ReviewCreate /> : <Review />}</div>}
         </div>
       )}
       <Toast />

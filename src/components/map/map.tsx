@@ -1,9 +1,9 @@
-import { useLocate } from '@/hooks/useLocate';
+import { useLocate } from '@/hooks/Map/useLocate';
 import { location } from '@/type';
 import { useRecoilState } from 'recoil';
 import { mapState } from '@/recoil/atoms/mapState';
-import { useMapScript } from '@/hooks/useMapScript';
-import { useMap } from '@/hooks/useMap';
+import { useMapScript } from '@/hooks/Map/useMapScript';
+import { useMap } from '@/hooks/Map/useMap';
 
 export const KakaoMap = () => {
   const [locate] = useRecoilState<location>(mapState);

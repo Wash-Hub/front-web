@@ -9,7 +9,7 @@ export const getReviewInfo = () => {
   const currentLocation = useRecoilValue(currentLocationAtom);
   if (currentLocation.id === '') return undefined;
   const { data } = useQuery(
-    'mapInfo',
+    ['mapInfo', currentLocation.id],
     async () => {
       const response = await instanceJson.get(`/map/${currentLocation.id}`);
       return response.data;
@@ -19,7 +19,7 @@ export const getReviewInfo = () => {
       onError: (error) => {
         setError(error);
       },
-    }
+    },
   );
 
   if (data === undefined) return undefined;

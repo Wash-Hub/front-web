@@ -1,7 +1,7 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { mapState } from '../recoil/atoms/mapState';
-import { location } from '../type';
-import { errorState } from '../recoil/atoms/errorState';
+import { mapState } from '../../recoil/atoms/mapState';
+import { location } from '../../type';
+import { errorState } from '../../recoil/atoms/errorState';
 
 export const useLocate = () => {
   const [locate, setLocate] = useRecoilState<location>(mapState);

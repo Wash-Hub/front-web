@@ -1,11 +1,10 @@
-import { customoverlay, MapScript, MiniMapScript } from '../type';
+import { customoverlay, MapScript, MiniMapScript } from '../../type';
 import { useEffect, useRef } from 'react';
 import { Infowindow } from '@/components/Infowindow/Infowindow';
-import { useOpen } from '../hooks/useOpen';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { currentLocationAtom, mapInfoAtom, mapInitializedAtom, mapState } from '../recoil/atoms/mapState';
+import { currentLocationAtom, mapInfoAtom, mapInitializedAtom, mapState } from '../../recoil/atoms/mapState';
 import _ from 'lodash';
-import { debouncedUpdateLocate } from '../utils/debounceUpdateLotate';
+import { debouncedUpdateLocate } from '../../utils/debounceUpdateLotate';
 import { toast } from 'react-toastify';
 import 'react-kakao-maps-sdk';
 import { useNavigate } from 'react-router-dom';

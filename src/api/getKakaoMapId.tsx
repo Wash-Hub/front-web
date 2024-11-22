@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil';
 export const getKakaoMapId: KakaoMapId = (longitude, latitude, placeName) => {
   const setError = useSetRecoilState(errorState);
   const { data } = useQuery(
-    'data',
+    ['data', longitude, latitude, placeName],
     () =>
       axios
         .get(
@@ -18,7 +18,7 @@ export const getKakaoMapId: KakaoMapId = (longitude, latitude, placeName) => {
               // KA: 'sdk/2.2.0 kakao.js/1.39.17 os/javascript lang/en-GB device/MacIntel origin/http%3A%2F%2Flocalhost%3A3000',
               KA: 'sdk/2.2.0 kakao.js/1.39.17 os/javascript lang/en-GB device/MacIntel origin/https%3A%2F%2Fwww.washhub.co.kr',
             },
-          }
+          },
         )
         .then((res) => res.data),
     {
@@ -26,7 +26,7 @@ export const getKakaoMapId: KakaoMapId = (longitude, latitude, placeName) => {
       onError: (error) => {
         setError(error);
       },
-    }
+    },
   );
   const id = data?.documents[0].id;
 

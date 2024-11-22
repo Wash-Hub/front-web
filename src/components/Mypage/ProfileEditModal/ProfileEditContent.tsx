@@ -1,5 +1,4 @@
-import { useAxiosInterceptors } from '@/hooks/useAxiosInterceptors';
-import { usePatchProfile } from '@/hooks/useMutationApi';
+import { useAxiosInterceptors } from '@/hooks/Auth/useAxiosInterceptors';
 import { myPageState } from '@/recoil/atoms/myPageState';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
@@ -13,7 +12,7 @@ export const ProfileEditContent = ({ name, email }: { name: string; email: strin
   const onClickCancel = () => {
     setIsOpened((prev) => ({ ...prev, isModalOpened: false }));
   };
-  const { patchProfileData } = usePatchProfile();
+  const { patchProfileData } = useProfile();
   const onSubmit = (data: any) => {
     patchProfileData({ name: data.name, email: data.email });
     setIsOpened((prev) => ({ ...prev, isModalOpened: false }));
@@ -55,3 +54,6 @@ export const ProfileEditContent = ({ name, email }: { name: string; email: strin
     </div>
   );
 };
+function useProfile(): { patchProfileData: any } {
+  throw new Error('Function not implemented.');
+}

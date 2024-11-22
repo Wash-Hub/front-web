@@ -1,8 +1,8 @@
-import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
-import { loginAtom, loginState, logoutAtom, updateTokenAtom } from '../recoil/atoms/loginState';
-import { useEffect } from 'react';
+import { loginAtom, loginState, logoutAtom, updateTokenAtom } from '@/recoil/atoms/loginState';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
 import { Cookies } from 'react-cookie';
+import { useEffect } from 'react';
 
 export const useLogin = () => {
   const tokenLoadable = useRecoilValueLoadable(loginAtom);
@@ -37,6 +37,7 @@ export const useLogout = (): (() => void) => {
       navigate('/');
     } else if (tokenLoadable.state === 'hasError') {
       alert('로그아웃에 실패하였습니다. 다시 시도해주세요.');
+      navigate('/');
     }
   };
 };

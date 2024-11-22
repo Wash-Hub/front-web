@@ -4,7 +4,6 @@ import { MypageContent } from '@/components/Mypage/MypageContent';
 import { MypageHeader } from '@/components/Mypage/MypageHeader';
 import { ProfileEditModal } from '@/components/Mypage/ProfileEditModal/ProfileEditModal';
 import { Spinner } from '@/components/Spinner/Spinner';
-import { Toast } from '@/components/Toast/Toast';
 import { myPageState } from '@/recoil/atoms/myPageState';
 import { userInfo } from '@/type';
 import { useRecoilState } from 'recoil';
@@ -23,7 +22,6 @@ export const Mypage = () => {
         </>
       )}
       {isOpen.isModalOpened && <ProfileEditModal name={data.profile.name} email={data.profile.email} />}
-      <Toast />
     </MenuContainer>
   );
 };

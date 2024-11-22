@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { useRefreshToken } from './useMutation'; // Custom hook
 import { useRecoilState } from 'recoil';
-import { updateTokenAtom } from '../recoil/atoms/loginState';
-import { CONFIG } from '../../config';
-import { instanceJson } from '../api/instanceJson';
-import { instanceFormData } from '../api/instanceFormData';
+import { updateTokenAtom } from '@/recoil/atoms/loginState';
+import { useRefreshToken } from '../Queries/useRefreshToken';
+import { instanceFormData } from '@/api/instanceFormData';
+import { instanceJson } from '@/api/instanceJson';
+import { CONFIG } from '../../../config';
 
 export const useAxiosInterceptors = () => {
   const refreshMutation = useRefreshToken();
@@ -42,7 +42,7 @@ export const useAxiosInterceptors = () => {
           window.location.href = '/';
         }
         return Promise.reject(error);
-      }
+      },
     );
   }, [refreshMutation, setToken]);
 };
@@ -82,7 +82,7 @@ export const useAxiosInterceptorsJson = () => {
           window.location.href = '/';
         }
         return Promise.reject(error);
-      }
+      },
     );
   }, [refreshMutation, setToken]);
 };

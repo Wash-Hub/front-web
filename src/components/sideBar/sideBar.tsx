@@ -14,7 +14,7 @@ import { SearchBar } from '../Search/SearchBar';
 import { ProfileLogout } from '../Profile/ProfileLogout';
 import { ProfileLogin } from '../Profile/ProfileLogin';
 import { LoginButton } from '../Button/LoginButton';
-import { useLogout } from '@/hooks/useAuth';
+import { useLogout } from '@/hooks/Auth/useAuth';
 export const SideBar = () => {
   const { onClickHome, onClickMenu, onClickMyPage, changeLocate } = useMenu();
 
@@ -22,8 +22,11 @@ export const SideBar = () => {
   const [loginModal, setLoginModal] = useRecoilState(loginModalState);
   const [currentLocation] = useRecoilState(currentLocationAtom);
   const onClickLogin = () => {
-    setLoginModal({ isModalOpen: true });
+    if (!loginModal.isModalOpen) {
+      setLoginModal({ isModalOpen: true });
+    }
   };
+
   const logout = useLogout();
   const onClickLogout = () => {
     logout();

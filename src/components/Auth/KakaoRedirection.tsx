@@ -1,6 +1,6 @@
 import { ClipLoader } from 'react-spinners';
 import { useEffect } from 'react';
-import { useLogin } from '@/hooks/useAuth';
+import { useLogin } from '@/hooks/Auth/useAuth';
 export const KakaoRedirection = () => {
   const login = useLogin();
   useEffect(() => {

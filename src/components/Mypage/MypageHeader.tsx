@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { RxHamburgerMenu } from 'react-icons/rx';
-import { useLogout } from '@/hooks/useAuth';
+import { useLogout } from '@/hooks/Auth/useAuth';
 export const MypageHeader = ({ data }: any) => {
   const [isOpen, setIsOpen] = useRecoilState(myPageState);
   const dropdownRef = useRef<HTMLDivElement>(null);

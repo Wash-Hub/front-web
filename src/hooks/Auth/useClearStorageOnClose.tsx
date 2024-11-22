@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { CONFIG } from '../../config';
+import { CONFIG } from '../../../config';
 import { Cookies } from 'react-cookie';
 
 export const useClearStorageOnClose = () => {

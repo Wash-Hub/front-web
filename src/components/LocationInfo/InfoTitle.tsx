@@ -1,4 +1,4 @@
-import { useBookmark } from '@/hooks/useMutationApi';
+import { useBookmark } from '@/hooks/Queries/useBookmark';
 import { loginModalState } from '@/recoil/atoms/loginState';
 import { GoBookmark } from 'react-icons/go';
 import { GoBookmarkFill } from 'react-icons/go';
@@ -13,13 +13,6 @@ export const InfoTitle = (data: any) => {
     },
   );
 
-  const onClickCreateBookmark = () => {
-    createBookmark();
-  };
-
-  const onClickCancelBookmark = () => {
-    cancelBookmark();
-  };
   return (
     <div>
       <img src={data.data.picture} alt="" className="relative h-[250px] w-full" />
@@ -30,11 +23,11 @@ export const InfoTitle = (data: any) => {
         </div>
         <div className="cursor-pointer text-2xl text-gray-500 hover:text-black">
           {data.isBookMark ? (
-            <div onClick={onClickCancelBookmark}>
+            <div onClick={cancelBookmark}>
               <GoBookmarkFill style={{ color: '#04befe' }} />
             </div>
           ) : (
-            <div onClick={onClickCreateBookmark}>
+            <div onClick={createBookmark}>
               <GoBookmark style={{ color: '#04befe' }} />
             </div>
           )}
