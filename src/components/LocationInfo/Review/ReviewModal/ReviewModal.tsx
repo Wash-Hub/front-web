@@ -1,8 +1,8 @@
 import { reviewState } from '@/recoil/atoms/reviewState';
-import { closeModal } from '@/styles/globalStyle.css';
 import Modal from 'react-modal';
 import { useRecoilState } from 'recoil';
 import { ReviewAlert } from './ReviewAlert';
+import { closeModal } from '@/styles/globalStyle';
 
 export const ReviewModal = () => {
   const [isCreateReviewModalOpen, setCreateReviewModalOpen] = useRecoilState(reviewState);

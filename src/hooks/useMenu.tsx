@@ -28,7 +28,7 @@ export const useMenu = () => {
       navigate('/mypage/1');
     }
 
-    // navigate('/mypage');
+    // navigate('/mypage/1');
   };
 
   const changeLocate = () => {

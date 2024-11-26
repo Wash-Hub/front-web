@@ -1,8 +1,8 @@
 import { loginModalState } from '@/recoil/atoms/loginState';
-import { loginModal } from '@/styles/globalStyle.css';
 import Modal from 'react-modal';
 import { useRecoilState } from 'recoil';
 import { Login } from './Login';
+import { loginModal } from '@/styles/globalStyle';
 
 export const LoginModal = () => {
   const [isModalOpen, setIsModalOpen] = useRecoilState(loginModalState);

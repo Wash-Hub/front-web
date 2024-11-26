@@ -1,5 +1,5 @@
 import { reviewState } from '@/recoil/atoms/reviewState';
-import { imgModal } from '@/styles/globalStyle.css';
+import { imgModal } from '@/styles/globalStyle';
 import Modal from 'react-modal';
 import { useRecoilState } from 'recoil';
 export const ReviewImgModal = () => {

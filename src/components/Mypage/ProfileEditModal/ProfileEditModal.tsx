@@ -2,6 +2,7 @@ import { myPageState } from '@/recoil/atoms/myPageState';
 import Modal from 'react-modal';
 import { useRecoilState } from 'recoil';
 import { ProfileEditContent } from './ProfileEditContent';
+import { profileEditModal } from '@/styles/globalStyle';
 
 export const ProfileEditModal = ({ name, email }: { name: string; email: string }) => {
   const [isOpen, setIsOpen] = useRecoilState(myPageState);
@@ -13,11 +14,10 @@ export const ProfileEditModal = ({ name, email }: { name: string; email: string 
       shouldCloseOnEsc={false}
       shouldCloseOnOverlayClick={false}
       style={{
-        overlay: {
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        },
+        overlay: profileEditModal.overlay,
         content: {
-          textAlign: 'center',
+          ...profileEditModal.content,
+          textAlign: profileEditModal.content.textAlign as React.CSSProperties['textAlign'],
           width: window.innerWidth > 768 ? '30%' : '70%',
         },
       }}

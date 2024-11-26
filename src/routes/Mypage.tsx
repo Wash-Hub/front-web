@@ -10,7 +10,6 @@ import { useRecoilState } from 'recoil';
 export const Mypage = () => {
   const data: userInfo = getUserInfo();
   const [isOpen] = useRecoilState(myPageState);
-
   return (
     <MenuContainer>
       {data === undefined ? (

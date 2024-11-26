@@ -30,14 +30,14 @@ export const MypageHeader = ({ data }: any) => {
   }, []);
   return (
     <div className="flex flex-row items-center justify-between px-4 py-5">
-      <div className="flex items-center font-bold">
+      <div className="flex items-center text-sm font-semibold">
         <img src={data.profile.profileImg} alt="" className="mr-2 h-10 w-10 rounded-full" />
         <div>{data.profile.name} 님</div>
       </div>
       <div className="relative inline-block" ref={dropdownRef}>
         <RxHamburgerMenu className="h-5 w-5 cursor-pointer" onClick={onClickMenu} />
         {isOpen.isDropdownMenuOpened && (
-          <div className="absolute left-[-110px] top-[110%] z-10 w-[120px] rounded-md border border-gray-200 bg-white p-2 shadow-md">
+          <div className="absolute left-[-120px] top-[110%] z-10 w-[137px] rounded-md border border-gray-200 bg-white p-2 shadow-md">
             <div
               className="cursor-pointer rounded-md border-b border-gray-200 px-4 py-2 hover:bg-gray-100"
               onClick={onClickProfileEdit}

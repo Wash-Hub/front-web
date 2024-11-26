@@ -1,4 +1,5 @@
 import { useAxiosInterceptors } from '@/hooks/Auth/useAxiosInterceptors';
+import { usePatchProfile } from '@/hooks/Queries/useProfile';
 import { myPageState } from '@/recoil/atoms/myPageState';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
@@ -8,13 +9,12 @@ export const ProfileEditContent = ({ name, email }: { name: string; email: strin
 
   const { register, handleSubmit } = useForm();
   const setIsOpened = useSetRecoilState(myPageState);
-
   const onClickCancel = () => {
     setIsOpened((prev) => ({ ...prev, isModalOpened: false }));
   };
-  const { patchProfileData } = useProfile();
+  const { patchProfileData } = usePatchProfile();
   const onSubmit = (data: any) => {
-    patchProfileData({ name: data.name, email: data.email });
+    patchProfileData(data);
     setIsOpened((prev) => ({ ...prev, isModalOpened: false }));
   };
   return (
@@ -54,6 +54,3 @@ export const ProfileEditContent = ({ name, email }: { name: string; email: strin
     </div>
   );
 };
-function useProfile(): { patchProfileData: any } {
-  throw new Error('Function not implemented.');
-}
