@@ -13,6 +13,7 @@ import { sidebarState } from '@/recoil/atoms/sidebarState';
 import { Review } from './Review/Review';
 import { ReviewCreate } from './Review/ReviewCreate';
 import { ReviewModal } from './Review/ReviewModal/ReviewModal';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Info = () => {
   useAxiosInterceptorsJson();

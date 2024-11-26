@@ -25,7 +25,7 @@ export const useMenu = () => {
     if (!login.isLogin) {
       setIsModalOpen((prevState) => ({ ...prevState, isModalOpen: !prevState.isModalOpen }));
     } else {
-      navigate('/mypage');
+      navigate('/mypage/1');
     }
 
     // navigate('/mypage');

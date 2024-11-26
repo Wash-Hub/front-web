@@ -28,7 +28,7 @@ export const getKakaoMapId: KakaoMapId = (longitude, latitude, placeName) => {
       },
     },
   );
-  const id = data?.documents[0].id;
+  const id = data?.documents[0] ? data.documents[0].id : '';
 
   return id;
 };
