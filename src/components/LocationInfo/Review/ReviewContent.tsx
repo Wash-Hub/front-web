@@ -1,18 +1,17 @@
 import { useReview } from '@/hooks/Queries/useReivew';
 import { reviewState } from '@/recoil/atoms/reviewState';
 import { MdDelete } from 'react-icons/md';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 export const ReviewContent = ({ item, userId }: any) => {
   const [, setIsDeleteReviewModalOpen] = useRecoilState(reviewState);
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const { deleteReviewData } = useReview();
+  const navigate = useNavigate();
   const onClickDeleteReview = () => {
     deleteReviewData(item.id);
     setIsDeleteReviewModalOpen((prev) => ({ ...prev, isDeleteReviewModalOpen: true }));
-    navigate(`/detail/${id}`);
+    navigate(0);
   };
   return (
     <div>

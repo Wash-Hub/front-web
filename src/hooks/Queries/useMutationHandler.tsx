@@ -16,9 +16,7 @@ export const useMutationHandler = (
   const mutation = useMutation(mutationFn, {
     onSuccess: (status: any) => {
       if (Number(status) === 201 || Number(status) === 200) {
-        setTimeout(() => {
-          notifySuccess();
-        }, 0);
+        notifySuccess();
       } else if (options && Number(status) === 401) {
         options();
       } else {

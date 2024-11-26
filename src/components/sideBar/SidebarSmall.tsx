@@ -10,11 +10,15 @@ import { currentLocationAtom } from '@/recoil/atoms/mapState';
 import { loginState } from '@/recoil/atoms/loginState';
 import { ProfileLogin } from '../Profile/ProfileLogin';
 import { ProfileLogout } from '../Profile/ProfileLogout';
+import { useEffect } from 'react';
 export const SidebarSmall = () => {
   const { onClickHome, onClickMenu, onClickMyPage, changeLocate } = useMenu();
 
-  const [login] = useRecoilState(loginState);
+  const [login, setLogin] = useRecoilState(loginState);
   const [currentLocation] = useRecoilState(currentLocationAtom);
+  useEffect(() => {
+    localStorage.getItem('token') ? setLogin({ isLogin: true }) : setLogin({ isLogin: false });
+  }, []);
   return (
     <aside className="flex h-screen w-16 flex-col items-center overflow-y-auto border-r bg-white py-8 rtl:border-l rtl:border-r-0 dark:border-gray-700 dark:bg-gray-900">
       <nav className="flex flex-1 flex-col space-y-6">

@@ -15,7 +15,6 @@ export const Review = () => {
   const [isImgModalOpen] = useRecoilState(reviewState);
   const id = useRecoilValue(userUniqIdAtom);
   const [isDeleteReviewModalOpen] = useRecoilState(reviewState);
-
   return (
     <div>
       {ReviewData === undefined || ReviewData.length === 0 ? (
@@ -24,7 +23,7 @@ export const Review = () => {
         <div className="flex h-full w-full flex-col gap-4 p-4">
           {ReviewData.map((item: any) => (
             <div key={item.id} className="flex flex-col pt-2">
-              <ReviewContent item={item} id={id} />
+              <ReviewContent item={item} userId={id} />
               {item.img.length > 0 && <ReviewImg item={item} />}
               {isDeleteReviewModalOpen.isDeleteReviewModalOpen && <ReviewModal />}
             </div>

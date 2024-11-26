@@ -8,6 +8,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { ReviewModal } from './ReviewModal/ReviewModal';
 import { useReview } from '@/hooks/Queries/useReivew';
+import { useNavigate } from 'react-router-dom';
 
 export const ReviewCreate = () => {
   useAxiosInterceptors();
@@ -38,12 +39,13 @@ export const ReviewCreate = () => {
   const onClickCancle = () => {
     setCreateReviewModalOpen((prev) => ({ ...prev, isCreateReviewModalOpen: true }));
   };
-
+  const navigate = useNavigate();
   const { postReviewData } = useReview();
   const onSubmit = (data: any) => {
     data = { files: file, desc: data.content, map: currentLocation.id };
     postReviewData(data);
     setReview((prev) => ({ ...prev, isOpened: false }));
+    navigate(0);
   };
 
   return (
