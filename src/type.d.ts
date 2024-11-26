@@ -115,9 +115,7 @@ export interface ReviewData {
   map: string;
 }
 
-export interface DeleteReviewData {
-  id: string;
-}
+export type DeleteReviewData = string;
 
 export interface ProfileEditData {
   name: string;

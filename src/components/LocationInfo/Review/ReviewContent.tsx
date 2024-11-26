@@ -1,14 +1,18 @@
 import { useReview } from '@/hooks/Queries/useReivew';
 import { reviewState } from '@/recoil/atoms/reviewState';
 import { MdDelete } from 'react-icons/md';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
-export const ReviewContent = ({ item, id }: any) => {
+export const ReviewContent = ({ item, userId }: any) => {
   const [, setIsDeleteReviewModalOpen] = useRecoilState(reviewState);
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { deleteReviewData } = useReview();
   const onClickDeleteReview = () => {
     deleteReviewData(item.id);
     setIsDeleteReviewModalOpen((prev) => ({ ...prev, isDeleteReviewModalOpen: true }));
+    navigate(`/detail/${id}`);
   };
   return (
     <div>
@@ -19,7 +23,7 @@ export const ReviewContent = ({ item, id }: any) => {
         </div>
         <div className="flex items-center justify-between gap-1">
           <div className="text-xs font-normal text-gray-500">{item.createdAt}</div>
-          {id === item.user.id && (
+          {userId === item.user.id && (
             <div
               className="cursor-pointer text-red-400 transition-colors duration-300 hover:text-red-600"
               onClick={onClickDeleteReview}

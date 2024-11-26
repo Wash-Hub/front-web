@@ -13,9 +13,8 @@ export const useReview = () => {
     notifyCreateReview,
     notifyError,
   );
-
   const { mutate: deleteReviewData } = useMutationHandler(
-    (data: DeleteReviewData) => deleteReview(data.id),
+    (data: DeleteReviewData) => deleteReview(data),
     notifyDeleteReview,
     notifyError,
   );
