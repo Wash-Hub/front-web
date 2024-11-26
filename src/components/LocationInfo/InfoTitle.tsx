@@ -7,7 +7,8 @@ import { useState } from 'react';
 
 export const InfoTitle = (data: any) => {
   const [, setIsModalOpen] = useRecoilState(loginModalState);
-  const [isBookmarked, setIsBookmarked] = useState(data.data.isBookMark);
+  const state = data.data.isBookMark ? true : false;
+  const [isBookmarked, setIsBookmarked] = useState(state);
 
   const { createBookmark, cancelBookmark } = useBookmark(
     { mapId: data },
