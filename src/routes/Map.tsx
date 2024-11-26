@@ -1,5 +1,5 @@
+import { KakaoMap } from '@/components/Map/map';
 import { Outlet } from 'react-router-dom';
-import { KakaoMap } from '@/components/Map/Map';
 
 export const Map = () => {
   return (

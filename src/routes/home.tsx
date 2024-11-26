@@ -3,7 +3,7 @@ import { loginState, userUniqIdAtom } from '../recoil/atoms/loginState';
 import { useEffect } from 'react';
 import { useClearStorageOnClose } from '../hooks/Auth/useClearStorageOnClose';
 import { windowSizeState } from '../recoil/atoms/sidebarState';
-import { SideBar } from '@/components/SideBar/Sidebar';
+import { SideBar } from '@/components/SideBar/sideBar';
 
 export const Home = () => {
   useClearStorageOnClose();

@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { KakaoRedirection } from './components/Auth/KakaoRedirection';
 import { Map } from './routes/Map';
-import { Home } from '@/routes/Home';
 import { LocationInfo } from './routes/LocationInfo';
 import { Mypage } from './routes/Mypage';
 import { SearchDetail } from './routes/SearchDetail';
+import { Home } from './routes/home';
 
 type routeElement = {
   path: string;
