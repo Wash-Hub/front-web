@@ -39,13 +39,12 @@
 
 ## 2. 채택한 개발 기술과 브랜치 전략
 
-### React, vanilla-extract
+### React, TailwindCSS
 
 - React
   - 컴포넌트화를 통해 추후 유지보수와 재사용성에 특화된 React를 선택하였습니다.
 - Vanilla-extract
-  - emotion, tailwind, vanilla-extract 중에 고민하였으나 zero-runtime CSS인 vanilla-extract가 개인 프로젝트가 적합하다 판단되어 선택하였습니다.
-  - 또한 vanilla-extract를 사용하면 tailwind와 달리 css 코드를 깔끔하게 처리할 수 있다는 점을 고려하여 선택하였습니다.
+  - 빠르고 불필요한 네이밍, 파일 생성 없이 스타일 적용 가능한 TailwindCSS를 선택하였습니다.
 
 ### Recoil, React-query
 
