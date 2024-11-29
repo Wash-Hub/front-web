@@ -1,12 +1,10 @@
 import { getKakaoMapId } from '@/api/getKakaoMapId';
-import { useLocate } from '@/hooks/Map/useLocate';
 import { useMiniMapScript } from '@/hooks/Map/useMapScript';
 import { RiMapPin2Line } from 'react-icons/ri';
 
 export const Detail = (mapData: any) => {
   mapData = mapData.mapData;
   useMiniMapScript(mapData.latitude, mapData.longitude);
-  useLocate();
   const id = getKakaoMapId(mapData.longitude, mapData.latitude, mapData.placeName);
   const onClickMap = () => {
     window.open(`https://place.map.kakao.com/${id}`);

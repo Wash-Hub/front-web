@@ -1,27 +1,26 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { mapState } from '../../recoil/atoms/mapState';
+import { mapInfoAtom, mapState } from '../../recoil/atoms/mapState';
 import { location } from '../../type';
 import { errorState } from '../../recoil/atoms/errorState';
-import { useRef, useEffect } from 'react';
+import { getMapAllInfo } from '@/api/getMapInfo';
 
 export const useLocate = () => {
   const [locate, setLocate] = useRecoilState<location>(mapState);
   const setError = useSetRecoilState(errorState);
-  const IsFetched = useRef(false);
-  useEffect(() => {
-    if (navigator.geolocation && !IsFetched.current) {
-      navigator.geolocation.getCurrentPosition(success, error);
-    }
-  }, []);
+  const locateInfo = getMapAllInfo(locate);
+  const setMapData = useSetRecoilState(mapInfoAtom);
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
 
   function success(position: { coords: location }) {
-    if (!IsFetched.current) {
-      IsFetched.current = true;
+    if (locate.latitude === 0 && locate.longitude === 0) {
       setLocate({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
     }
+    if (locateInfo.data) setMapData(locateInfo.data);
   }
 
   function error() {

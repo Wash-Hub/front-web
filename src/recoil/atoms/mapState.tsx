@@ -6,9 +6,17 @@ import { CONFIG } from '../../../config';
 export const mapState: RecoilState<location> = atom({
   key: 'mapState',
   default: {
-    latitude: 0,
-    longitude: 0,
+    latitude: localStorage.getItem('latitude') ? parseFloat(localStorage.getItem('latitude') as string) : 0,
+    longitude: localStorage.getItem('longitude') ? parseFloat(localStorage.getItem('longitude') as string) : 0,
   },
+  effects_UNSTABLE: [
+    ({ onSet }) => {
+      onSet((newValue) => {
+        localStorage.setItem('latitude', newValue.latitude.toString());
+        localStorage.setItem('longitude', newValue.longitude.toString());
+      });
+    },
+  ],
 });
 
 export const screenSizeState = atom({

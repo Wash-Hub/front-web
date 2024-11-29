@@ -4,16 +4,30 @@ import { Cookies } from 'react-cookie';
 
 export const useClearStorageOnClose = () => {
   useEffect(() => {
+    let isRefreshed = false;
+
     const clearStorage = () => {
-      window.localStorage.removeItem(CONFIG.TOKEN_KEY);
-      const cookies = new Cookies();
-      cookies.remove('refreshToken', { path: '/' });
+      if (!isRefreshed) {
+        window.localStorage.removeItem(CONFIG.TOKEN_KEY);
+        localStorage.removeItem('latitude');
+        localStorage.removeItem('longitude');
+        const cookies = new Cookies();
+        cookies.remove('refreshToken', { path: '/' });
+      }
     };
 
-    window.addEventListener('beforeunload', clearStorage);
+    const handleBeforeUnload = (event: any) => {
+      if (event?.currentTarget?.performance?.navigation?.type === 1) {
+        isRefreshed = true;
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('unload', clearStorage);
 
     return () => {
-      window.removeEventListener('beforeunload', clearStorage);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('unload', clearStorage);
     };
   }, []);
 };

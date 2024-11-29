@@ -7,12 +7,12 @@ import { useParams } from 'react-router-dom';
 export const MypageContent = ({ data }: { data: userInfo }) => {
   const { page } = useParams();
   const setCurrentLocation = useSetRecoilState(currentLocationAtom);
-  const setLocate = useSetRecoilState(mapState);
+  const setUpdateMapState = useSetRecoilState(mapState);
   const setMapData = useSetRecoilState(mapInfoAtom);
   const onClickDetail = (id: string, latitude: number, longitude: number, item: any) => {
     setCurrentLocation({ id });
     setMapData([item]);
-    setLocate({ latitude, longitude });
+    setUpdateMapState({ latitude, longitude });
   };
   return (
     <div className="flex h-full flex-col">
