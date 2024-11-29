@@ -1,5 +1,5 @@
 import { useBookmark } from '@/hooks/Queries/useBookmark';
-import { loginModalState } from '@/recoil/atoms/loginState';
+import { loginModalState, loginState } from '@/recoil/atoms/loginState';
 import { GoBookmark } from 'react-icons/go';
 import { GoBookmarkFill } from 'react-icons/go';
 import { useRecoilState } from 'recoil';
@@ -16,14 +16,14 @@ export const InfoTitle = (data: any) => {
       onOpenModal: () => setIsModalOpen({ isModalOpen: true }),
     },
   );
-
+  const [login] = useRecoilState(loginState);
   const handleBookmarkToggle = () => {
     if (isBookmarked) {
       cancelBookmark();
-      setIsBookmarked(false);
+      if (login.isLogin) setIsBookmarked(false);
     } else {
       createBookmark();
-      setIsBookmarked(true);
+      if (login.isLogin) setIsBookmarked(true);
     }
   };
 
