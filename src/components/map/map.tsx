@@ -3,12 +3,10 @@ import { location } from '@/type';
 import { useRecoilState } from 'recoil';
 import { mapState } from '@/recoil/atoms/mapState';
 import { useMapScript } from '@/hooks/Map/useMapScript';
-import { useMap } from '@/hooks/Map/useMap';
 
 export const KakaoMap = () => {
   const [locate] = useRecoilState<location>(mapState);
   useLocate();
-  useMap(locate);
   useMapScript(locate.latitude, locate.longitude, true);
 
   return (
