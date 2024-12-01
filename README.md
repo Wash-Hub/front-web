@@ -31,7 +31,7 @@
 
 ## 1. 개발 환경
 
-- Front : typescript, React, vanilla-extract, Recoil, React-query
+- Front : typescript, React, TailwindCSS, Recoil, React-query
 - 버전 및 이슈관리 : Github
 - 서비스 배포 환경 : aws Rout53, CloudFront, S3
 - 협업 툴 : notion, discord
@@ -43,7 +43,7 @@
 
 - React
   - 컴포넌트화를 통해 추후 유지보수와 재사용성에 특화된 React를 선택하였습니다.
-- Vanilla-extract
+- TailwindCSS
   - 빠르고 불필요한 네이밍, 파일 생성 없이 스타일 적용 가능한 TailwindCSS를 선택하였습니다.
 
 ### Recoil, React-query
