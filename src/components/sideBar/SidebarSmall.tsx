@@ -17,7 +17,7 @@ export const SidebarSmall = () => {
   const [login, setLogin] = useRecoilState(loginState);
   const [currentLocation] = useRecoilState(currentLocationAtom);
   useEffect(() => {
-    localStorage.getItem('token') ? setLogin({ isLogin: true }) : setLogin({ isLogin: false });
+    sessionStorage.getItem('token') ? setLogin({ isLogin: true }) : setLogin({ isLogin: false });
   }, []);
   return (
     <aside className="flex h-screen w-16 flex-col items-center overflow-y-auto border-r bg-white py-8 rtl:border-l rtl:border-r-0 dark:border-gray-700 dark:bg-gray-900">

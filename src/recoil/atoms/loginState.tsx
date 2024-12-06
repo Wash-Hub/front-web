@@ -21,14 +21,16 @@ export const loginModalState = atom<LoginModalState>({
 
 const tokenBaseAtom = atom({
   key: 'tokenBaseAtom',
-  default: localStorage.getItem(CONFIG.TOKEN_KEY) ? JSON.parse(localStorage.getItem(CONFIG.TOKEN_KEY) as string) : null,
+  default: sessionStorage.getItem(CONFIG.TOKEN_KEY)
+    ? JSON.parse(sessionStorage.getItem(CONFIG.TOKEN_KEY) as string)
+    : null,
   effects_UNSTABLE: [
     ({ onSet }) => {
       onSet((newValue) => {
         if (newValue === null) {
-          localStorage.removeItem(CONFIG.TOKEN_KEY);
+          sessionStorage.removeItem(CONFIG.TOKEN_KEY);
         } else {
-          localStorage.setItem(CONFIG.TOKEN_KEY, JSON.stringify(newValue));
+          sessionStorage.setItem(CONFIG.TOKEN_KEY, JSON.stringify(newValue));
         }
       });
     },
@@ -80,12 +82,12 @@ export const defaultClientAtom = selector({
             return instance.request(originalRequest);
           } catch (error) {
             alert('예기치 못한 오류가 발생하였습니다. 다시 로그인해주세요.');
-            window.localStorage.removeItem(CONFIG.TOKEN_KEY);
+            window.sessionStorage.removeItem(CONFIG.TOKEN_KEY);
             window.location.href = `/`;
           }
         } else if (data.message === 'Expired RefreshToken') {
           alert('로그인이 만료되었습니다. 다시 로그인해주세요.');
-          window.localStorage.removeItem(CONFIG.TOKEN_KEY);
+          window.sessionStorage.removeItem(CONFIG.TOKEN_KEY);
           window.location.href = `/`;
         }
       },

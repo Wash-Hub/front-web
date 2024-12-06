@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { CONFIG } from '../../../config';
 import { Cookies } from 'react-cookie';
 
 export const useClearStorageOnClose = () => {
@@ -8,7 +7,6 @@ export const useClearStorageOnClose = () => {
 
     const clearStorage = () => {
       if (!isRefreshed) {
-        window.localStorage.removeItem(CONFIG.TOKEN_KEY);
         localStorage.removeItem('latitude');
         localStorage.removeItem('longitude');
         const cookies = new Cookies();

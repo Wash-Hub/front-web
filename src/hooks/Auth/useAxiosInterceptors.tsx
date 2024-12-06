@@ -12,7 +12,7 @@ export const useAxiosInterceptors = () => {
 
   useEffect(() => {
     instanceFormData.interceptors.request.use((config) => {
-      const token = JSON.parse(localStorage.getItem(CONFIG.TOKEN_KEY) as string);
+      const token = JSON.parse(sessionStorage.getItem(CONFIG.TOKEN_KEY) as string);
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -33,12 +33,12 @@ export const useAxiosInterceptors = () => {
             return instanceFormData.request(originalRequest);
           } catch (error) {
             alert('로그인이 만료되었습니다. 다시 로그인해주세요.');
-            window.localStorage.removeItem(CONFIG.TOKEN_KEY);
+            window.sessionStorage.removeItem(CONFIG.TOKEN_KEY);
             window.location.href = '/';
           }
         } else if (data.message === 'Expired RefreshToken') {
           alert('로그인이 만료되었습니다. 다시 로그인해주세요.');
-          window.localStorage.removeItem(CONFIG.TOKEN_KEY);
+          window.sessionStorage.removeItem(CONFIG.TOKEN_KEY);
           window.location.href = '/';
         }
         return Promise.reject(error);
@@ -52,7 +52,7 @@ export const useAxiosInterceptorsJson = () => {
   const [, setToken] = useRecoilState(updateTokenAtom);
   useEffect(() => {
     instanceJson.interceptors.request.use((config) => {
-      const token = JSON.parse(localStorage.getItem(CONFIG.TOKEN_KEY) as string);
+      const token = JSON.parse(sessionStorage.getItem(CONFIG.TOKEN_KEY) as string);
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -73,12 +73,12 @@ export const useAxiosInterceptorsJson = () => {
             return instanceJson.request(originalRequest);
           } catch (error) {
             alert('로그인이 만료되었습니다. 다시 로그인해주세요.');
-            window.localStorage.removeItem(CONFIG.TOKEN_KEY);
+            window.sessionStorage.removeItem(CONFIG.TOKEN_KEY);
             window.location.href = '/';
           }
         } else if (data.message === 'Expired RefreshToken') {
           alert('로그인이 만료되었습니다. 다시 로그인해주세요.');
-          window.localStorage.removeItem(CONFIG.TOKEN_KEY);
+          window.sessionStorage.removeItem(CONFIG.TOKEN_KEY);
           window.location.href = '/';
         }
         return Promise.reject(error);
