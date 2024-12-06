@@ -1,12 +1,10 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { loginState, userUniqIdAtom } from '../recoil/atoms/loginState';
 import { useEffect } from 'react';
-import { useClearStorageOnClose } from '../hooks/Auth/useClearStorageOnClose';
 import { windowSizeState } from '../recoil/atoms/sidebarState';
 import { SideBar } from '@/components/SideBar/sideBar';
 
 export const Home = () => {
-  useClearStorageOnClose();
   const id = useRecoilValue(userUniqIdAtom);
   const setIsLogin = useSetRecoilState(loginState);
   const [, setDesktop] = useRecoilState(windowSizeState);
